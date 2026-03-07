@@ -1,65 +1,50 @@
-import Image from "next/image";
+'use client';
+import PropTypes from 'prop-types';
+import { cn } from '@/lib/utils';
+import { useState } from 'react';
+import SectionHeader from '@/components/snippets/SectionHeader';
+import BackToTopButton from '@/components/snippets/BackToTopButton';
+import ScrambleTextAnimation1 from '@/components/snippets/ScrambleTextAnimation1';
+import TextReveal from '@/components/snippets/TextReveal';
+import Image from 'next/image'
+
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black mt-16.5">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <section className="container py-0 px-4 md:px-0 m-auto mt-[65.5px]">
+      <div className="flex items-center gap-16 overflow-hidden py-0 max-lg:mt-24 max-lg:flex-col lg:h-[calc(100svh-65.5px)]
+">
+        <SectionHeader
+          overline={'MONTREAL QC: 3:20'}
+          title={`I build what your Shopify store can't do out of the box.`}
+          body={'Custom features, design implementation, and integrations for growing e-commerce brands.'}
+          headingType={'h1'}
+          align={'left'}
+          className="mb-8 flex-1"
+          parentClassName={"flex-1"}
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+        <div className="flex-1">
+          <img src={"/profile.JPEG"} alt="Hero Image" width={500} height={500} className="w-full h-auto" />
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+      </div>
+      <section className="py-0  lg:mb-8">
+        <ScrambleTextAnimation1 className='text-overline mb-6 text-muted'>
+          {"A bit about me."}
+        </ScrambleTextAnimation1>
+        <TextReveal
+          body={"'When we engage with a client, we bring together our experience working across brand strategy, communications, policy and digital to offer a unified perspective. We work as an extension of your team to quickly identify what’s holding your business back, design a solution, and bring together the talent and tools to deliver results.',"}
+          className="h3 pt-12 lg:pt-4"
+          blockClassName="max-w-[1074px] "
+          textClassName="text-primary"
+        />
+      </section>
+      <section className="py-0 lg:py-24 lg:mb-8">
+        <ScrambleTextAnimation1 className='text-overline mb-6 text-muted'>
+          {"What I do."}
+        </ScrambleTextAnimation1>
+
+      </section>
+      <BackToTopButton position="center" />
+    </section>
   );
 }

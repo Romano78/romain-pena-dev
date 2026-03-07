@@ -108,6 +108,15 @@
   --color-sidebar-ring: hsl(var(--sidebar-ring));
 }
 
+@layer components {
+  h1, .h1 { @apply font-sans text-4xl lg:text-6xl font-bold leading-tight text-foreground; }
+  h2, .h2 { @apply font-sans text-3xl lg:text-5xl font-bold leading-tight text-foreground; }
+  h3, .h3 { @apply font-sans text-2xl lg:text-4xl font-semibold leading-snug text-foreground; }
+  h4, .h4 { @apply font-sans text-xl  lg:text-3xl font-semibold leading-snug text-foreground; }
+  h5, .h5 { @apply font-sans text-lg  lg:text-xl  font-medium leading-normal text-foreground; }
+  h6, .h6 { @apply font-sans text-base lg:text-lg  font-medium leading-normal text-foreground; }
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -121,3 +130,4 @@
     @apply bg-background text-foreground;
   }
 }
+
