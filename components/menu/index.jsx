@@ -7,6 +7,7 @@ import DesktopNavigation from './DesktopNavigation';
 import MobileMenuButton from './MobileMenuButton';
 import MobileMenu from './MobileMenu';
 import { cn } from '@/lib/utils';
+import { ThemeToggle } from './ThemeToggle';
 
 /**
  * Consolidated Menu component that handles both client-side behavior and menu content
@@ -147,11 +148,16 @@ export default function Menu({ className = '' }) {
                         href='#'
                         className='text-lg font-semibold tracking-tight text-foreground'
                       >
-                        RomainPena
-                        <span className='font-light text-accent'>.dev</span>
+                        Romain
+                        <span className=' text-muted'>Pena</span>
                       </a>
                     </div>
                     <DesktopNavigation />
+                  </div>
+
+                  {/* Desktop Actions */}
+                  <div className='hidden items-center gap-4 lg:flex'>
+                    <ThemeToggle />
                   </div>
 
                   {/* Mobile Menu Button */}

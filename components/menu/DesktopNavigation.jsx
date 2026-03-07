@@ -16,7 +16,7 @@ export default function DesktopNavigation() {
         {navigationItems.map((item) => (
           <NavigationMenuItem key={item.id}>
             <NavigationMenuLink asChild>
-              <Button variant='ghost' size='sm' asChild>
+              <Button variant='link' size='sm' asChild>
                 <a
                   href={item.href}
                   title={item.label}
