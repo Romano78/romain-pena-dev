@@ -29,6 +29,7 @@ import { useEffect, useRef } from 'react';
 import { motion, useInView, useSpring, useTransform } from 'framer-motion';
 import PropTypes from 'prop-types';
 import { cn } from '@/lib/utils';
+import ScrambleTextAnimation1 from '@/components/snippets/ScrambleTextAnimation1';
 
 // Placeholder data for component preview
 const mockData = {
@@ -69,8 +70,8 @@ const mockData = {
  * @param {string} [props.theme] - Optional theme override for this section (light, dark, modern)
  */
 export default function Steps({
-  id = 'stats',
-  overline = 'Stats',
+  id = 'how-i-work',
+  overlineText = 'How I Work',
   statistics = mockData.statistics,
   className,
 }) {
@@ -82,10 +83,13 @@ export default function Steps({
         <section
           id={id}
           className={cn(
-            'container grid grid-cols-1 gap-y-20 max-lg:gap-y-12 lg:gap-y-[180px]',
+            'py-0 lg:mb-8',
             className,
           )}
         >
+          <ScrambleTextAnimation1 className='text-overline mb-6 text-muted'>
+            {overlineText}
+          </ScrambleTextAnimation1>
           <div className='grid grid-cols-1 gap-x-8 gap-y-12 md:grid-cols-3 lg:grid-cols-3'>
             {statistics.map(
               ({ value, stringValue, label, subLabel }, index) => (
@@ -105,6 +109,7 @@ export default function Steps({
     </div>
   );
 }
+
 
 function Stat({ value, label, subLabel, stringValue, index = 0 }) {
   const ref = useRef(null);
@@ -147,9 +152,7 @@ function Stat({ value, label, subLabel, stringValue, index = 0 }) {
 
 Steps.propTypes = {
   id: PropTypes.string,
-  overline: PropTypes.string,
-  title: PropTypes.string,
-  description: PropTypes.string,
+  overlineText: PropTypes.string,
   statistics: PropTypes.arrayOf(
     PropTypes.shape({
       value: PropTypes.any,

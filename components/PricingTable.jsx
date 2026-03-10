@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import SectionHeader from '@/components/snippets/SectionHeader';
 import ComparisonTable from '@/components/snippets/ComparisonTable';
 import PropTypes from 'prop-types';
+import { useScrollReveal } from '@/hooks/use-scroll-reveal';
 
 const defaultOptions = {
   overline: 'Pricing',
@@ -157,11 +158,12 @@ const defaultOptions = {
 export default function PricingTable({ className, options = defaultOptions }) {
   const [isYearly, setIsYearly] = React.useState(false);
   const [showFullComparison, setShowFullComparison] = React.useState(false);
+  const cardsRef = useScrollReveal({ stagger: 0.15, selector: '.pricing-card', start: 'top 80%' });
 
   return (
     <div>
       <div className='bg-background'>
-        <section className={cn('container relative', className)}>
+        <section id="pricing" className={cn('container relative', className)}>
           <div className='mx-auto max-w-[58rem] text-center'>
             <SectionHeader
               overline={options.overline}
@@ -198,12 +200,12 @@ export default function PricingTable({ className, options = defaultOptions }) {
             </div>
           </div>
 
-          <div className='mx-auto grid gap-4 sm:grid-cols-2 md:grid-cols-3'>
+          <div ref={cardsRef} className='mx-auto grid gap-4 sm:grid-cols-2 md:grid-cols-3'>
             {options.plans.map((plan) => (
               <div
                 key={plan.title}
                 className={cn(
-                  'border-border bg-card relative rounded-[--radius] border p-8',
+                  'pricing-card border-border bg-card relative rounded-[--radius] border p-8',
                   plan.popular && 'border-primary shadow-lg',
                 )}
               >

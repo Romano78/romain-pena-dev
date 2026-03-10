@@ -5,6 +5,7 @@ import { ThemeProvider } from '@/config/theme-provider';
 import "@/styles/globals.css";
 import Menu from "@/components/menu"
 import Footer from "@/components/Footer";
+import SmoothScroll from "@/components/SmoothScroll";
 
 const inter = Inter({
   subsets: ['latin'],
@@ -27,9 +28,11 @@ export default function RootLayout({
         className={`${inter.variable} antialiased`}
       >
         <ThemeProvider>
-          <Menu />
-          {children}
-          <Footer />
+          <SmoothScroll>
+            <Menu />
+            {children}
+            <Footer />
+          </SmoothScroll>
         </ThemeProvider>
       </body>
     </html>
