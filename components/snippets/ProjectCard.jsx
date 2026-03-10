@@ -150,7 +150,7 @@ export default function ProjectCard({ items = projects, className = '' }) {
             start: 'top 80%',
             once: true,
           },
-        }
+        },
       );
     }, grid);
 
@@ -158,11 +158,11 @@ export default function ProjectCard({ items = projects, className = '' }) {
   }, []);
 
   return (
-    <section id="work" className={cn(className)}>
-      <ScrambleTextAnimation1 className="text-overline mb-6 text-muted">
+    <section id='work' className={cn(className)}>
+      <ScrambleTextAnimation1 className='text-overline mb-6 text-muted'>
         {'Selected Work'}
       </ScrambleTextAnimation1>
-      <div ref={gridRef} className="grid gap-6 md:grid-cols-3">
+      <div ref={gridRef} className='grid gap-6 md:grid-cols-3'>
         {items.map((project) => (
           <FlipCard key={project.client} project={project} />
         ))}

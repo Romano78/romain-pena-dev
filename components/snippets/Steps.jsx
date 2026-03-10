@@ -77,7 +77,7 @@ export default function Steps({
   id = 'how-i-work',
   overlineText = 'How I Work',
   statistics = mockData.statistics,
-  className,
+  className = '',
 }) {
   const lineRef = useRef(null);
   const sectionRef = useRef(null);
@@ -102,7 +102,7 @@ export default function Steps({
             end: 'top 30%',
             scrub: 1,
           },
-        }
+        },
       );
     });
 
@@ -123,18 +123,16 @@ export default function Steps({
         style={{ transform: 'scaleX(0)' }}
       />
       <div className='grid grid-cols-1 gap-x-8 gap-y-12 md:grid-cols-3 lg:grid-cols-3'>
-        {statistics.map(
-          ({ value, stringValue, label, subLabel }, index) => (
-            <Stat
-              key={index}
-              index={index}
-              value={value}
-              stringValue={stringValue}
-              label={label}
-              subLabel={subLabel}
-            />
-          ),
-        )}
+        {statistics.map(({ value, stringValue, label, subLabel }, index) => (
+          <Stat
+            key={index}
+            index={index}
+            value={value}
+            stringValue={stringValue}
+            label={label}
+            subLabel={subLabel}
+          />
+        ))}
       </div>
     </section>
   );

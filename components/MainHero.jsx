@@ -54,31 +54,32 @@ export default function MainHero({
   }, []);
 
   return (
-    <div
+    <section
       ref={containerRef}
       className={`flex items-center gap-16 overflow-hidden py-0 max-lg:mt-24 max-lg:flex-col lg:h-[calc(100svh-65.5px)] ${cn(className)} ${cn(parentClassName)}`}
+      id="main-hero"
     >
-      <div ref={textRef} className="flex-1">
+      <div ref={textRef} className='flex-1'>
         <SectionHeader
           overline={overline}
           title={title}
           body={body}
           headingType={headingType}
           align={align}
-          className="mb-8 flex-1"
-          parentClassName="flex-1"
+          className='mb-8 flex-1'
+          parentClassName='flex-1'
         />
       </div>
-      <div ref={imageRef} className="flex-1">
+      <div ref={imageRef} className='flex-1'>
         <img
-          src="/profile.JPEG"
-          alt="Romain Pena"
+          src='/profile.JPEG'
+          alt='Romain Pena'
           width={600}
           height={500}
-          className="w-full h-auto"
+          className='w-full h-auto'
         />
       </div>
-    </div>
+    </section>
   );
 }
 

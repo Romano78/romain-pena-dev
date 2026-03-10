@@ -36,13 +36,12 @@ const TextReveal = ({
   textClassName = 'h3',
   sticky = false,
   textCenter = false,
-  scrollTarget = null,
 }) => {
   const targetRef = useRef(null);
 
   const { scrollYProgress } = useScroll({
-    target: scrollTarget || targetRef,
-    offset: (scrollTarget || sticky) ? ['start end', 'end start'] : ['center end', 'end start'],
+    target: targetRef,
+    offset: sticky ? ['start end', 'end start'] : ['center end', 'end start'],
   });
 
   const { linesData, lineCount } = useMemo(() => {
@@ -76,32 +75,6 @@ const TextReveal = ({
 
   if (!body.trim()) {
     return null;
-  }
-
-  // When scrollTarget is provided, About owns the sticky container — render text only
-  if (scrollTarget) {
-    return (
-      <div className={cn(blockClassName)}>
-        <div className={textClassName}>
-          {linesData.map(({ words, lineIndex }) => (
-            <React.Fragment key={lineIndex}>
-              <div className={`inline-flex flex-wrap gap-x-[0.18em] ${textCenter ? 'justify-center' : ''}`}>
-                {words.map(({ chars, type }, i) =>
-                  type === 'word' && (
-                    <span key={`${lineIndex}-${i}`} className='split-word inline-block'>
-                      {chars.map(({ char, range }, j) => (
-                        <Character key={`${lineIndex}-${i}-${j}`} char={char} progress={scrollYProgress} range={range} />
-                      ))}
-                    </span>
-                  )
-                )}
-              </div>
-              {lineIndex < lineCount - 1 && <br className='whitespace-pre' />}
-            </React.Fragment>
-          ))}
-        </div>
-      </div>
-    );
   }
 
   return (
@@ -162,7 +135,6 @@ TextReveal.propTypes = {
   textClassName: PropTypes.string,
   sticky: PropTypes.bool,
   textCenter: PropTypes.bool,
-  scrollTarget: PropTypes.object,
 };
 
 export default TextReveal;
