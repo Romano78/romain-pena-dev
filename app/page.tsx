@@ -1,13 +1,10 @@
-'use client';
-import PropTypes from 'prop-types';
-import { cn } from '@/lib/utils';
-import { useState } from 'react';
 import SectionHeader from '@/components/snippets/SectionHeader';
 import BackToTopButton from '@/components/snippets/BackToTopButton';
 import ScrambleTextAnimation1 from '@/components/snippets/ScrambleTextAnimation1';
 import TextReveal from '@/components/snippets/TextReveal';
-import Image from 'next/image'
-
+import Services from '@/components/Services';
+import ProjectCard from '@/components/snippets/ProjectCard';
+import Steps from '@/components/snippets/Steps';
 
 export default function Home() {
   return (
@@ -38,12 +35,29 @@ export default function Home() {
           textClassName="text-primary"
         />
       </section>
-      <section className="py-0 lg:py-24 lg:mb-8">
+      <section className="py-0 lg:py-24">
         <ScrambleTextAnimation1 className='text-overline mb-6 text-muted'>
           {"What I do."}
         </ScrambleTextAnimation1>
 
+        <Services />
       </section>
+
+      <section className="py-0 lg:mb-8">
+        <ScrambleTextAnimation1 className='text-overline mb-6 text-muted'>
+          {"Selected Work"}
+        </ScrambleTextAnimation1>
+        <ProjectCard
+        />
+      </section>
+
+      <section className="py-0 lg:mb-8">
+        <ScrambleTextAnimation1 className='text-overline mb-6 text-muted'>
+          {"How I Work"}
+        </ScrambleTextAnimation1>
+        <Steps />
+      </section>
+
       <BackToTopButton position="center" />
     </section>
   );
