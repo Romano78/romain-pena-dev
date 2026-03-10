@@ -1,7 +1,7 @@
 "use client"
 
 import SectionHeader from '@/components/snippets/SectionHeader';
-import BackToTopButton from '@/components/snippets/BackToTopButton';1
+import BackToTopButton from '@/components/snippets/BackToTopButton';
 import ScrambleTextAnimation1 from '@/components/snippets/ScrambleTextAnimation1';
 import TextReveal from '@/components/snippets/TextReveal';
 import Services from '@/components/Services';
