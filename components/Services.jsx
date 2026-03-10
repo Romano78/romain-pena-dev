@@ -1,10 +1,14 @@
 'use client';
 
+import { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { ArrowRight, Blocks, LineChart } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { useScrollReveal } from '@/hooks/use-scroll-reveal';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import ScrambleTextAnimation1 from '@/components/snippets/ScrambleTextAnimation1';
+
+gsap.registerPlugin(ScrollTrigger);
 
 function ColumnItem({ icon: Icon, title, body }) {
   return (
@@ -45,14 +49,44 @@ function Services({
   ],
   className = '',
 }) {
-  const ref = useScrollReveal({ stagger: 0.15, selector: '.service-card', start: 'top 80%' });
+  const gridRef = useRef(null);
+
+  useEffect(() => {
+    const grid = gridRef.current;
+    if (!grid) return;
+
+    const cards = grid.querySelectorAll('.service-card');
+    if (!cards.length) return;
+
+    const ctx = gsap.context(() => {
+      cards.forEach((card, i) => {
+        gsap.fromTo(
+          card,
+          { x: i === 0 ? -40 : 40, opacity: 0 },
+          {
+            x: 0,
+            opacity: 1,
+            duration: 0.7,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: card,
+              start: 'top 85%',
+              once: true,
+            },
+          }
+        );
+      });
+    }, grid);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
-    <section id="services" className={cn('py-0 lg:py-24', className)}>
+    <section id="services" className={cn(className)}>
       <ScrambleTextAnimation1 className="text-overline mb-6 text-muted">
         {'What I do.'}
       </ScrambleTextAnimation1>
-      <div ref={ref} className="grid gap-6 md:grid-cols-2">
+      <div ref={gridRef} className="grid gap-6 md:grid-cols-2">
         {columns.map((column, i) => (
           <ColumnItem key={i} {...column} />
         ))}

@@ -29,7 +29,11 @@ import { useEffect, useRef } from 'react';
 import { motion, useInView, useSpring, useTransform } from 'framer-motion';
 import PropTypes from 'prop-types';
 import { cn } from '@/lib/utils';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import ScrambleTextAnimation1 from '@/components/snippets/ScrambleTextAnimation1';
+
+gsap.registerPlugin(ScrollTrigger);
 
 // Placeholder data for component preview
 const mockData = {
@@ -75,38 +79,64 @@ export default function Steps({
   statistics = mockData.statistics,
   className,
 }) {
+  const lineRef = useRef(null);
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const line = lineRef.current;
+    const section = sectionRef.current;
+    if (!line || !section) return;
+
+    const mm = gsap.matchMedia();
+
+    mm.add('(min-width: 768px)', () => {
+      gsap.fromTo(
+        line,
+        { scaleX: 0 },
+        {
+          scaleX: 1,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: section,
+            start: 'top 75%',
+            end: 'top 30%',
+            scrub: 1,
+          },
+        }
+      );
+    });
+
+    return () => mm.revert();
+  }, []);
+
   if (!statistics.length) return null;
 
   return (
-    <div>
-      <div className='bg-background'>
-        <section
-          id={id}
-          className={cn(
-            'py-0 lg:mb-8',
-            className,
-          )}
-        >
-          <ScrambleTextAnimation1 className='text-overline mb-6 text-muted'>
-            {overlineText}
-          </ScrambleTextAnimation1>
-          <div className='grid grid-cols-1 gap-x-8 gap-y-12 md:grid-cols-3 lg:grid-cols-3'>
-            {statistics.map(
-              ({ value, stringValue, label, subLabel }, index) => (
-                <Stat
-                  key={index}
-                  index={index}
-                  value={value}
-                  stringValue={stringValue}
-                  label={label}
-                  subLabel={subLabel}
-                />
-              ),
-            )}
-          </div>
-        </section>
+    <section ref={sectionRef} id={id} className={cn(className)}>
+      <ScrambleTextAnimation1 className='text-overline mb-6 text-muted'>
+        {overlineText}
+      </ScrambleTextAnimation1>
+      {/* Progress line — desktop only */}
+      <div
+        ref={lineRef}
+        className='hidden md:block h-px bg-muted/50 mb-10 origin-left'
+        style={{ transform: 'scaleX(0)' }}
+      />
+      <div className='grid grid-cols-1 gap-x-8 gap-y-12 md:grid-cols-3 lg:grid-cols-3'>
+        {statistics.map(
+          ({ value, stringValue, label, subLabel }, index) => (
+            <Stat
+              key={index}
+              index={index}
+              value={value}
+              stringValue={stringValue}
+              label={label}
+              subLabel={subLabel}
+            />
+          ),
+        )}
       </div>
-    </div>
+    </section>
   );
 }
 

@@ -161,9 +161,7 @@ export default function PricingTable({ className, options = defaultOptions }) {
   const cardsRef = useScrollReveal({ stagger: 0.15, selector: '.pricing-card', start: 'top 80%' });
 
   return (
-    <div>
-      <div className='bg-background'>
-        <section id="pricing" className={cn('container relative', className)}>
+    <section id="pricing" className={cn('relative', className)}>
           <div className='mx-auto max-w-[58rem] text-center'>
             <SectionHeader
               overline={options.overline}
@@ -271,9 +269,7 @@ export default function PricingTable({ className, options = defaultOptions }) {
               <ComparisonTable features={options.fullFeatureList} />
             </div>
           )}
-        </section>
-      </div>
-    </div>
+    </section>
   );
 }
 

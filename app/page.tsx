@@ -7,16 +7,18 @@ import PricingTable from '@/components/PricingTable';
 import Contact from '@/components/Contact';
 import BackToTopButton from '@/components/snippets/BackToTopButton';
 
+const SECTION_SPACING = 'pt-20 lg:pt-32';
+
 export default function Home() {
   return (
     <main className="container py-0 px-4 md:px-0 m-auto mt-[65.5px]">
       <MainHero />
       <About />
-      <Services />
-      <ProjectCard />
-      <Steps />
-      <PricingTable />
-      <Contact />
+      <Services className={SECTION_SPACING} />
+      <ProjectCard className={SECTION_SPACING} />
+      <Steps className={SECTION_SPACING} />
+      <PricingTable className={SECTION_SPACING} />
+      <Contact className={`${SECTION_SPACING} pb-20 lg:pb-32`} />
       <BackToTopButton position="center" />
     </main>
   );

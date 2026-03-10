@@ -149,3 +149,28 @@ Everything else stays as a Server Component.
 - Run marketing campaigns or paid ads
 - Design (he implements designs, doesn't create them)
 - Shopify setup for clients with no Shopify knowledge
+
+## Key Libraries
+
+### Lenis — Smooth Scrolling
+Docs: https://github.com/darkroomengineering/lenis/blob/main/README.md
+
+- Lenis is initialized once at the root level in `app/layout.tsx` 
+  or a dedicated `LenisProvider` component
+- Always use "use client" for the Lenis wrapper
+- Integrate with Framer Motion via lenis.on('scroll', ...) 
+  to sync scroll progress
+- Do NOT use both Lenis and native CSS scroll-behavior: smooth — 
+  they conflict
+
+### GSAP
+Docs: https://gsap.com/docs/v3/
+
+- Use `useGSAP()` hook (from @gsap/react) instead of useEffect 
+  for all GSAP animations — it handles cleanup automatically
+- Register plugins at the top of the file: 
+  gsap.registerPlugin(ScrollTrigger)
+- Always use `scrollerProxy` to make ScrollTrigger work with Lenis:
+  ScrollTrigger.scrollerProxy for Lenis compatibility
+- Scope all GSAP selectors to a ref to avoid targeting 
+  wrong elements across components

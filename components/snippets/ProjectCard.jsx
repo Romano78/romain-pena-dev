@@ -1,11 +1,15 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import PropTypes from 'prop-types';
-import { useScrollReveal } from '@/hooks/use-scroll-reveal';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Image from 'next/image';
 import ScrambleTextAnimation1 from '@/components/snippets/ScrambleTextAnimation1';
+import { cn } from '@/lib/utils';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const projects = [
   {
@@ -120,15 +124,45 @@ function FlipCard({ project }) {
   );
 }
 
-export default function ProjectCard({ items = projects }) {
-  const ref = useScrollReveal({ stagger: 0.15, selector: '.project-card-item', start: 'top 80%' });
+export default function ProjectCard({ items = projects, className = '' }) {
+  const gridRef = useRef(null);
+
+  useEffect(() => {
+    const grid = gridRef.current;
+    if (!grid) return;
+
+    const cards = grid.querySelectorAll('.project-card-item');
+    if (!cards.length) return;
+
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        cards,
+        { scale: 0.95, opacity: 0, y: 20 },
+        {
+          scale: 1,
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          ease: 'power2.out',
+          stagger: 0.12,
+          scrollTrigger: {
+            trigger: grid,
+            start: 'top 80%',
+            once: true,
+          },
+        }
+      );
+    }, grid);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
-    <section id="work" className="py-0 lg:mb-8">
+    <section id="work" className={cn(className)}>
       <ScrambleTextAnimation1 className="text-overline mb-6 text-muted">
         {'Selected Work'}
       </ScrambleTextAnimation1>
-      <div ref={ref} className="grid gap-6 md:grid-cols-3">
+      <div ref={gridRef} className="grid gap-6 md:grid-cols-3">
         {items.map((project) => (
           <FlipCard key={project.client} project={project} />
         ))}
@@ -149,6 +183,7 @@ FlipCard.propTypes = {
 };
 
 ProjectCard.propTypes = {
+  className: PropTypes.string,
   items: PropTypes.arrayOf(
     PropTypes.shape({
       client: PropTypes.string.isRequired,
