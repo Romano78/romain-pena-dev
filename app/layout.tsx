@@ -4,6 +4,7 @@ import { ThemeProvider } from '@/config/theme-provider';
 
 import "@/styles/globals.css";
 import Menu from "@/components/menu"
+import Footer from "@/components/Footer";
 
 const inter = Inter({
   subsets: ['latin'],
@@ -28,6 +29,7 @@ export default function RootLayout({
         <ThemeProvider>
           <Menu />
           {children}
+          <Footer />
         </ThemeProvider>
       </body>
     </html>
