@@ -1,30 +1,5 @@
 'use client';
 
-/**
- * Stats Component
- * A section component that displays animated statistics with headings and descriptions.
- * Features smooth counting animations and responsive grid layout.
- *
- * @example
- * <Stats
- *   heading="Company Metrics"
- *   description="Our achievements in numbers"
- *   statistics={[
- *     {
- *       value: 200,
- *       label: "Projects",
- *       subLabel: "Completed in 2024"
- *     },
- *     {
- *       value: 0,
- *       stringValue: "∞",
- *       label: "Possibilities",
- *       subLabel: "Limited only by imagination"
- *     }
- *   ]}
- * />
- */
-
 import { useEffect, useRef } from 'react';
 import { motion, useInView, useSpring, useTransform } from 'framer-motion';
 import PropTypes from 'prop-types';
@@ -62,17 +37,6 @@ const mockData = {
   ],
 };
 
-/**
- * Stats component that displays statistics with headings and descriptions
- * @component
- * @param {Object} props - Component props
- * @param {string} [props.id='stats'] - Optional ID for anchor linking
- * @param {string} [props.overline='Stats'] - Optional overline text displayed above the title
- * @param {string} [props.title] - Main heading text
- * @param {string} [props.description] - Descriptive text below heading
- * @param {Array} [props.statistics] - Array of statistic objects with value, label, and subLabel
- * @param {string} [props.theme] - Optional theme override for this section (light, dark, modern)
- */
 export default function Steps({
   id = 'how-i-work',
   overlineText = 'How I Work',
@@ -137,7 +101,6 @@ export default function Steps({
     </section>
   );
 }
-
 
 function Stat({ value, label, subLabel, stringValue, index = 0 }) {
   const ref = useRef(null);
