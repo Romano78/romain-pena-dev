@@ -4,15 +4,11 @@ import { useEffect, useRef } from 'react';
 import { motion, useInView, useSpring, useTransform } from 'framer-motion';
 import PropTypes from 'prop-types';
 import { cn } from '@/lib/utils';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import ScrambleTextAnimation1 from '@/components/snippets/ScrambleTextAnimation1';
-
-gsap.registerPlugin(ScrollTrigger);
+import SectionHeader from '@/components/snippets/SectionHeader';
 
 // Placeholder data for component preview
 const mockData = {
-  statistics: [
+  steps: [
     {
       value: 1,
       stringValue: '01',
@@ -40,54 +36,16 @@ const mockData = {
 export default function Steps({
   id = 'how-i-work',
   overlineText = 'How I Work',
-  statistics = mockData.statistics,
+  steps = mockData.steps,
   className = '',
 }) {
-  const lineRef = useRef(null);
-  const sectionRef = useRef(null);
-
-  useEffect(() => {
-    const line = lineRef.current;
-    const section = sectionRef.current;
-    if (!line || !section) return;
-
-    const mm = gsap.matchMedia();
-
-    mm.add('(min-width: 768px)', () => {
-      gsap.fromTo(
-        line,
-        { scaleX: 0 },
-        {
-          scaleX: 1,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: section,
-            start: 'top 75%',
-            end: 'top 30%',
-            scrub: 1,
-          },
-        },
-      );
-    });
-
-    return () => mm.revert();
-  }, []);
-
-  if (!statistics.length) return null;
+  if (!steps.length) return null;
 
   return (
-    <section ref={sectionRef} id={id} className={cn(className)}>
-      <ScrambleTextAnimation1 className='text-overline mb-6 text-muted'>
-        {overlineText}
-      </ScrambleTextAnimation1>
-      {/* Progress line — desktop only */}
-      <div
-        ref={lineRef}
-        className='hidden md:block h-px bg-muted/50 mb-10 origin-left'
-        style={{ transform: 'scaleX(0)' }}
-      />
+    <section id={id} className={cn(className)}>
+      <SectionHeader overline={overlineText} />
       <div className='grid grid-cols-1 gap-x-8 gap-y-12 md:grid-cols-3 lg:grid-cols-3'>
-        {statistics.map(({ value, stringValue, label, subLabel }, index) => (
+        {steps.map(({ value, stringValue, label, subLabel }, index) => (
           <Stat
             key={index}
             index={index}
@@ -144,7 +102,7 @@ function Stat({ value, label, subLabel, stringValue, index = 0 }) {
 Steps.propTypes = {
   id: PropTypes.string,
   overlineText: PropTypes.string,
-  statistics: PropTypes.arrayOf(
+  steps: PropTypes.arrayOf(
     PropTypes.shape({
       value: PropTypes.any,
       stringValue: PropTypes.string,
@@ -153,9 +111,6 @@ Steps.propTypes = {
     }),
   ),
   className: PropTypes.string,
-  /**
-   * Optional theme override for this section (light, dark, modern)
-   */
   theme: PropTypes.string,
 };
 

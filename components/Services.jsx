@@ -6,7 +6,7 @@ import { ArrowRight, Blocks, LineChart } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import ScrambleTextAnimation1 from '@/components/snippets/ScrambleTextAnimation1';
+import SectionHeader from '@/components/snippets/SectionHeader';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -83,9 +83,7 @@ function Services({
 
   return (
     <section id="services" className={cn(className)}>
-      <ScrambleTextAnimation1 className="text-overline mb-6 text-muted">
-        {'What I do.'}
-      </ScrambleTextAnimation1>
+      <SectionHeader overline='What I do.' />
       <div ref={gridRef} className="grid gap-6 md:grid-cols-2">
         {columns.map((column, i) => (
           <ColumnItem key={i} {...column} />

@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Image from 'next/image';
-import ScrambleTextAnimation1 from '@/components/snippets/ScrambleTextAnimation1';
+import SectionHeader from '@/components/snippets/SectionHeader';
 import { cn } from '@/lib/utils';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -159,9 +159,7 @@ export default function ProjectCard({ items = projects, className = '' }) {
 
   return (
     <section id='work' className={cn(className)}>
-      <ScrambleTextAnimation1 className='text-overline mb-6 text-muted'>
-        {'Selected Work'}
-      </ScrambleTextAnimation1>
+      <SectionHeader overline='Selected Work' />
       <div ref={gridRef} className='grid gap-6 md:grid-cols-3'>
         {items.map((project) => (
           <FlipCard key={project.client} project={project} />
