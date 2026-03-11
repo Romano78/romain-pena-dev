@@ -109,19 +109,51 @@
 }
 
 @layer components {
-  h1, .h1 { @apply font-sans text-4xl lg:text-6xl font-bold leading-tight text-foreground; }
-  h2, .h2 { @apply font-sans text-3xl lg:text-5xl font-bold leading-tight text-foreground; }
-  h3, .h3 { @apply font-sans text-2xl lg:text-4xl font-semibold leading-snug text-foreground; }
-  h4, .h4 { @apply font-sans text-xl  lg:text-3xl font-semibold leading-snug text-foreground; }
-  h5, .h5 { @apply font-sans text-lg  lg:text-xl  font-medium leading-normal text-foreground; }
-  h6, .h6 { @apply font-sans text-base lg:text-lg  font-medium leading-normal text-foreground; }
-  .text-overline { @apply text-xs font-medium uppercase tracking-widest; }
+
+  h1,
+  .h1 {
+    @apply font-sans text-4xl lg:text-6xl font-bold leading-tight text-foreground;
+  }
+
+  h2,
+  .h2 {
+    @apply font-sans text-3xl lg:text-5xl font-bold leading-tight text-foreground;
+  }
+
+  h3,
+  .h3 {
+    @apply font-sans text-2xl lg:text-4xl font-semibold leading-snug text-foreground;
+  }
+
+  h4,
+  .h4 {
+    @apply font-sans text-xl lg:text-3xl font-semibold leading-snug text-foreground;
+  }
+
+  h5,
+  .h5 {
+    @apply font-sans text-lg lg:text-xl font-medium leading-normal text-foreground;
+  }
+
+  h6,
+  .h6 {
+    @apply font-sans text-base lg:text-lg font-medium leading-normal text-foreground;
+  }
+
+  .text-overline {
+    @apply text-xs font-medium uppercase tracking-widest;
+  }
 }
 
 /* Marquee animation */
 @keyframes marquee-scroll {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 .marquee-track {
@@ -138,7 +170,8 @@
   }
 
   html {
-    scroll-behavior: auto; /* Lenis handles smooth scroll */
+    scroll-behavior: auto;
+    /* Lenis handles smooth scroll */
   }
 
   body {
@@ -146,3 +179,19 @@
   }
 }
 
+
+@keyframes pulse-dot {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.4;
+  }
+}
+
+.animate-pulse-dot {
+  animation: pulse-dot 2s ease-in-out infinite;
+}

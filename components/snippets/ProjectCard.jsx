@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Image from 'next/image';
+import { ArrowUpRight } from 'lucide-react';
 import SectionHeader from '@/components/snippets/SectionHeader';
 import { cn } from '@/lib/utils';
 
@@ -13,7 +14,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const projects = [
   {
-    client: 'Major Gaming Brand',
+    client: 'Atari.com',
     type: 'Full Storefront Build',
     description:
       'Custom Shopify storefront built pixel-perfect from design files. Full component library, countdown timers, add-to-cart logic, and navigation — all built from scratch pre-Dawn framework.',
@@ -23,20 +24,20 @@ const projects = [
       'Advanced add-to-cart flows',
       'Full navigation system',
     ],
-    gradient: 'from-zinc-900 to-zinc-800',
+    image: '/Atari-Logo.png',
+    url: 'https://atari.com',
   },
   {
     client: 'Licensed Merch Brand',
     type: 'Integrations & Features',
     description:
-      'Klaviyo, Google Tags, custom cart with product recommendations, and a custom app connecting their fulfillment backend to Shopify\'s order system.',
+      "Klaviyo, Google Tags, custom cart with product recommendations, and a custom app connecting their fulfillment backend to Shopify's order system.",
     items: [
       'Klaviyo email integration',
       'Google Tag Manager setup',
       'Custom cart + recommendations',
       'Fulfillment sync app',
     ],
-    gradient: 'from-stone-900 to-stone-800',
   },
   {
     client: 'Pet Commerce Brand',
@@ -49,7 +50,6 @@ const projects = [
       'Error handling & logging',
       'Admin dashboard',
     ],
-    gradient: 'from-slate-900 to-slate-800',
   },
 ];
 
@@ -58,19 +58,19 @@ function FlipCard({ project }) {
 
   return (
     <div
-      className="project-card-item relative h-[420px] cursor-pointer"
+      className='project-card-item relative min-h-[420px] cursor-pointer'
       style={{ perspective: '1200px' }}
       onClick={() => setIsFlipped((v) => !v)}
     >
       <motion.div
-        className="relative w-full h-full"
+        className='relative w-full h-full'
         animate={{ rotateY: isFlipped ? 180 : 0 }}
         transition={{ duration: 0.65, ease: [0.43, 0.13, 0.23, 0.96] }}
         style={{ transformStyle: 'preserve-3d' }}
       >
         {/* Front */}
         <div
-          className={`absolute inset-0 rounded-lg overflow-hidden bg-gradient-to-br ${project.gradient}`}
+          className='absolute inset-0 rounded-lg overflow-hidden'
           style={{ backfaceVisibility: 'hidden' }}
         >
           {project.image && (
@@ -78,20 +78,20 @@ function FlipCard({ project }) {
               src={project.image}
               alt={project.client}
               fill
-              className="object-cover"
+              className='object-cover'
             />
           )}
           {/* Overlay */}
-          <div className="absolute inset-0 bg-foreground/55" />
-          {/* Green accent line at top */}
-          <div className="absolute top-0 left-0 right-0 h-px bg-muted/60" />
+          <div
+            className={`absolute inset-0 ${project.image ? 'bg-[rgba(0,0,0,0.3)]' : 'bg-[hsl(187_80%_12%)]'}`}
+          />
 
-          <div className="absolute inset-0 p-8 flex flex-col justify-between">
-            <span className="text-overline text-muted/90">{project.type}</span>
+          <div className='absolute inset-0 p-8 flex flex-col justify-between'>
+            <span className='text-overline text-white'>{project.type}</span>
             <div>
-              <h3 className="h3 text-white leading-tight">{project.client}</h3>
-              <p className="mt-3 text-white/50 text-sm flex items-center gap-1.5">
-                <span className="inline-block w-3 h-px bg-white/40" />
+              <h3 className='h3 text-white leading-tight'>{project.client}</h3>
+              <p className='mt-3 text-white/50 text-sm flex items-center gap-1.5'>
+                <span className='inline-block w-3 h-px bg-white/40' />
                 See details
               </p>
             </div>
@@ -100,24 +100,41 @@ function FlipCard({ project }) {
 
         {/* Back */}
         <div
-          className="absolute inset-0 rounded-lg border border-muted/40 bg-card p-8 flex flex-col"
+          className='absolute inset-0 rounded-lg border border-muted/40 bg-card p-8 flex flex-col'
           style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
         >
-          <div className="absolute top-0 left-0 right-0 h-px bg-muted/60" />
+          <span className='text-overline text-muted'>{project.type}</span>
+          <h3 className='h4 text-foreground mt-3 mb-6'>{project.client}</h3>
 
-          <span className="text-overline text-muted">{project.type}</span>
-          <h3 className="h4 text-foreground mt-3 mb-6">{project.client}</h3>
-
-          <ul className="space-y-3 flex-1">
+          <ul className='space-y-3 flex-1'>
             {project.items.map((item) => (
-              <li key={item} className="flex items-start gap-3 text-sm text-foreground/80">
-                <span className="text-muted mt-0.5 shrink-0">→</span>
+              <li
+                key={item}
+                className='flex items-start gap-3 text-sm text-foreground/80'
+              >
+                <span className='text-muted mt-0.5 shrink-0'>→</span>
                 {item}
               </li>
             ))}
           </ul>
 
-          <p className="text-muted-foreground text-xs mt-4">Click to close</p>
+          <div className='flex items-center justify-between mt-4'>
+            {project.url ? (
+              <a
+                href={project.url}
+                target='_blank'
+                rel='noopener noreferrer'
+                onClick={(e) => e.stopPropagation()}
+                className='inline-flex items-center gap-1.5 text-sm text-muted hover:opacity-70 transition-opacity'
+              >
+                Visit brand
+                <ArrowUpRight size={14} />
+              </a>
+            ) : (
+              <span />
+            )}
+            <p className='text-muted-foreground text-xs'>Click to close</p>
+          </div>
         </div>
       </motion.div>
     </div>
@@ -177,6 +194,7 @@ FlipCard.propTypes = {
     items: PropTypes.arrayOf(PropTypes.string).isRequired,
     gradient: PropTypes.string,
     image: PropTypes.string,
+    url: PropTypes.string,
   }).isRequired,
 };
 
@@ -190,6 +208,7 @@ ProjectCard.propTypes = {
       items: PropTypes.arrayOf(PropTypes.string).isRequired,
       gradient: PropTypes.string,
       image: PropTypes.string,
+      url: PropTypes.string,
     }),
   ),
 };

@@ -7,7 +7,7 @@ import TextAnimation1 from '@/components/snippets/TextAnimation1';
 import ScrambleTextAnimation1 from '@/components/snippets/ScrambleTextAnimation1';
 
 function SectionHeader({
-  overline = 'Overline',
+  overline = '',
   title = '',
   body = '',
   headingType = 'h2',
