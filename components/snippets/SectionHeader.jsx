@@ -14,6 +14,7 @@ function SectionHeader({
   align = 'left',
   className,
   parentClassName,
+  lineAnimation = false,
 }) {
   const alignmentClasses = {
     left: 'items-start text-left',
@@ -35,13 +36,15 @@ function SectionHeader({
             {overline}
           </ScrambleTextAnimation1>
         )}
-        <motion.div
-          className='hidden md:block w-full h-px bg-muted/50 mb-10 origin-left'
-          initial={{ scaleX: 0 }}
-          whileInView={{ scaleX: 1 }}
-          transition={{ duration: 1, ease: 'easeOut' }}
-          viewport={{ once: true, amount: 0.5 }}
-        />
+        {lineAnimation && (
+          <motion.div
+            className='hidden md:block w-full h-px bg-muted/50 mb-10 origin-left'
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            transition={{ duration: 1, ease: 'easeOut' }}
+            viewport={{ once: true, amount: 0.5 }}
+          />
+        )}
         {title && (
           <TextAnimation1
             headingType={headingType}
