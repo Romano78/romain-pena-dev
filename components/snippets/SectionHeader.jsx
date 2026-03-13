@@ -1,17 +1,20 @@
-import React from 'react';
+'use client';
+
 import PropTypes from 'prop-types';
+import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import TextAnimation1 from '@/components/snippets/TextAnimation1';
 import ScrambleTextAnimation1 from '@/components/snippets/ScrambleTextAnimation1';
 
 function SectionHeader({
-  overline = 'Overline',
-  title = 'My section title',
-  body = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi fermentum metus faucibus lectus pharetra hendrerit.',
+  overline = '',
+  title = '',
+  body = '',
   headingType = 'h2',
   align = 'left',
   className,
   parentClassName,
+  lineAnimation = false,
 }) {
   const alignmentClasses = {
     left: 'items-start text-left',
@@ -32,6 +35,15 @@ function SectionHeader({
           <ScrambleTextAnimation1 className='text-overline mb-6 text-muted'>
             {overline}
           </ScrambleTextAnimation1>
+        )}
+        {lineAnimation && (
+          <motion.div
+            className='hidden md:block w-full h-px bg-muted/50 mb-10 origin-left'
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            transition={{ duration: 1, ease: 'easeOut' }}
+            viewport={{ once: true, amount: 0.5 }}
+          />
         )}
         {title && (
           <TextAnimation1

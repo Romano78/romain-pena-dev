@@ -1,23 +1,35 @@
-// import PropTypes from 'prop-types';
+'use client';
+
+import { useRef, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import SectionHeader from '@/components/snippets/SectionHeader';
+import FlipCard from '@/components/snippets/FlipCard';
+import { cn } from '@/lib/utils';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const projects = [
   {
-    client: 'Major Gaming Brand',
+    client: 'Atari.com',
     type: 'Full Storefront Build',
     description:
-      'Custom Shopify storefront built pixel-perfect from design files. Full component library, countdown timers, add-to-cart logic, and navigation \u2014 all built from scratch pre-Dawn framework.',
+      'Custom Shopify storefront built pixel-perfect from design files. Full component library, countdown timers, add-to-cart logic, and navigation — all built from scratch pre-Dawn framework.',
     items: [
       'Custom component library',
       'Countdown timers & urgency UI',
       'Advanced add-to-cart flows',
       'Full navigation system',
     ],
+    image: '/Atari-Logo.png',
+    url: 'https://atari.com',
   },
   {
     client: 'Licensed Merch Brand',
     type: 'Integrations & Features',
     description:
-      'Klaviyo, Google Tags, custom cart with product recommendations, and a custom app connecting their fulfillment backend to Shopify\u2019s order system.',
+      "Klaviyo, Google Tags, custom cart with product recommendations, and a custom app connecting their fulfillment backend to Shopify's order system.",
     items: [
       'Klaviyo email integration',
       'Google Tag Manager setup',
@@ -29,7 +41,7 @@ const projects = [
     client: 'Pet Commerce Brand',
     type: 'Custom Sync App',
     description:
-      'Built a custom app to sync products daily between an internal system and Shopify \u2014 keeping inventory accurate across both platforms automatically.',
+      'Built a custom app to sync products daily between an internal system and Shopify — keeping inventory accurate across both platforms automatically.',
     items: [
       'Daily product sync',
       'Inventory reconciliation',
@@ -39,42 +51,62 @@ const projects = [
   },
 ];
 
-function ProjectCard() {
+export default function ProjectCard({ items = projects, className = '' }) {
+  const gridRef = useRef(null);
+
+  useEffect(() => {
+    const grid = gridRef.current;
+    if (!grid) return;
+
+    const cards = grid.querySelectorAll('.project-card-item');
+    if (!cards.length) return;
+
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        cards,
+        { scale: 0.95, opacity: 0, y: 20 },
+        {
+          scale: 1,
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          ease: 'power2.out',
+          stagger: 0.12,
+          scrollTrigger: {
+            trigger: grid,
+            start: 'top 80%',
+            once: true,
+          },
+        },
+      );
+    }, grid);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <div className=''>
-      <div className=' grid gap-6 md:grid-cols-3'>
-        {projects.map((project) => (
-          <div
-            key={project.client}
-            className='group flex flex-col rounded-lg border border-border bg-card p-8 transition-colors hover:border-accent'
-          >
-            <span className='text-xs font-medium uppercase tracking-wider text-accent'>
-              {project.type}
-            </span>
-            <h3 className='mt-2 text-lg font-semibold text-card-foreground'>
-              {project.client}
-            </h3>
-            <p className='mt-3 flex-1 text-sm leading-relaxed text-muted-foreground'>
-              {project.description}
-            </p>
-            <ul className='mt-6 space-y-2'>
-              {project.items.map((item) => (
-                <li
-                  key={item}
-                  className='flex items-start gap-2 text-sm text-muted-foreground'
-                >
-                  <span className='mt-0.5 text-accent'>{'\u2192'}</span>
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
+    <section id='work' className={cn(className)}>
+      <SectionHeader overline='Selected Work' />
+      <div ref={gridRef} className='grid gap-6 md:grid-cols-3'>
+        {items.map((project) => (
+          <FlipCard key={project.client} project={project} />
         ))}
       </div>
-    </div>
+    </section>
   );
 }
 
-export default ProjectCard;
-
-ProjectCard.propTypes = {};
+ProjectCard.propTypes = {
+  className: PropTypes.string,
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      client: PropTypes.string.isRequired,
+      type: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+      items: PropTypes.arrayOf(PropTypes.string).isRequired,
+      gradient: PropTypes.string,
+      image: PropTypes.string,
+      url: PropTypes.string,
+    }),
+  ),
+};

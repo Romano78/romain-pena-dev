@@ -1,24 +1,31 @@
+'use client';
+
+import { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { ArrowRight, Blocks, LineChart } from 'lucide-react';
-import Link from 'next/link';
 import { cn } from '@/lib/utils';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import SectionHeader from '@/components/snippets/SectionHeader';
+
+gsap.registerPlugin(ScrollTrigger);
 
 function ColumnItem({ icon: Icon, title, body }) {
   return (
-    <div id='services' className='group block h-full'>
-      <div className='bg-background border-border relative flex h-full flex-col items-start overflow-hidden rounded-[--radius] border p-6 transition-colors hover:border-muted'>
+    <div className="service-card group block h-full">
+      <div className="bg-background border-border relative flex h-full flex-col items-start overflow-hidden rounded-[--radius] border p-6 transition-colors hover:border-muted">
         {Icon && (
-          <div className='relative mb-4'>
-            <div className='bg-primary/10 flex h-12 w-12 items-center justify-center rounded-[--radius]'>
-              <Icon className='text-primary h-6 w-6' />
+          <div className="relative mb-4">
+            <div className="bg-primary/10 flex h-12 w-12 items-center justify-center rounded-[--radius]">
+              <Icon className="text-primary h-6 w-6" />
             </div>
           </div>
         )}
-        <h3 className='h4 text-foreground mb-2'>{title}</h3>
-        <p className='text-body text-muted-foreground'>{body}</p>
-        <p className='text-primary group-hover:text-primary/80 mt-4 flex items-center gap-2 transition-colors'>
+        <h3 className="h4 text-foreground mb-2">{title}</h3>
+        <p className="text-body text-muted-foreground">{body}</p>
+        <p className="text-primary group-hover:text-muted mt-4 flex items-center gap-2 transition-colors">
           Learn more{' '}
-          <ArrowRight className='h-4 w-4 transition-transform group-hover:translate-x-1' />
+          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
         </p>
       </div>
     </div>
@@ -26,7 +33,6 @@ function ColumnItem({ icon: Icon, title, body }) {
 }
 
 function Services({
-  id = 'columns1',
   columns = [
     {
       icon: Blocks,
@@ -43,9 +49,42 @@ function Services({
   ],
   className = '',
 }) {
+  const gridRef = useRef(null);
+
+  useEffect(() => {
+    const grid = gridRef.current;
+    if (!grid) return;
+
+    const cards = grid.querySelectorAll('.service-card');
+    if (!cards.length) return;
+
+    const ctx = gsap.context(() => {
+      cards.forEach((card, i) => {
+        gsap.fromTo(
+          card,
+          { x: i === 0 ? -40 : 40, opacity: 0 },
+          {
+            x: 0,
+            opacity: 1,
+            duration: 0.7,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: card,
+              start: 'top 85%',
+              once: true,
+            },
+          }
+        );
+      });
+    }, grid);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section id={id} className={cn(className)}>
-      <div className='grid gap-6 md:grid-cols-2'>
+    <section id="services" className={cn(className)}>
+      <SectionHeader overline='What I do.' />
+      <div ref={gridRef} className="grid gap-6 md:grid-cols-2">
         {columns.map((column, i) => (
           <ColumnItem key={i} {...column} />
         ))}
@@ -62,7 +101,6 @@ ColumnItem.propTypes = {
 };
 
 Services.propTypes = {
-  id: PropTypes.string,
   columns: PropTypes.arrayOf(
     PropTypes.shape({
       icon: PropTypes.elementType,

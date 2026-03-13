@@ -1,38 +1,14 @@
 'use client';
 
-/**
- * Stats Component
- * A section component that displays animated statistics with headings and descriptions.
- * Features smooth counting animations and responsive grid layout.
- *
- * @example
- * <Stats
- *   heading="Company Metrics"
- *   description="Our achievements in numbers"
- *   statistics={[
- *     {
- *       value: 200,
- *       label: "Projects",
- *       subLabel: "Completed in 2024"
- *     },
- *     {
- *       value: 0,
- *       stringValue: "∞",
- *       label: "Possibilities",
- *       subLabel: "Limited only by imagination"
- *     }
- *   ]}
- * />
- */
-
 import { useEffect, useRef } from 'react';
 import { motion, useInView, useSpring, useTransform } from 'framer-motion';
 import PropTypes from 'prop-types';
 import { cn } from '@/lib/utils';
+import SectionHeader from '@/components/snippets/SectionHeader';
 
 // Placeholder data for component preview
 const mockData = {
-  statistics: [
+  steps: [
     {
       value: 1,
       stringValue: '01',
@@ -57,52 +33,30 @@ const mockData = {
   ],
 };
 
-/**
- * Stats component that displays statistics with headings and descriptions
- * @component
- * @param {Object} props - Component props
- * @param {string} [props.id='stats'] - Optional ID for anchor linking
- * @param {string} [props.overline='Stats'] - Optional overline text displayed above the title
- * @param {string} [props.title] - Main heading text
- * @param {string} [props.description] - Descriptive text below heading
- * @param {Array} [props.statistics] - Array of statistic objects with value, label, and subLabel
- * @param {string} [props.theme] - Optional theme override for this section (light, dark, modern)
- */
 export default function Steps({
-  id = 'stats',
-  overline = 'Stats',
-  statistics = mockData.statistics,
-  className,
+  id = 'how-i-work',
+  overlineText = 'How I Work',
+  steps = mockData.steps,
+  className = '',
 }) {
-  if (!statistics.length) return null;
+  if (!steps.length) return null;
 
   return (
-    <div>
-      <div className='bg-background'>
-        <section
-          id={id}
-          className={cn(
-            'container grid grid-cols-1 gap-y-20 max-lg:gap-y-12 lg:gap-y-[180px]',
-            className,
-          )}
-        >
-          <div className='grid grid-cols-1 gap-x-8 gap-y-12 md:grid-cols-3 lg:grid-cols-3'>
-            {statistics.map(
-              ({ value, stringValue, label, subLabel }, index) => (
-                <Stat
-                  key={index}
-                  index={index}
-                  value={value}
-                  stringValue={stringValue}
-                  label={label}
-                  subLabel={subLabel}
-                />
-              ),
-            )}
-          </div>
-        </section>
+    <section id={id} className={cn(className)}>
+      <SectionHeader overline={overlineText} />
+      <div className='grid grid-cols-1 gap-x-8 gap-y-12 md:grid-cols-3 lg:grid-cols-3'>
+        {steps.map(({ value, stringValue, label, subLabel }, index) => (
+          <Stat
+            key={index}
+            index={index}
+            value={value}
+            stringValue={stringValue}
+            label={label}
+            subLabel={subLabel}
+          />
+        ))}
       </div>
-    </div>
+    </section>
   );
 }
 
@@ -147,10 +101,8 @@ function Stat({ value, label, subLabel, stringValue, index = 0 }) {
 
 Steps.propTypes = {
   id: PropTypes.string,
-  overline: PropTypes.string,
-  title: PropTypes.string,
-  description: PropTypes.string,
-  statistics: PropTypes.arrayOf(
+  overlineText: PropTypes.string,
+  steps: PropTypes.arrayOf(
     PropTypes.shape({
       value: PropTypes.any,
       stringValue: PropTypes.string,
@@ -159,9 +111,6 @@ Steps.propTypes = {
     }),
   ),
   className: PropTypes.string,
-  /**
-   * Optional theme override for this section (light, dark, modern)
-   */
   theme: PropTypes.string,
 };
 
