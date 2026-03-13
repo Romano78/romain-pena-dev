@@ -3,15 +3,15 @@
 import { useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslations } from 'next-intl';
-import { ArrowRight, Blocks, LineChart } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import SectionHeader from '@/components/snippets/SectionHeader';
+import { Badge } from '@/components/ui/badge';
 
 gsap.registerPlugin(ScrollTrigger);
 
-function ColumnItem({ icon: Icon, title, body, learnMore }) {
+function ColumnItem({ icon: Icon, title, body, badgesL }) {
   return (
     <div className='service-card group  h-full'>
       <div className='bg-background border-border relative flex h-full flex-col items-start overflow-hidden rounded-[--radius] border p-6 transition-colors hover:border-muted'>
@@ -22,12 +22,21 @@ function ColumnItem({ icon: Icon, title, body, learnMore }) {
             </div>
           </div>
         )}
-        <h3 className='h4 text-foreground mb-2'>{title}</h3>
-        <p className='text-body text-muted-foreground'>{body}</p>
-        <p className='text-primary group-hover:text-muted mt-4 flex items-center gap-2 transition-colors'>
-          {learnMore}{' '}
-          <ArrowRight className='h-4 w-4 transition-transform group-hover:translate-x-1' />
-        </p>
+        <div className='mb-4'>
+          <h3 className='h4 text-foreground mb-2'>{title}</h3>
+          <p className='text-body text-muted-foreground'>{body}</p>
+        </div>
+        <div className='flex items-center gap-2 flex-wrap mt-auto'>
+          {badgesL.map((badge, i) => (
+            <Badge
+              key={i}
+              variant='outline'
+              className='text-sm text-muted-foreground'
+            >
+              {badge}
+            </Badge>
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -39,16 +48,20 @@ function Services({ className = '' }) {
 
   const columns = [
     {
-      icon: Blocks,
       title: t('design.title'),
       body: t('design.body'),
       href: '#work',
+      badgesL: [t('design.badge1'), t('design.badge2'), t('design.badge3')],
     },
     {
-      icon: LineChart,
       title: t('features.title'),
       body: t('features.body'),
       href: '#',
+      badgesL: [
+        t('features.badge1'),
+        t('features.badge2'),
+        t('features.badge3'),
+      ],
     },
   ];
 

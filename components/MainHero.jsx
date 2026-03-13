@@ -79,7 +79,7 @@ export default function MainHero({
           parentClassName='flex-1'
         />
       </div>
-      <div ref={imageRef} className='flex-1'>
+      <div className='flex-1'>
         <img
           src='/profile.JPEG'
           alt='Romain Pena'

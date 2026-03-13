@@ -17,11 +17,17 @@
     "overline": "Ce que je fais.",
     "design": {
       "title": "Intégration de design",
-      "body": "Vous avez les maquettes. Je les rends réelles dans Shopify — pixel-perfect, exactement comme votre designer l'a prévu. Sans interprétation, sans raccourcis."
+      "body": "Vous avez les maquettes. Je les rends réelles dans Shopify — pixel-perfect, exactement comme votre designer l'a prévu. Sans interprétation, sans raccourcis.",
+      "badge1": "Figma → Shopify",
+      "badge2": "Tailwind CSS",
+      "badge3": "Pixel-perfect"
     },
     "features": {
       "title": "Fonctionnalités & Intégrations",
-      "body": "Quand le store d'applications Shopify ne suffit pas. Je développe des fonctionnalités sur mesure, connecte des outils tiers et adapte votre boutique à votre business."
+      "body": "Quand le store d'applications Shopify ne suffit pas. Je développe des fonctionnalités sur mesure, connecte des outils tiers et adapte votre boutique à votre business.",
+      "badge1": "Figma → Shopify",
+      "badge2": "Tailwind CSS",
+      "badge3": "Pixel-perfect"
     }
   },
   "work": {

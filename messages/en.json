@@ -17,11 +17,17 @@
     "overline": "What I do.",
     "design": {
       "title": "Design Implementation",
-      "body": "You have the designs. I make them real in Shopify — pixel-perfect, exactly as your designer intended. No interpretation, no shortcuts."
+      "body": "You have the designs. I make them real in Shopify — pixel-perfect, exactly as your designer intended. No interpretation, no shortcuts.",
+      "badge1": "Liquid",
+      "badge2": "Tailwind CSS",
+      "badge3": "Pixel-perfect"
     },
     "features": {
       "title": "Features & Integrations",
-      "body": "When the Shopify app store isn't enough. I build custom features, connect third-party tools, and make your store work the way your business actually works."
+      "body": "When the Shopify app store isn't enough. I build custom features, connect third-party tools, and make your store work the way your business actually works.",
+      "badge1": "Liquid",
+      "badge2": "Tailwind CSS",
+      "badge3": "Pixel-perfect"
     }
   },
   "work": {
