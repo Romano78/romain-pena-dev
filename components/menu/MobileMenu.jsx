@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { navigationItems } from '@/config/navigation-config';
 import PropTypes from 'prop-types';
-import LocalSwitcher from '@/components/snippets/LocalSwitcher';
+import LanguageSwitcher from '@/components/snippets/LanguageSwitcher';
 import { ThemeToggle } from './ThemeToggle';
 
 export default function MobileMenu({ isOpen, onItemClick }) {
@@ -39,7 +39,7 @@ export default function MobileMenu({ isOpen, onItemClick }) {
             ))}
           </div>
           <div className=''>
-            <LocalSwitcher className='w-full' />
+            <LanguageSwitcher className='w-full' />
           </div>
           <div className='bg-primary/10 mb-6 rounded-lg p-2'>
             <ThemeToggle />

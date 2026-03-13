@@ -8,7 +8,7 @@ import MobileMenuButton from './MobileMenuButton';
 import MobileMenu from './MobileMenu';
 import { cn } from '@/lib/utils';
 import { ThemeToggle } from './ThemeToggle';
-import LocalSwitcher from '@/components/snippets/LocalSwitcher';
+import LanguageSwitcher from '@/components/snippets/LanguageSwitcher';
 
 export default function Menu({ className = '' }) {
   const [isMounted, setIsMounted] = useState(false);
@@ -145,7 +145,7 @@ export default function Menu({ className = '' }) {
 
                   {/* Desktop Actions */}
                   <div className='hidden items-center gap-4 lg:flex'>
-                    <LocalSwitcher />
+                    <LanguageSwitcher />
                     <ThemeToggle />
                   </div>
 
