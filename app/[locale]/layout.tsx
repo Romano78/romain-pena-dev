@@ -54,7 +54,7 @@ export default function LocaleLayout({
   params: Promise<{ locale: string }>;
 }) {
   return (
-    <Suspense>
+    <Suspense fallback={null}>
       <LocaleContent params={params}>{children}</LocaleContent>
     </Suspense>
   );
