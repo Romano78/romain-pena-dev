@@ -8,6 +8,7 @@ import {
 } from '@/components/snippets/NavigationMenu';
 import { Button } from '@/components/ui/button';
 import { navigationItems } from '@/config/navigation-config';
+import { Link } from '@/i18n/navigation';
 
 export default function DesktopNavigation() {
   return (
@@ -17,14 +18,14 @@ export default function DesktopNavigation() {
           <NavigationMenuItem key={item.id}>
             <NavigationMenuLink asChild>
               <Button variant='link' size='sm' asChild>
-                <a
+                <Link
                   href={item.href}
                   title={item.label}
                   target={item.isExternal ? '_blank' : undefined}
                   rel={item.isExternal ? 'noopener noreferrer' : undefined}
                 >
                   {item.label}
-                </a>
+                </Link>
               </Button>
             </NavigationMenuLink>
           </NavigationMenuItem>
