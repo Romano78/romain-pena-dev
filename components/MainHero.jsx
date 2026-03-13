@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
+import { useTranslations } from 'next-intl';
 import SectionHeader from '@/components/snippets/SectionHeader';
 import { cn } from '@/lib/utils';
 import { gsap } from 'gsap';
@@ -11,15 +12,12 @@ import TextAnimation1 from '@/components/snippets/TextAnimation1';
 gsap.registerPlugin(ScrollTrigger);
 
 export default function MainHero({
-  overline = 'MONTREAL QC: 3:20',
-  title = `I build what your Shopify store can't do out of the box.`,
-  body = 'Custom features, design implementation, and integrations for growing e-commerce brands.',
   headingType = 'h1',
   align = 'left',
   className = '',
   parentClassName = '',
-  lineAnimation = false,
 }) {
+  const t = useTranslations('hero');
   const imageRef = useRef(null);
   const textRef = useRef(null);
   const containerRef = useRef(null);
@@ -69,12 +67,12 @@ export default function MainHero({
         <div className='mt-12 flex items-center gap-2 text-sm text-muted-foreground mb-6'>
           <TextAnimation1 headingType={'p'} align={align}>
             <span className='inline-block h-2 w-2 rounded-full bg-muted animate-pulse-dot mr-2' />
-            {'Based in Montreal \u00B7 Available for new clients'}
+            {t('status')}
           </TextAnimation1>
         </div>
         <SectionHeader
-          title={title}
-          body={body}
+          title={t('tagline')}
+          body={t('body')}
           headingType={headingType}
           align={align}
           className='mb-8 flex-1'
@@ -95,9 +93,6 @@ export default function MainHero({
 }
 
 MainHero.propTypes = {
-  overline: PropTypes.string,
-  title: PropTypes.string,
-  body: PropTypes.string,
   headingType: PropTypes.oneOf(['h1', 'h2', 'h3', 'h4', 'h5', 'h6']),
   align: PropTypes.oneOf(['left', 'center', 'right']),
   className: PropTypes.string,

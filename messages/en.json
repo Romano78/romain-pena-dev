@@ -1,4 +1,7 @@
 {
+  "common": {
+    "learnMore": "Learn more"
+  },
   "nav": {
     "work": "Work",
     "services": "Services",
@@ -6,6 +9,28 @@
     "contact": "Contact"
   },
   "hero": {
-    "tagline": "I build what your Shopify store can't do out of the box."
+    "status": "Based in Montreal · Available for new clients",
+    "tagline": "I build what your Shopify store can't do out of the box.",
+    "body": "Custom features, design implementation, and integrations for growing e-commerce brands."
+  },
+  "services": {
+    "overline": "What I do.",
+    "design": {
+      "title": "Design Implementation",
+      "body": "You have the designs. I make them real in Shopify — pixel-perfect, exactly as your designer intended. No interpretation, no shortcuts."
+    },
+    "features": {
+      "title": "Features & Integrations",
+      "body": "When the Shopify app store isn't enough. I build custom features, connect third-party tools, and make your store work the way your business actually works."
+    }
+  },
+  "work": {
+    "overline": "Selected Work",
+    "viewProject": "View project →"
+  },
+  "workDetail": {
+    "back": "Work",
+    "deliverables": "Deliverables",
+    "visitBrand": "Visit brand"
   }
 }

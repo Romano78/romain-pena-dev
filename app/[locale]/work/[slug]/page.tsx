@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
+import { getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import { ArrowUpRight, ArrowLeft } from 'lucide-react';
 import { projects, getProject } from '@/config/projects';
@@ -36,6 +37,8 @@ export default async function CaseStudyPage({
 
   if (!project) notFound();
 
+  const t = await getTranslations('workDetail');
+
   return (
     <main className='container px-4 md:px-0 m-auto mt-[65.5px] pt-16 pb-32 max-w-3xl'>
       {/* Back */}
@@ -44,7 +47,7 @@ export default async function CaseStudyPage({
         className='inline-flex items-center gap-2 text-sm text-foreground/50 hover:text-foreground transition-colors mb-12'
       >
         <ArrowLeft size={14} />
-        Work
+        {t('back')}
       </Link>
 
       {/* Header */}
@@ -71,7 +74,7 @@ export default async function CaseStudyPage({
 
       {/* Deliverables */}
       <div className='border-t border-border pt-10'>
-        <span className='text-overline text-muted mb-6 block'>Deliverables</span>
+        <span className='text-overline text-muted mb-6 block'>{t('deliverables')}</span>
         <ul className='space-y-4'>
           {project.items.map((item) => (
             <li key={item} className='flex items-start gap-3 text-foreground/80'>
@@ -91,7 +94,7 @@ export default async function CaseStudyPage({
             rel='noopener noreferrer'
             className='inline-flex items-center gap-2 text-muted hover:opacity-70 transition-opacity'
           >
-            Visit brand
+            {t('visitBrand')}
             <ArrowUpRight size={16} />
           </a>
         </div>

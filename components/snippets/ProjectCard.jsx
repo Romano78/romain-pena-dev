@@ -1,6 +1,7 @@
 'use client';
 
 import { useRef, useEffect } from 'react';
+import { useTranslations } from 'next-intl';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import PropTypes from 'prop-types';
 import Image from 'next/image';
@@ -15,6 +16,7 @@ gsap.registerPlugin(ScrollTrigger);
 const CARD_OFFSETS = ['mt-0', 'md:mt-48'];
 
 export default function ProjectCard({ project, index }) {
+  const t = useTranslations('work');
   const cardRef = useRef(null);
 
   const { scrollYProgress } = useScroll({
@@ -69,7 +71,7 @@ export default function ProjectCard({ project, index }) {
           {/* Bottom CTA — slides up on hover */}
           <div className='absolute bottom-6 left-6 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 delay-75'>
             <span className='text-sm font-medium text-white tracking-wide'>
-              View project →
+              {t('viewProject')}
             </span>
           </div>
         </div>

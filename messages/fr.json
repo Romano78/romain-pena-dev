@@ -1,11 +1,36 @@
 {
+  "common": {
+    "learnMore": "En savoir plus"
+  },
   "nav": {
-    "work": "Work",
+    "work": "Travaux",
     "services": "Services",
-    "pricing": "Pricing",
+    "pricing": "Tarifs",
     "contact": "Contact"
   },
   "hero": {
-    "tagline": "I build what your Shopify store can't do out of the box."
+    "status": "Basé à Montréal · Disponible pour de nouveaux clients",
+    "tagline": "Je construis ce que votre boutique Shopify ne peut pas faire nativement.",
+    "body": "Fonctionnalités sur mesure, intégration de design et connexions tierces pour les marques e-commerce en croissance."
+  },
+  "services": {
+    "overline": "Ce que je fais.",
+    "design": {
+      "title": "Intégration de design",
+      "body": "Vous avez les maquettes. Je les rends réelles dans Shopify — pixel-perfect, exactement comme votre designer l'a prévu. Sans interprétation, sans raccourcis."
+    },
+    "features": {
+      "title": "Fonctionnalités & Intégrations",
+      "body": "Quand le store d'applications Shopify ne suffit pas. Je développe des fonctionnalités sur mesure, connecte des outils tiers et adapte votre boutique à votre business."
+    }
+  },
+  "work": {
+    "overline": "Réalisations",
+    "viewProject": "Voir le projet →"
+  },
+  "workDetail": {
+    "back": "Travaux",
+    "deliverables": "Livrables",
+    "visitBrand": "Visiter la marque"
   }
 }

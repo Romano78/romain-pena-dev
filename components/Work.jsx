@@ -2,6 +2,7 @@
 
 import { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useTranslations } from 'next-intl';
 import { gsap } from 'gsap';
 import SectionHeader from '@/components/snippets/SectionHeader';
 import { cn } from '@/lib/utils';
@@ -9,7 +10,9 @@ import { projects } from '@/config/projects';
 import ProjectCard from '@/components/snippets/ProjectCard';
 
 export default function Work({ className = '' }) {
+  const t = useTranslations('work');
   const gridRef = useRef(null);
+
 
   useEffect(() => {
     const grid = gridRef.current;
@@ -42,7 +45,7 @@ export default function Work({ className = '' }) {
 
   return (
     <section id='work' className={cn(className)}>
-      <SectionHeader overline='Selected Work' />
+      <SectionHeader overline={t('overline')} />
       <div
         ref={gridRef}
         className='grid gap-x-16 gap-y-20 md:grid-cols-2 md:items-start'
