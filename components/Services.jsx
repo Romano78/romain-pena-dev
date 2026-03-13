@@ -12,7 +12,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 function ColumnItem({ icon: Icon, title, body }) {
   return (
-    <div className="service-card group block h-full">
+    <div className="service-card group  h-full">
       <div className="bg-background border-border relative flex h-full flex-col items-start overflow-hidden rounded-[--radius] border p-6 transition-colors hover:border-muted">
         {Icon && (
           <div className="relative mb-4">
@@ -51,35 +51,35 @@ function Services({
 }) {
   const gridRef = useRef(null);
 
-  useEffect(() => {
-    const grid = gridRef.current;
-    if (!grid) return;
+  // useEffect(() => {
+  //   const grid = gridRef.current;
+  //   if (!grid) return;
 
-    const cards = grid.querySelectorAll('.service-card');
-    if (!cards.length) return;
+  //   const cards = grid.querySelectorAll('.service-card');
+  //   if (!cards.length) return;
 
-    const ctx = gsap.context(() => {
-      cards.forEach((card, i) => {
-        gsap.fromTo(
-          card,
-          { x: i === 0 ? -40 : 40, opacity: 0 },
-          {
-            x: 0,
-            opacity: 1,
-            duration: 0.7,
-            ease: 'power2.out',
-            scrollTrigger: {
-              trigger: card,
-              start: 'top 85%',
-              once: true,
-            },
-          }
-        );
-      });
-    }, grid);
+  //   const ctx = gsap.context(() => {
+  //     cards.forEach((card, i) => {
+  //       gsap.fromTo(
+  //         card,
+  //         { x: i === 0 ? -40 : 40, opacity: 0 },
+  //         {
+  //           x: 0,
+  //           opacity: 1,
+  //           duration: 0.7,
+  //           ease: 'power2.out',
+  //           scrollTrigger: {
+  //             trigger: card,
+  //             start: 'top 85%',
+  //             once: true,
+  //           },
+  //         }
+  //       );
+  //     });
+  //   }, grid);
 
-    return () => ctx.revert();
-  }, []);
+  //   return () => ctx.revert();
+  // }, []);
 
   return (
     <section id="services" className={cn(className)}>

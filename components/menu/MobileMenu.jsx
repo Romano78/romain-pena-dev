@@ -1,18 +1,9 @@
 import { Button } from '@/components/ui/button';
 import { navigationItems } from '@/config/navigation-config';
 import PropTypes from 'prop-types';
-// import { ThemeToggle } from '@/components/snippets/Customizer/theme-toggle';
-// import AuthSection from './AuthSection';
+import LocalSwitcher from '@/components/snippets/LocalSwitcher';
+import { ThemeToggle } from './ThemeToggle';
 
-/**
- * Mobile menu component that displays navigation items and theme toggle
- *
- * @param {Object} props - Component props
- * @param {boolean} props.isOpen - Whether the mobile menu is open
- * @param {Object} props.user - User object for authentication
- * @param {Function} props.onItemClick - Callback function when a navigation item is clicked
- * @returns {JSX.Element} - MobileMenu component
- */
 export default function MobileMenu({ isOpen, onItemClick }) {
   return (
     <div
@@ -24,11 +15,8 @@ export default function MobileMenu({ isOpen, onItemClick }) {
     >
       <div className='mx-auto p-6'>
         {/* Theme Toggle */}
-        {/* <div className='bg-muted/50 mb-6 rounded-lg p-2'>
-          <ThemeToggle />
-        </div> */}
+
         <nav className='space-y-4'>
-          {/* Navigation Links */}
           <div className='space-y-2'>
             {navigationItems.map((item) => (
               <Button
@@ -36,7 +24,7 @@ export default function MobileMenu({ isOpen, onItemClick }) {
                 variant='ghost'
                 size='sm'
                 href={item.href}
-                className='w-full justify-start'
+                className='w-full justify-start pl-0'
                 disabled={item.isDisabled}
                 target={item.isExternal ? '_blank' : undefined}
                 rel={item.isExternal ? 'noopener noreferrer' : undefined}
@@ -49,6 +37,12 @@ export default function MobileMenu({ isOpen, onItemClick }) {
                 {item.label}
               </Button>
             ))}
+          </div>
+          <div className=''>
+            <LocalSwitcher className='w-full' />
+          </div>
+          <div className='bg-primary/10 mb-6 rounded-lg p-2'>
+            <ThemeToggle />
           </div>
         </nav>
       </div>
