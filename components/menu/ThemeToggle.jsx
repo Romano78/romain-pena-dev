@@ -52,7 +52,7 @@ export function ThemeToggle() {
     <div className='relative w-auto lg:w-auto'>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className='hover:bg-accent rounded-md p-2 px-3 transition-colors flex items-center gap-2 lg:w-auto w-full justify-between lg:justify-start'
+        className='hover:bg-accent rounded-md p-2 px-3 transition-colors flex items-center gap-2 lg:w-auto w-full justify-between lg:justify-start cursor-pointer'
         aria-label='Toggle theme menu'
         aria-expanded={isOpen}
         aria-haspopup='true'

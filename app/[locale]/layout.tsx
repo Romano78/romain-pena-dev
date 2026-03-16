@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { ThemeProvider } from '@/config/theme-provider';
@@ -17,7 +18,7 @@ export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
-export default async function LocaleLayout({
+async function LocaleContent({
   children,
   params,
 }: {
@@ -42,5 +43,19 @@ export default async function LocaleLayout({
         </SmoothScroll>
       </ThemeProvider>
     </NextIntlClientProvider>
+  );
+}
+
+export default function LocaleLayout({
+  children,
+  params,
+}: {
+  children: React.ReactNode;
+  params: Promise<{ locale: string }>;
+}) {
+  return (
+    <Suspense fallback={null}>
+      <LocaleContent params={params}>{children}</LocaleContent>
+    </Suspense>
   );
 }

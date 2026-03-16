@@ -8,27 +8,9 @@ import MobileMenuButton from './MobileMenuButton';
 import MobileMenu from './MobileMenu';
 import { cn } from '@/lib/utils';
 import { ThemeToggle } from './ThemeToggle';
+import LanguageSwitcher from '@/components/snippets/LanguageSwitcher';
 
-/**
- * Consolidated Menu component that handles both client-side behavior and menu content
- *
- * Features:
- * - Scroll-aware behavior to hide/show based on scroll direction
- * - Smooth animations using Framer Motion
- * - Mobile and desktop navigation
- * - Theme toggle
- * - Authentication section
- * - Special handling for docs section
- *
- * @component
- * @param {Object} props - Component props
- * @param {string} [props.className] - Additional CSS classes
- * @param {string} [props.theme] - Optional theme override for this section (light, dark, modern)
- * @param {Object} [props.user] - User object for authentication state
- * @returns {JSX.Element} - Menu component
- */
 export default function Menu({ className = '' }) {
-  // Client-side state
   const [isMounted, setIsMounted] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [shouldShowMenu, setShouldShowMenu] = useState(true);
@@ -36,12 +18,10 @@ export default function Menu({ className = '' }) {
   const menuHeight = 65; // Match the height in the className
   const componentMounted = useRef(false);
 
-  // Handle mobile menu toggle
   const handleMobileMenuToggle = (isOpen) => {
     setIsMobileMenuOpen(isOpen);
   };
 
-  // Close mobile menu
   const closeMobileMenu = () => {
     setIsMobileMenuOpen(false);
   };
@@ -53,7 +33,6 @@ export default function Menu({ className = '' }) {
       componentMounted.current = true;
     }, 100);
 
-    // Handle scroll events
     const handleScroll = () => {
       if (!componentMounted.current) return;
 
@@ -77,7 +56,6 @@ export default function Menu({ className = '' }) {
       setLastScrollY(currentScrollY);
     };
 
-    // Add scroll listener
     window.addEventListener('scroll', handleScroll, { passive: true });
 
     return () => {
@@ -124,6 +102,16 @@ export default function Menu({ className = '' }) {
   };
 
   return (
+    <>
+      {/* Body overlay */}
+      <motion.div
+        className='fixed inset-0 z-[99] bg-black/50'
+        initial={{ opacity: 0, pointerEvents: 'none' }}
+        animate={isMobileMenuOpen ? { opacity: 1, pointerEvents: 'auto' } : { opacity: 0, pointerEvents: 'none' }}
+        transition={{ duration: 0.3 }}
+        onClick={closeMobileMenu}
+      />
+
     <motion.div
       className='fixed left-0 right-0 top-0 z-[100]'
       initial='visible'
@@ -157,6 +145,7 @@ export default function Menu({ className = '' }) {
 
                   {/* Desktop Actions */}
                   <div className='hidden items-center gap-4 lg:flex'>
+                    <LanguageSwitcher />
                     <ThemeToggle />
                   </div>
 
@@ -188,17 +177,12 @@ export default function Menu({ className = '' }) {
         />
       </div>
     </motion.div>
+    </>
   );
 }
 
 Menu.propTypes = {
   className: PropTypes.string,
-  /**
-   * Optional theme override for this section (light, dark, modern)
-   */
   theme: PropTypes.string,
-  /**
-   * User object for authentication state
-   */
   user: PropTypes.object,
 };

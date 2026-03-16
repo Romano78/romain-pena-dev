@@ -8,8 +8,12 @@ import {
 } from '@/components/snippets/NavigationMenu';
 import { Button } from '@/components/ui/button';
 import { navigationItems } from '@/config/navigation-config';
+import { Link } from '@/i18n/navigation';
+import { useTranslations } from 'next-intl';
 
 export default function DesktopNavigation() {
+  const navTranslations = useTranslations('nav');
+
   return (
     <NavigationMenu className='hidden lg:flex justify-end'>
       <NavigationMenuList className='flex'>
@@ -17,14 +21,14 @@ export default function DesktopNavigation() {
           <NavigationMenuItem key={item.id}>
             <NavigationMenuLink asChild>
               <Button variant='link' size='sm' asChild>
-                <a
+                <Link
                   href={item.href}
-                  title={item.label}
+                  title={navTranslations(item.id) || item.label}
                   target={item.isExternal ? '_blank' : undefined}
                   rel={item.isExternal ? 'noopener noreferrer' : undefined}
                 >
-                  {item.label}
-                </a>
+                  {navTranslations(item.id) || item.label}
+                </Link>
               </Button>
             </NavigationMenuLink>
           </NavigationMenuItem>
