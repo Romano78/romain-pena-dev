@@ -11,7 +11,7 @@ const SECTION_SPACING = 'pt-20 lg:pt-32';
 
 export default function Home() {
   return (
-    <main className='container py-0 px-4 md:px-0 m-auto mt-[65.5px]'>
+    <main id='main-content' className='container py-0 px-4 md:px-0 m-auto mt-(--menu-height)'>
       <MainHero />
       <About />
       <Services className={SECTION_SPACING} />

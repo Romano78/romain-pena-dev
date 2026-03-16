@@ -173,7 +173,7 @@ export default function PricingTable({ className, options = defaultOptions }) {
           <div
             key={plan.title}
             className={cn(
-              'pricing-card border-border bg-card relative rounded-[--radius] border rounded-sm  p-8 hover:bg-[hsl(187_80%_12%)] radius-sm',
+              'pricing-card border-border bg-card relative rounded-[--radius] border rounded-sm  p-8 hover:bg-card-deep radius-sm',
               plan.popular && 'border-primary shadow-lg',
             )}
           >

@@ -48,7 +48,7 @@ function WorkCard({ project, index }) {
                 className='object-cover transition-transform duration-700 group-hover:scale-105'
               />
             ) : (
-              <div className='w-full h-full bg-[hsl(187_80%_12%)]' />
+              <div className='w-full h-full bg-card-deep' />
             )}
           </motion.div>
 

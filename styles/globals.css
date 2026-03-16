@@ -32,6 +32,8 @@
   --chart-5: 45 60% 50%;
   --radius: 0.5rem;
   --overlay: hsla(0, 0%, 100%, 0.18);
+  --card-deep: 187 80% 12%;
+  --menu-height: 65.5px;
 }
 
 .dark {
@@ -94,6 +96,7 @@
   --color-chart-4: hsl(var(--chart-4));
   --color-chart-5: hsl(var(--chart-5));
   --color-overlay: var(--overlay);
+  --color-card-deep: hsl(var(--card-deep));
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);

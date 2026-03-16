@@ -9,11 +9,23 @@ import { ArrowUpRight } from 'lucide-react';
 export default function FlipCard({ project }) {
   const [isFlipped, setIsFlipped] = useState(false);
 
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      setIsFlipped((v) => !v);
+    }
+  };
+
   return (
     <div
-      className='project-card-item relative min-h-[420px] cursor-pointer'
+      role='button'
+      tabIndex={0}
+      aria-pressed={isFlipped}
+      aria-label={`${project.client} — ${project.type}. Press to ${isFlipped ? 'close' : 'see details'}`}
+      className='project-card-item relative min-h-[420px] cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-muted rounded-lg'
       style={{ perspective: '1200px' }}
       onClick={() => setIsFlipped((v) => !v)}
+      onKeyDown={handleKeyDown}
     >
       <motion.div
         className='relative w-full h-full'
@@ -35,7 +47,7 @@ export default function FlipCard({ project }) {
             />
           )}
           <div
-            className={`absolute inset-0 ${project.image ? 'bg-[rgba(0,0,0,0.3)]' : 'bg-[hsl(187_80%_12%)]'}`}
+            className={`absolute inset-0 ${project.image ? 'bg-[rgba(0,0,0,0.3)]' : 'bg-card-deep'}`}
           />
           <div className='absolute inset-0 p-8 flex flex-col justify-between'>
             <span className='text-overline text-white'>{project.type}</span>

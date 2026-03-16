@@ -16,6 +16,8 @@ import PropTypes from 'prop-types';
 export default function MobileMenu({ isOpen, onItemClick }) {
   return (
     <div
+      id='mobile-menu'
+      aria-hidden={!isOpen}
       className={`absolute top-16.5 lg:hidden w-full ${
         isOpen
           ? 'translate-x-0 opacity-100'
@@ -27,7 +29,7 @@ export default function MobileMenu({ isOpen, onItemClick }) {
         {/* <div className='bg-muted/50 mb-6 rounded-lg p-2'>
           <ThemeToggle />
         </div> */}
-        <nav className='space-y-4'>
+        <nav aria-label='Mobile navigation' className='space-y-4'>
           {/* Navigation Links */}
           <div className='space-y-2'>
             {navigationItems.map((item) => (

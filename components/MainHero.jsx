@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
+import Image from 'next/image';
 import SectionHeader from '@/components/snippets/SectionHeader';
 import { cn } from '@/lib/utils';
 import { gsap } from 'gsap';
@@ -62,7 +63,7 @@ export default function MainHero({
   return (
     <section
       ref={containerRef}
-      className={`flex items-center gap-16 overflow-hidden py-0 max-lg:mt-24 max-lg:flex-col lg:h-[calc(100svh-65.5px)] ${cn(className)} ${cn(parentClassName)}`}
+      className={`flex items-center gap-16 overflow-hidden py-0 max-lg:mt-24 max-lg:flex-col lg:h-[calc(100svh-var(--menu-height))] ${cn(className)} ${cn(parentClassName)}`}
       id='main-hero'
     >
       <div ref={textRef} className='flex-1'>
@@ -82,11 +83,12 @@ export default function MainHero({
         />
       </div>
       <div ref={imageRef} className='flex-1'>
-        <img
+        <Image
           src='/profile.JPEG'
-          alt='Romain Pena'
+          alt='Romain Pena, Shopify developer based in Montreal'
           width={600}
           height={500}
+          priority
           className='w-full h-auto'
         />
       </div>

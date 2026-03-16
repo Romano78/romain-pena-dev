@@ -1,14 +1,10 @@
 'use client';
 
-import { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { motion } from 'framer-motion';
 import { ArrowRight, Blocks, LineChart } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import SectionHeader from '@/components/snippets/SectionHeader';
-
-gsap.registerPlugin(ScrollTrigger);
 
 function ColumnItem({ icon: Icon, title, body }) {
   return (
@@ -49,44 +45,20 @@ function Services({
   ],
   className = '',
 }) {
-  const gridRef = useRef(null);
-
-  useEffect(() => {
-    const grid = gridRef.current;
-    if (!grid) return;
-
-    const cards = grid.querySelectorAll('.service-card');
-    if (!cards.length) return;
-
-    const ctx = gsap.context(() => {
-      cards.forEach((card, i) => {
-        gsap.fromTo(
-          card,
-          { x: i === 0 ? -40 : 40, opacity: 0 },
-          {
-            x: 0,
-            opacity: 1,
-            duration: 0.7,
-            ease: 'power2.out',
-            scrollTrigger: {
-              trigger: card,
-              start: 'top 85%',
-              once: true,
-            },
-          }
-        );
-      });
-    }, grid);
-
-    return () => ctx.revert();
-  }, []);
-
   return (
     <section id="services" className={cn(className)}>
       <SectionHeader overline='What I do.' />
-      <div ref={gridRef} className="grid gap-6 md:grid-cols-2">
+      <div className="grid gap-6 md:grid-cols-2">
         {columns.map((column, i) => (
-          <ColumnItem key={i} {...column} />
+          <motion.div
+            key={i}
+            initial={{ x: i === 0 ? -40 : 40, opacity: 0 }}
+            whileInView={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.7, ease: 'easeOut' }}
+            viewport={{ once: true, amount: 0.15 }}
+          >
+            <ColumnItem {...column} />
+          </motion.div>
         ))}
       </div>
     </section>

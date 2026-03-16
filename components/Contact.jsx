@@ -1,12 +1,16 @@
 'use client';
 
-import { useRef } from 'react';
+import { useState } from 'react';
 import { Mail } from 'lucide-react';
 import { useScrollReveal } from '@/hooks/use-scroll-reveal';
 import ScrambleTextAnimation1 from '@/components/snippets/ScrambleTextAnimation1';
 import { cn } from '@/lib/utils';
 
+const inputClass =
+  'w-full rounded-md border border-border bg-card px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground transition-colors focus:border-muted focus:outline-none focus:ring-2 focus:ring-muted/40';
+
 export default function Contact({ className = '' }) {
+  const [submitted, setSubmitted] = useState(false);
   const ref = useScrollReveal({ y: 30, duration: 0.9, stagger: 0.1, selector: '.contact-reveal' });
 
   return (
@@ -33,53 +37,72 @@ export default function Contact({ className = '' }) {
           </a>
         </div>
 
-        <form
-          className="contact-reveal mt-10 max-w-md space-y-4"
-          onSubmit={(e) => e.preventDefault()}
-        >
-          <div>
-            <label htmlFor="name" className="sr-only">
-              Name
-            </label>
-            <input
-              id="name"
-              name="name"
-              type="text"
-              placeholder="Your name"
-              className="w-full rounded-md border border-border bg-card px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground transition-colors focus:border-muted focus:outline-none"
-            />
-          </div>
-          <div>
-            <label htmlFor="email" className="sr-only">
-              Email
-            </label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              placeholder="Your email"
-              className="w-full rounded-md border border-border bg-card px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground transition-colors focus:border-muted focus:outline-none"
-            />
-          </div>
-          <div>
-            <label htmlFor="message" className="sr-only">
-              Message
-            </label>
-            <textarea
-              id="message"
-              name="message"
-              placeholder="Tell me about your project"
-              rows={4}
-              className="w-full resize-none rounded-md border border-border bg-card px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground transition-colors focus:border-muted focus:outline-none"
-            />
-          </div>
-          <button
-            type="submit"
-            className="rounded-md border border-foreground bg-foreground px-6 py-3 text-sm font-medium text-background transition-colors hover:bg-muted hover:border-muted"
+        {submitted ? (
+          <p
+            role="status"
+            aria-live="polite"
+            className="contact-reveal mt-10 max-w-md rounded-md border border-muted/40 bg-card px-6 py-5 text-sm text-foreground"
           >
-            Send message
-          </button>
-        </form>
+            Message received — I{"'"}ll get back to you within 24 hours.
+          </p>
+        ) : (
+          <form
+            className="contact-reveal mt-10 max-w-md space-y-4"
+            onSubmit={(e) => {
+              e.preventDefault();
+              setSubmitted(true);
+            }}
+          >
+            <div>
+              <label htmlFor="name" className="sr-only">
+                Name
+              </label>
+              <input
+                id="name"
+                name="name"
+                type="text"
+                placeholder="Your name"
+                required
+                aria-required="true"
+                className={inputClass}
+              />
+            </div>
+            <div>
+              <label htmlFor="email" className="sr-only">
+                Email
+              </label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="Your email"
+                required
+                aria-required="true"
+                className={inputClass}
+              />
+            </div>
+            <div>
+              <label htmlFor="message" className="sr-only">
+                Message
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                placeholder="Tell me about your project"
+                rows={4}
+                required
+                aria-required="true"
+                className={cn(inputClass, 'resize-none')}
+              />
+            </div>
+            <button
+              type="submit"
+              className="rounded-md border border-foreground bg-foreground px-6 py-3 text-sm font-medium text-background transition-colors hover:bg-muted hover:border-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-muted"
+            >
+              Send message
+            </button>
+          </form>
+        )}
     </section>
   );
 }
