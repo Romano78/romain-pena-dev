@@ -8,6 +8,9 @@
     "pricing": "Pricing",
     "contact": "Contact"
   },
+  "footer": {
+    "copyright": "© {year} Your Company Name. All rights reserved.  "
+  },
   "hero": {
     "status": "Based in Montreal · Available for new clients",
     "tagline": "I build what your Shopify store can't do out of the box.",

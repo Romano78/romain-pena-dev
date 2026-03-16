@@ -8,6 +8,9 @@
     "pricing": "Tarifs",
     "contact": "Contact"
   },
+  "footer": {
+    "copyright": "© {year} Shopify Developer Montreal. Tous droits réservés.  "
+  },
   "hero": {
     "status": "Basé à Montréal · Disponible pour de nouveaux clients",
     "tagline": "Je construis ce que votre boutique Shopify ne peut pas faire nativement.",

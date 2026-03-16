@@ -7,23 +7,34 @@ import {
   NavigationMenuList,
 } from '@/components/snippets/NavigationMenu';
 import { Button } from '@/components/ui/button';
-import { navigationItems } from '@/config/navigation-config';
+import { footerNavigationItems } from '@/config/navigation-config';
+import { useTranslations } from 'next-intl';
 
 export default function FooterNavigation() {
+  const footerTranslations = useTranslations('footer');
+
+  console.log(footerNavigationItems);
+
   return (
     <NavigationMenu className='hidden lg:flex justify-end'>
       <NavigationMenuList className='flex'>
-        {navigationItems.map((item) => (
+        {footerNavigationItems.map((item) => (
           <NavigationMenuItem key={item.id}>
             <NavigationMenuLink asChild>
               <Button variant='link' size='sm' asChild>
                 <a
                   href={item.href}
-                  title={item.label}
+                  title={
+                    footerTranslations(item.id, {
+                      year: new Date().getFullYear(),
+                    }) || item.label
+                  }
                   target={item.isExternal ? '_blank' : undefined}
                   rel={item.isExternal ? 'noopener noreferrer' : undefined}
                 >
-                  {item.label}
+                  {footerTranslations(item.id, {
+                    year: new Date().getFullYear(),
+                  }) || item.label}
                 </a>
               </Button>
             </NavigationMenuLink>

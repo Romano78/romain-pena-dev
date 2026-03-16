@@ -43,34 +43,39 @@ function ColumnItem({ icon: Icon, title, body, badgesL }) {
 }
 
 function Services({ className = '' }) {
-  const t = useTranslations('services');
+  const serviceT = useTranslations('services');
+  const commonT = useTranslations('common');
   const gridRef = useRef(null);
 
   const columns = [
     {
-      title: t('design.title'),
-      body: t('design.body'),
+      title: serviceT('design.title'),
+      body: serviceT('design.body'),
       href: '#work',
-      badgesL: [t('design.badge1'), t('design.badge2'), t('design.badge3')],
+      badgesL: [
+        serviceT('design.badge1'),
+        serviceT('design.badge2'),
+        serviceT('design.badge3'),
+      ],
     },
     {
-      title: t('features.title'),
-      body: t('features.body'),
+      title: serviceT('features.title'),
+      body: serviceT('features.body'),
       href: '#',
       badgesL: [
-        t('features.badge1'),
-        t('features.badge2'),
-        t('features.badge3'),
+        serviceT('features.badge1'),
+        serviceT('features.badge2'),
+        serviceT('features.badge3'),
       ],
     },
   ];
 
   return (
     <section id='services' className={cn(className)}>
-      <SectionHeader overline={t('overline')} />
+      <SectionHeader overline={serviceT('overline')} />
       <div ref={gridRef} className='grid gap-6 md:grid-cols-2'>
         {columns.map((column, i) => (
-          <ColumnItem key={i} {...column} learnMore={t('learnMore')} />
+          <ColumnItem key={i} {...column} learnMore={commonT('learnMore')} />
         ))}
       </div>
     </section>
