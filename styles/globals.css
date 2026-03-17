@@ -14,7 +14,7 @@
   --primary-foreground: 0 0% 98%;
   --secondary: 220 5% 96%;
   --secondary-foreground: 220 14% 20%;
-  --muted: 142 50% 35%;
+  --muted: 187 55% 30%;
   --muted-foreground: 220 5% 45%;
   --accent: 220 5% 92%;
   --accent-foreground: 220 14% 20%;
@@ -109,6 +109,23 @@
   --color-sidebar-accent-foreground: hsl(var(--sidebar-accent-foreground));
   --color-sidebar-border: hsl(var(--sidebar-border));
   --color-sidebar-ring: hsl(var(--sidebar-ring));
+}
+
+@utility container {
+  width: 100%;
+  margin-inline: auto;
+
+  @media (width >=1280px) {
+    max-width: 1400px;
+  }
+
+  @media (width >=1536px) {
+    max-width: 1440px;
+  }
+
+  @media (width >=1900px) {
+    max-width: 1600px;
+  }
 }
 
 @layer components {

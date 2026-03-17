@@ -1,7 +1,6 @@
 'use client';
 
 import { useRef, useEffect } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
 import PropTypes from 'prop-types';
 import Image from 'next/image';
 import { Link } from '@/i18n/navigation';
@@ -13,74 +12,65 @@ import { projects } from '@/config/projects';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Even-indexed cards sit high, odd-indexed cards drop — creates the waterfall stagger
-const CARD_OFFSETS = ['mt-0', 'md:mt-48'];
-
-function WorkCard({ project, index }) {
-  const cardRef = useRef(null);
-
-  const { scrollYProgress } = useScroll({
-    target: cardRef,
-    offset: ['start end', 'end start'],
-  });
-
-  const imageY = useTransform(scrollYProgress, [0, 1], ['-8%', '8%']);
-
+function WorkCard({ project }) {
   return (
-    <motion.article
-      ref={cardRef}
-      className={cn('work-card group', CARD_OFFSETS[index % 2])}
-    >
+    <article className='work-card group'>
       <Link href={`/work/${project.slug}`} className='block'>
         {/* Image */}
-        <div className='relative overflow-hidden rounded-2xl aspect-4/3'>
-          {/* Parallax image */}
-          <motion.div
-            className='absolute inset-0 scale-110'
-            style={{ y: imageY }}
-            transition={{ duration: 0.6, ease: [0.43, 0.13, 0.23, 0.96] }}
-          >
-            {project.image ? (
-              <Image
-                src={project.image}
-                alt={project.client}
-                fill
-                className='object-cover transition-transform duration-700 group-hover:scale-105'
-              />
-            ) : (
-              <div className='w-full h-full bg-card-deep' />
-            )}
-          </motion.div>
+        <div className='work-card-image relative overflow-hidden rounded-2xl aspect-video md:aspect-[4/3] bg-card-deep'>
+          {project.image ? (
+            <Image
+              src={project.image}
+              alt={project.client}
+              fill
+              className='object-contain transition-transform duration-700 group-hover:scale-105'
+            />
+          ) : (
+            <div className='w-full h-full bg-card-deep' />
+          )}
 
-          {/* Overlay — fades in on hover */}
-          <div className='absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500' />
+          {/* Overlay */}
+          <div className='absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500' />
 
-          {/* Top-right vertical type label — slides in on hover */}
-          <div className='absolute top-5 right-5 opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 delay-75'>
-            <span
-              className='text-overline text-muted'
-              style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}
-            >
-              {project.type}
-            </span>
-          </div>
-
-          {/* Bottom CTA — slides up on hover */}
-          <div className='absolute bottom-6 left-6 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 delay-75'>
-            <span className='text-sm font-medium text-white tracking-wide'>
-              View project →
-            </span>
+          {/* Desktop hover content */}
+          <div className='hidden md:flex absolute inset-0 flex-col justify-between p-6 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-75'>
+            <span className='text-overline text-muted'>{project.type}</span>
+            <div className='space-y-4'>
+              <div className='flex flex-wrap gap-2'>
+                {project.items.slice(0, 3).map((item) => (
+                  <span
+                    key={item}
+                    className='text-xs px-2.5 py-1 rounded-full border border-white/30 text-white/80'
+                  >
+                    {item}
+                  </span>
+                ))}
+              </div>
+              <span className='text-sm font-medium text-white tracking-wide'>View project →</span>
+            </div>
           </div>
         </div>
 
-        {/* Below image — client name only */}
-        <div className='pt-4'>
-          <h3 className='h3 group-hover:text-muted transition-colors duration-300'>
-            {project.client}
-          </h3>
+        {/* Below image */}
+        <div className='work-card-text pt-4 space-y-3'>
+          <h3 className='h3'>{project.client}</h3>
+          {/* Mobile only: type + pills */}
+          <div className='md:hidden space-y-2'>
+            <span className='text-overline text-muted block'>{project.type}</span>
+            <div className='flex flex-wrap gap-2'>
+              {project.items.slice(0, 3).map((item) => (
+                <span
+                  key={item}
+                  className='text-xs px-2.5 py-1 rounded-full border border-border text-foreground/60'
+                >
+                  {item}
+                </span>
+              ))}
+            </div>
+          </div>
         </div>
       </Link>
-    </motion.article>
+    </article>
   );
 }
 
@@ -93,7 +83,6 @@ WorkCard.propTypes = {
     image: PropTypes.string,
     url: PropTypes.string,
   }).isRequired,
-  index: PropTypes.number.isRequired,
 };
 
 export default function Work({ className = '' }) {
@@ -106,26 +95,90 @@ export default function Work({ className = '' }) {
     const cards = grid.querySelectorAll('.work-card');
     if (!cards.length) return;
 
+    const canHover = window.matchMedia('(hover: hover)').matches;
+
+    // Scroll animations
     const ctx = gsap.context(() => {
-      gsap.fromTo(
-        cards,
-        { y: 60, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.7,
-          ease: 'power3.out',
-          stagger: 0.15,
-          scrollTrigger: {
-            trigger: grid,
-            start: 'top 85%',
-            once: true,
+      cards.forEach((card, i) => {
+        const imageEl = card.querySelector('.work-card-image');
+        const textEl = card.querySelector('.work-card-text');
+
+        gsap.fromTo(
+          imageEl,
+          { clipPath: 'inset(0 0 100% 0)' },
+          {
+            clipPath: 'inset(0 0 0% 0)',
+            duration: 1.2,
+            ease: 'power3.out',
+            delay: i * 0.1,
+            scrollTrigger: {
+              trigger: card,
+              start: 'top 85%',
+              once: true,
+            },
           },
-        },
-      );
+        );
+
+        gsap.fromTo(
+          textEl,
+          { y: 12, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.6,
+            ease: 'power3.out',
+            delay: i * 0.1 + 0.5,
+            scrollTrigger: {
+              trigger: card,
+              start: 'top 85%',
+              once: true,
+            },
+          },
+        );
+      });
     }, grid);
 
-    return () => ctx.revert();
+    // Tilt — only attached on hover-capable devices
+    const tiltCleanups = [];
+
+    if (canHover) {
+      cards.forEach((card) => {
+        const onMove = (e) => {
+          const rect = card.getBoundingClientRect();
+          const rotateX = ((e.clientY - rect.top - rect.height / 2) / (rect.height / 2)) * -4;
+          const rotateY = ((e.clientX - rect.left - rect.width / 2) / (rect.width / 2)) * 4;
+          gsap.to(card, {
+            rotateX,
+            rotateY,
+            duration: 0.4,
+            ease: 'power2.out',
+            transformPerspective: 900,
+            transformOrigin: 'center center',
+          });
+        };
+
+        const onLeave = () => {
+          gsap.to(card, {
+            rotateX: 0,
+            rotateY: 0,
+            duration: 0.6,
+            ease: 'power3.out',
+          });
+        };
+
+        card.addEventListener('mousemove', onMove);
+        card.addEventListener('mouseleave', onLeave);
+        tiltCleanups.push(() => {
+          card.removeEventListener('mousemove', onMove);
+          card.removeEventListener('mouseleave', onLeave);
+        });
+      });
+    }
+
+    return () => {
+      ctx.revert();
+      tiltCleanups.forEach((fn) => fn());
+    };
   }, []);
 
   return (
@@ -133,10 +186,10 @@ export default function Work({ className = '' }) {
       <SectionHeader overline='Selected Work' />
       <div
         ref={gridRef}
-        className='grid gap-x-16 gap-y-20 md:grid-cols-2 md:items-start'
+        className='grid gap-x-8 gap-y-16 md:grid-cols-2'
       >
-        {projects.map((project, i) => (
-          <WorkCard key={project.slug} project={project} index={i} />
+        {projects.map((project) => (
+          <WorkCard key={project.slug} project={project} />
         ))}
       </div>
     </section>
