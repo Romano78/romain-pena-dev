@@ -20,49 +20,33 @@ const defaultOptions = {
       popular: false,
       title: 'Growth',
       description: '12 hours included',
-      price: 900,
+      price: 1200,
       features: [
-        { feature: 'Design implementation from Figma' },
+        { feature: 'Figma → Shopify implementation' },
         { feature: 'New feature additions' },
         { feature: 'Bug fixes & improvements' },
         { feature: '48h response time' },
         { feature: 'Monthly sync call' },
       ],
-      buttonText: 'Start Pro',
-      buttonLink: '#',
+      buttonText: 'Get started',
+      buttonLink: '#contact',
     },
     {
       buttonVariant: 'outline',
       popular: true,
       title: 'Partner',
       description: '20 hours included',
-      price: 1500,
+      price: 2000,
       features: [
         { feature: 'Everything in Growth' },
         { feature: 'Custom features & integrations' },
-        { feature: 'Priority support' },
+        { feature: 'Custom app development' },
         { feature: 'Weekly sync call' },
         { feature: 'Slack access' },
       ],
-      buttonText: 'Contact Sales',
-      buttonLink: '#',
+      buttonText: 'Get started',
+      buttonLink: '#contact',
     },
-    {
-      buttonVariant: 'outline',
-      popular: false,
-      title: 'Site Audit',
-      description: 'One-time comprehensive review',
-      price: 0,
-      features: [
-        { feature: 'Comprehensive site analysis' },
-        { feature: 'Detailed report with actionable insights' },
-        { feature: 'Recommendations for improvements' },
-        { feature: 'SEO, performance, and accessibility review' },
-        { feature: 'One-time service' },
-      ],
-      buttonText: 'Get Started',
-      buttonLink: '#',
-    }
   ],
   fullFeatureList: [
     {
@@ -133,7 +117,7 @@ const defaultOptions = {
   billedQuarterlyText: 'billed monthly',
   billedYearlyText: 'billed yearly',
   mostPopularText: 'Most Popular',
-  currency: '$',
+  currency: '€',
   pricePeriodText: '/month',
   fullFeatureListName: 'Feature Comparison',
   fullFeatureListItemName: 'Feature',
@@ -167,7 +151,7 @@ export default function PricingTable({ className, options = defaultOptions }) {
 
       <div
         ref={cardsRef}
-        className='mx-auto grid gap-4 sm:grid-cols-2 md:grid-cols-3'
+        className='mx-auto grid gap-4 sm:grid-cols-2'
       >
         {options.plans.map((plan) => (
           <div

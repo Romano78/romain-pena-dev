@@ -14,7 +14,7 @@ gsap.registerPlugin(ScrollTrigger);
 export default function MainHero({
   overline = 'MONTREAL QC: 3:20',
   title = `I build what your Shopify store can't do out of the box.`,
-  body = 'Custom features, design implementation, and integrations for growing e-commerce brands.',
+  body = 'Figma-to-Shopify implementation, custom features, and backend integrations — for brands that have outgrown what themes and apps can do.',
   headingType = 'h1',
   align = 'left',
   className = '',

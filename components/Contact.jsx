@@ -20,9 +20,7 @@ export default function Contact({ className = '' }) {
       </ScrambleTextAnimation1>
 
         <p className="contact-reveal mt-6 max-w-xl text-lg leading-relaxed text-foreground">
-          If you have a Shopify store and need reliable ongoing development, I
-          {"'"}d love to hear about it. Send me a message and I{"'"}ll get back to
-          you within 24 hours.
+          If you have a design-led Shopify store that needs custom development — or an agency that needs a reliable Shopify partner — send me a message. I{"'"}ll get back to you within 24 hours.
         </p>
 
         <div className="contact-reveal mt-10 flex flex-col gap-8 md:flex-row md:gap-16">

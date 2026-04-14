@@ -28,15 +28,15 @@ function Services({
   columns = [
     {
       icon: Blocks,
-      title: 'Design Implementation',
-      body: 'You have the designs. I make them real in Shopify — pixel-perfect, exactly as your designer intended. No interpretation, no shortcuts.',
+      title: 'Figma → Shopify',
+      body: 'You have the designs. I make them real — pixel-perfect, exactly as your designer intended. Custom sections, Liquid, no page builders, no interpretation.',
       href: '#work',
     },
     {
       icon: LineChart,
-      title: 'Features & Integrations',
-      body: "When the Shopify app store isn't enough. I build custom features, connect third-party tools, and make your store work the way your business actually works.",
-      href: '#',
+      title: 'Custom Features & Apps',
+      body: "When the app store isn't enough. I build custom Shopify apps, backend integrations, and features that make your store work the way your business actually works.",
+      href: '#work',
     },
   ],
   className = '',

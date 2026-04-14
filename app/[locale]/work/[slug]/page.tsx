@@ -50,24 +50,26 @@ export default async function CaseStudyPage({
             Work
           </Link>
 
-          <p className='text-foreground/70 text-lg leading-relaxed'>
-            {project.description}
-          </p>
+          <div className='mt-auto'>
+            <p className='text-foreground/70 text-lg leading-relaxed'>
+              {project.description}
+            </p>
 
-          {project.url && (
-            <a
-              href={project.url}
-              target='_blank'
-              rel='noopener noreferrer'
-              className='mt-8 inline-flex items-center gap-2 text-foreground hover:text-muted transition-colors'
-            >
-              Visit site
-              <ArrowUpRight size={16} />
-            </a>
-          )}
+            {project.url && (
+              <a
+                href={project.url}
+                target='_blank'
+                rel='noopener noreferrer'
+                className='mt-8 inline-flex items-center gap-2 text-foreground hover:text-muted transition-colors'
+              >
+                Visit site
+                <ArrowUpRight size={16} />
+              </a>
+            )}
+          </div>
 
           {/* Metadata */}
-          <dl className='mt-auto pt-8 border-t border-border space-y-2'>
+          <dl className='pt-8 border-t border-border space-y-2'>
             <div className='flex gap-6'>
               <dt className='text-overline text-muted-foreground w-16 shrink-0'>Client</dt>
               <dd className='text-overline text-foreground'>{project.client}</dd>
