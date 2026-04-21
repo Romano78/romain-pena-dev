@@ -6,25 +6,10 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { gsap } from 'gsap';
-import { ArrowDown, ArrowRight } from 'lucide-react';
+import { ArrowDown } from 'lucide-react';
 import PillCta from '@/components/snippets/PillCta';
 import LinkCta from '@/components/snippets/LinkCta';
-
-const col1Images = [
-  '/atari_safari.png',
-  '/andor_safari.png',
-  '/jaysonhome_safari.png',
-  'https://picsum.photos/seed/rp1/800/600',
-  'https://picsum.photos/seed/rp2/800/600',
-];
-
-const col2Images = [
-  '/together-sfari.png',
-  '/animo_safari.png',
-  '/cc_safari.png',
-  'https://picsum.photos/seed/rp3/800/600',
-  'https://picsum.photos/seed/rp4/800/600',
-];
+import ImagePlaceholder from '@/components/snippets/ImagePlaceholder';
 
 /**
  * @typedef {Object} MainHeroProps
@@ -47,8 +32,8 @@ export default function MainHero({
   leftCol = [],
   rightCol = [],
 }) {
-  const displayLeft = leftCol.length > 0 ? leftCol : col1Images;
-  const displayRight = rightCol.length > 0 ? rightCol : col2Images;
+  const displayLeft = leftCol.length > 0 ? leftCol : Array(5).fill(null);
+  const displayRight = rightCol.length > 0 ? rightCol : Array(5).fill(null);
 
   const textRef = useRef(null);
 
@@ -86,9 +71,9 @@ export default function MainHero({
           {title}
         </h1>
 
-        <div className='flex items-center gap-6'>
+        <div className='flex items-end gap-6'>
           <PillCta href='#work' icon={<ArrowDown className='h-3 w-3' />}>See work</PillCta>
-          <LinkCta href='#contact' icon={<ArrowRight className='h-3 w-3' />}>Contact</LinkCta>
+          <LinkCta href='#contact' uppercase={false} className='mb-0.5'>Contact</LinkCta>
         </div>
       </div>
 
@@ -105,14 +90,11 @@ export default function MainHero({
           transition={{ repeat: Infinity, duration: 30, repeatType: 'loop', ease: 'linear' }}
         >
           {[...displayLeft, ...displayLeft].map((src, i) => (
-            <div key={i} className='relative rounded-xl overflow-hidden aspect-[4/3] flex-shrink-0'>
-              <Image
-                src={src}
-                alt=''
-                fill
-                sizes='20vw'
-                className='object-cover'
-              />
+            <div key={i} className='relative rounded-xl overflow-hidden aspect-[3/4] flex-shrink-0'>
+              {src
+                ? <Image src={src} alt='' fill sizes='20vw' className='object-cover' />
+                : <ImagePlaceholder />
+              }
             </div>
           ))}
         </motion.div>
@@ -125,14 +107,11 @@ export default function MainHero({
           transition={{ repeat: Infinity, duration: 30, repeatType: 'loop', ease: 'linear' }}
         >
           {[...displayRight, ...displayRight].map((src, i) => (
-            <div key={i} className='relative rounded-xl overflow-hidden aspect-[4/3] flex-shrink-0'>
-              <Image
-                src={src}
-                alt=''
-                fill
-                sizes='20vw'
-                className='object-cover'
-              />
+            <div key={i} className='relative rounded-xl overflow-hidden aspect-[3/4] flex-shrink-0'>
+              {src
+                ? <Image src={src} alt='' fill sizes='20vw' className='object-cover' />
+                : <ImagePlaceholder />
+              }
             </div>
           ))}
         </motion.div>

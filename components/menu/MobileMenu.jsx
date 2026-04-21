@@ -1,65 +1,78 @@
-import { Button } from '@/components/ui/button';
+'use client';
+
+import { useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { X } from 'lucide-react';
 import { navigationItems } from '@/config/navigation-config';
-import PropTypes from 'prop-types';
-import LanguageSwitcher from '@/components/snippets/LanguageSwitcher';
 import { ThemeToggle } from './ThemeToggle';
-import { Link } from '@/i18n/navigation';
+import LanguageSwitcher from '@/components/snippets/LanguageSwitcher';
+import { cubicBezierPreset } from '@/config/cubic-beziers';
+import PropTypes from 'prop-types';
 import { useTranslations } from 'next-intl';
 
-export default function MobileMenu({ isOpen, onItemClick }) {
+export default function MobileMenu({ isOpen, onClose }) {
   const navTranslations = useTranslations('nav');
 
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [isOpen]);
+
   return (
-    <div
-      id='mobile-menu'
-      aria-hidden={!isOpen}
-      className={`absolute top-16.5 lg:hidden w-full ${
-        isOpen
-          ? 'translate-x-0 opacity-100'
-          : '-translate-x-full opacity-0 pointer-events-none'
-      } bg-background overflow-y-auto transition-all duration-500 ease-in-out border-b`}
-    >
-      <div className='mx-auto p-6'>
-        {/* Theme Toggle */}
-        {/* <div className='bg-muted/50 mb-6 rounded-lg p-2'>
-          <ThemeToggle />
-        </div> */}
-        <nav aria-label='Mobile navigation' className='space-y-4'>
-          {/* Navigation Links */}
-          <div className='space-y-2'>
-            {navigationItems.map((item) => (
-              <Button
-                variant='link'
-                size='sm'
-                asChild
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          className='fixed inset-0 z-[200] flex flex-col bg-background'
+          initial={{ x: '100%' }}
+          animate={{ x: 0 }}
+          exit={{ x: '100%' }}
+          transition={{ duration: 0.5, ease: cubicBezierPreset }}
+        >
+          {/* Header */}
+          <div className='flex items-center justify-between px-6 py-4 border-b border-border'>
+            <a href='#' onClick={onClose} className='text-lg font-semibold tracking-tight text-foreground'>
+              Romain<span className='text-muted'>Pena</span>
+            </a>
+            <button
+              onClick={onClose}
+              className='flex items-center gap-2 px-4 py-2 rounded-full text-xs font-medium tracking-widest uppercase text-foreground/70 border border-border'
+            >
+              Close <X size={14} />
+            </button>
+          </div>
+
+          {/* Links */}
+          <nav className='flex flex-col justify-center flex-1 px-6 gap-6'>
+            {navigationItems.map((item, i) => (
+              <motion.div
                 key={item.id}
-                onClick={onItemClick}
-                className='flex flex-col items-start gap-1 w-full text-left pl-0 hover:bg---secondary-foreground/10 rounded-md transition-colors'
+                initial={{ opacity: 0, x: 40 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.4, delay: 0.2 + i * 0.07, ease: cubicBezierPreset }}
               >
-                <Link
+                <a
                   href={item.href}
-                  title={navTranslations(item.id) || item.label}
-                  target={item.isExternal ? '_blank' : undefined}
-                  rel={item.isExternal ? 'noopener noreferrer' : undefined}
+                  onClick={onClose}
+                  className='text-5xl font-bold text-foreground hover:text-muted transition-colors block'
                 >
                   {navTranslations(item.id) || item.label}
-                </Link>
-              </Button>
+                </a>
+              </motion.div>
             ))}
-          </div>
-          <div className=''>
-            <LanguageSwitcher className='w-full' />
-          </div>
-          <div className='bg-primary/10 mb-6 rounded-lg p-2'>
+          </nav>
+
+          {/* Bottom */}
+          <div className='px-6 py-8 flex items-center gap-4 border-t border-border'>
+            <LanguageSwitcher />
             <ThemeToggle />
           </div>
-        </nav>
-      </div>
-    </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }
 
 MobileMenu.propTypes = {
   isOpen: PropTypes.bool.isRequired,
-  user: PropTypes.object,
+  onClose: PropTypes.func.isRequired,
 };

@@ -13,8 +13,6 @@ import { useTranslations } from 'next-intl';
 export default function FooterNavigation() {
   const footerTranslations = useTranslations('footer');
 
-  console.log(footerNavigationItems);
-
   return (
     <NavigationMenu className='hidden lg:flex justify-end'>
       <NavigationMenuList className='flex'>

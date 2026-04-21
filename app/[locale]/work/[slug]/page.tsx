@@ -1,10 +1,11 @@
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
-import { getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import { ArrowUpRight, ArrowLeft } from 'lucide-react';
 import { projects, getProject } from '@/config/projects';
 import { routing } from '@/i18n/routing';
+import { getProjectGallery, getProjectCover } from '@/lib/cloudinary';
+import ImagePlaceholder from '@/components/snippets/ImagePlaceholder';
 import type { Metadata } from 'next';
 
 export function generateStaticParams() {
@@ -37,7 +38,8 @@ export default async function CaseStudyPage({
 
   if (!project) notFound();
 
-  const t = await getTranslations('workDetail');
+  const cover = await getProjectCover(slug);
+  const gallery = await getProjectGallery(slug);
 
   return (
     <main className='container px-4 md:px-0 m-auto mt-(--menu-height)'>
@@ -87,22 +89,24 @@ export default async function CaseStudyPage({
         {/* RIGHT — images */}
         <div className='py-16 lg:py-20 space-y-3'>
           {/* Hero */}
-          {project.image && (
-            <div className='relative w-full aspect-[4/3] bg-card-deep overflow-hidden'>
+          <div className='relative w-full aspect-[4/3] overflow-hidden rounded-xl'>
+            {(cover ?? project.image) ? (
               <Image
-                src={project.image}
+                src={(cover ?? project.image)!}
                 alt={project.client}
                 fill
-                className='object-contain'
+                className='object-cover object-top'
                 priority
               />
-            </div>
-          )}
+            ) : (
+              <ImagePlaceholder />
+            )}
+          </div>
 
           {/* Gallery */}
-          {project.gallery && project.gallery.length > 0 && (
+          {gallery.length > 0 && (
             <div className='columns-2 gap-3'>
-              {project.gallery.map((img, i) => (
+              {gallery.map((img, i) => (
                 <div key={i} className='break-inside-avoid mb-3'>
                   <Image
                     src={img}

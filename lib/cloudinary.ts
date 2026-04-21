@@ -24,38 +24,29 @@ function search(expression: string, max = 50) {
   return cloudinary.search.expression(expression).max_results(max).execute();
 }
 
-// ─── Marquee ─────────────────────────────────────────────────────────────
+// ─── Marquee gallery ──────────────────────────────────────────────────────
 
-export interface MarqueeAssets {
-  left: string[];
-  right: string[];
-}
-
-async function _getMarqueeAssets(): Promise<MarqueeAssets> {
-  if (process.env.NODE_ENV === 'development') return { left: [], right: [] };
+async function _getAllGalleryImages(): Promise<string[]> {
+  if (process.env.NODE_ENV === 'development') return [];
   try {
-    const [leftRes, rightRes] = await Promise.allSettled([
-      search('asset_folder="Marquee/left-column" AND resource_type=image'),
-      search('asset_folder="Marquee/right-column" AND resource_type=image'),
-    ]);
-
-    const left = leftRes.status === 'fulfilled'
-      ? leftRes.value.resources.map((r: CloudinaryResource) => cldImage(toPath(r)))
-      : [];
-    const right = rightRes.status === 'fulfilled'
-      ? rightRes.value.resources.map((r: CloudinaryResource) => cldImage(toPath(r)))
-      : [];
-
-    return { left, right };
+    const res = await cloudinary.api.resources({
+      type: 'upload',
+      resource_type: 'image',
+      prefix: 'Projects/',
+      max_results: 200,
+    });
+    return (res.resources as CloudinaryResource[])
+      .filter(r => r.public_id.includes('/gallery/'))
+      .map(r => cldImage(toPath(r), 800));
   } catch (err) {
-    console.error('[cloudinary] getMarqueeAssets failed:', err);
-    return { left: [], right: [] };
+    console.error('[cloudinary] getAllGalleryImages failed:', err);
+    return [];
   }
 }
 
-export const getMarqueeAssets = unstable_cache(
-  _getMarqueeAssets,
-  ['cloudinary-marquee-assets'],
+export const getAllGalleryImages = unstable_cache(
+  _getAllGalleryImages,
+  ['cloudinary-all-gallery-images'],
   { revalidate: 3600 },
 );
 
@@ -75,7 +66,7 @@ async function _getProjectImages(): Promise<Record<string, string>> {
     return slugs.reduce<Record<string, string>>((acc, slug, i) => {
       const res = results[i];
       if (res.status === 'fulfilled' && res.value.resources.length > 0) {
-        acc[slug] = cldImage(toPath(res.value.resources[0]));
+        acc[slug] = cldImage(toPath(res.value.resources[0]), 1200);
       }
       return acc;
     }, {});
@@ -88,6 +79,25 @@ async function _getProjectImages(): Promise<Record<string, string>> {
 export const getProjectImages = unstable_cache(
   _getProjectImages,
   ['cloudinary-project-images'],
+  { revalidate: 3600 },
+);
+
+export const getProjectCover = unstable_cache(
+  async (slug: string): Promise<string | null> => {
+    if (process.env.NODE_ENV === 'development') return null;
+    try {
+      const res = await search(
+        `asset_folder="Projects/${slug}/cover" AND resource_type=image`,
+        1,
+      );
+      if (res.resources.length === 0) return null;
+      return cldImage(toPath(res.resources[0]), 1200);
+    } catch (err) {
+      console.error('[cloudinary] getProjectCover failed:', err);
+      return null;
+    }
+  },
+  ['cloudinary-project-cover'],
   { revalidate: 3600 },
 );
 

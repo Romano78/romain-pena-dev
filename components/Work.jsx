@@ -10,6 +10,7 @@ import { projects } from '@/config/projects';
 import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import { Link } from '@/i18n/navigation';
+import ImagePlaceholder from '@/components/snippets/ImagePlaceholder';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -33,10 +34,10 @@ function WorkCard({
               src={project.image}
               alt={project.client}
               fill
-              className='object-cover object-[50%_20%] transition-transform duration-700 group-hover:scale-105'
+              className='object-cover object-top transition-transform duration-700 group-hover:scale-105'
             />
           ) : (
-            <div className='w-full h-full bg-card' />
+            <ImagePlaceholder />
           )}
 
           {/* Overlay */}

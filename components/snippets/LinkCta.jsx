@@ -3,10 +3,11 @@
 import { cn } from '@/lib/utils';
 import PropTypes from 'prop-types';
 
-export default function LinkCta({ href, onClick, icon, children, className = '' }) {
+export default function LinkCta({ href, onClick, icon, children, className = '', uppercase = true }) {
   const base = cn(
     'relative inline-flex items-center gap-1.5 cursor-pointer',
-    'text-xs font-medium tracking-widest uppercase text-foreground/50',
+    'text-xs font-medium tracking-widest text-foreground/50',
+    uppercase ? 'uppercase' : 'normal-case',
     'hover:text-foreground transition-colors duration-300 group',
     className
   );
@@ -29,4 +30,5 @@ LinkCta.propTypes = {
   icon: PropTypes.node,
   children: PropTypes.node.isRequired,
   className: PropTypes.string,
+  uppercase: PropTypes.bool,
 };

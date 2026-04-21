@@ -102,16 +102,6 @@ export default function Menu({ className = '' }) {
   };
 
   return (
-    <>
-      {/* Body overlay */}
-      <motion.div
-        className='fixed inset-0 z-[99] bg-black/50'
-        initial={{ opacity: 0, pointerEvents: 'none' }}
-        animate={isMobileMenuOpen ? { opacity: 1, pointerEvents: 'auto' } : { opacity: 0, pointerEvents: 'none' }}
-        transition={{ duration: 0.3 }}
-        onClick={closeMobileMenu}
-      />
-
     <motion.div
       className='fixed left-0 right-0 top-0 z-[100]'
       initial='visible'
@@ -152,17 +142,14 @@ export default function Menu({ className = '' }) {
                   {/* Mobile Menu Button */}
                   <div className='flex items-center justify-end gap-2 lg:hidden'>
                     <MobileMenuButton
-                      isOpen={isMobileMenuOpen}
                       onClick={() => handleMobileMenuToggle(!isMobileMenuOpen)}
-                      aria-expanded={isMobileMenuOpen}
-                      aria-controls='mobile-menu'
                     />
                   </div>
 
                   {/* Mobile Menu */}
                   <MobileMenu
                     isOpen={isMobileMenuOpen}
-                    onItemClick={closeMobileMenu}
+                    onClose={closeMobileMenu}
                   />
                 </div>
               </div>
@@ -179,7 +166,6 @@ export default function Menu({ className = '' }) {
         />
       </div>
     </motion.div>
-    </>
   );
 }
 

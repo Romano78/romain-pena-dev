@@ -1,38 +1,21 @@
 'use client';
 
 import PropTypes from 'prop-types';
+import { AlignRight } from 'lucide-react';
 
-export default function MobileMenuButton({ isOpen, onClick, ...props }) {
+export default function MobileMenuButton({ onClick }) {
   return (
     <button
       type='button'
-      aria-label={isOpen ? 'Close menu' : 'Open menu'}
-      aria-expanded={isOpen}
+      aria-label='Open menu'
       onClick={onClick}
-      className='z-[100] flex flex-col items-center justify-center w-11 h-11 space-y-1.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-muted'
-      {...props}
+      className='flex items-center gap-2 px-4 py-2 rounded-full text-xs font-medium tracking-widest uppercase text-foreground/70 hover:text-foreground transition-colors border border-border bg-background/50 backdrop-blur-sm'
     >
-      <span
-        className={`block h-0.5 w-6 bg-foreground transform transition duration-300 ease-in-out ${
-          isOpen ? 'rotate-45 translate-y-2' : ''
-        }`}
-      />
-      <span
-        className={`block h-0.5 w-6 bg-foreground transition duration-300 ease-in-out ${
-          isOpen ? 'opacity-0' : ''
-        }`}
-      />
-      <span
-        className={`block h-0.5 w-6 bg-foreground transform transition duration-300 ease-in-out ${
-          isOpen ? '-rotate-45 -translate-y-2' : ''
-        }`}
-      />
+      Menu <AlignRight size={14} />
     </button>
   );
 }
 
 MobileMenuButton.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
   onClick: PropTypes.func.isRequired,
-  'aria-controls': PropTypes.string,
 };
