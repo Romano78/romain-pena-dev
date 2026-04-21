@@ -3,7 +3,6 @@
 import { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { gsap } from 'gsap';
 import { ArrowDown } from 'lucide-react';
@@ -78,43 +77,33 @@ export default function MainHero({
       </div>
 
       {/* Right — vertical marquee (desktop only) */}
-      <div className='hidden lg:flex relative w-[45%] flex-shrink-0 h-full overflow-hidden gap-3'>
+      <div className='hidden lg:flex relative w-[55%] flex-shrink-0 h-full overflow-hidden gap-3'>
         {/* Top fade */}
         <div className='absolute top-0 left-0 right-0 z-10 h-24 bg-gradient-to-b from-background to-transparent pointer-events-none' />
 
-        {/* Column 1 — scrolls up at 30s */}
-        <motion.div
-          className='flex-1 flex flex-col gap-3'
-          initial={{ y: '0%' }}
-          animate={{ y: '-50%' }}
-          transition={{ repeat: Infinity, duration: 30, repeatType: 'loop', ease: 'linear' }}
-        >
+        {/* Column 1 — scrolls up */}
+        <div className='flex-1 flex flex-col gap-3 marquee-col-up'>
           {[...displayLeft, ...displayLeft].map((src, i) => (
-            <div key={i} className='relative rounded-xl overflow-hidden aspect-[3/4] flex-shrink-0'>
+            <div key={i} className='relative rounded-xl overflow-hidden aspect-[3/4] shrink-0'>
               {src
                 ? <Image src={src} alt='' fill sizes='20vw' className='object-cover' />
                 : <ImagePlaceholder />
               }
             </div>
           ))}
-        </motion.div>
+        </div>
 
-        {/* Column 2 — scrolls up at 22s (faster, creates depth), offset */}
-        <motion.div
-          className='flex-1 flex flex-col gap-3 -mt-[30%]'
-          initial={{ y: '-50%' }}
-          animate={{ y: '0%' }}
-          transition={{ repeat: Infinity, duration: 30, repeatType: 'loop', ease: 'linear' }}
-        >
+        {/* Column 2 — scrolls down, offset for depth */}
+        <div className='flex-1 flex flex-col gap-3 -mt-[30%] marquee-col-down'>
           {[...displayRight, ...displayRight].map((src, i) => (
-            <div key={i} className='relative rounded-xl overflow-hidden aspect-[3/4] flex-shrink-0'>
+            <div key={i} className='relative rounded-xl overflow-hidden aspect-[3/4] shrink-0'>
               {src
                 ? <Image src={src} alt='' fill sizes='20vw' className='object-cover' />
                 : <ImagePlaceholder />
               }
             </div>
           ))}
-        </motion.div>
+        </div>
 
         {/* Bottom fade */}
         <div className='absolute bottom-0 left-0 right-0 z-10 h-24 bg-gradient-to-t from-background to-transparent pointer-events-none' />
