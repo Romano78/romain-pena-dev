@@ -2,25 +2,32 @@
 
 import { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import Image from 'next/image';
-import { Link } from '@/i18n/navigation';
+import { useTranslations } from 'next-intl';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { cn } from '@/lib/utils';
 import { projects } from '@/config/projects';
 import { ArrowRight } from 'lucide-react';
+import Image from 'next/image';
+import { Link } from '@/i18n/navigation';
 
 gsap.registerPlugin(ScrollTrigger);
 
-function WorkCard({ project, aspectClass = 'aspect-video', titleClass = 'h3' }) {
+function WorkCard({
+  project,
+  aspectClass = 'aspect-video',
+  titleClass = 'h3',
+}) {
   return (
     <article className='work-card group'>
       <Link href={`/work/${project.slug}`} className='block'>
         {/* Image */}
-        <div className={cn(
-          'work-card-image relative overflow-hidden rounded-2xl bg-card',
-          aspectClass
-        )}>
+        <div
+          className={cn(
+            'work-card-image relative overflow-hidden rounded-2xl bg-card',
+            aspectClass,
+          )}
+        >
           {project.image ? (
             <Image
               src={project.image}
@@ -61,7 +68,9 @@ function WorkCard({ project, aspectClass = 'aspect-video', titleClass = 'h3' }) 
           <h3 className={titleClass}>{project.client}</h3>
           {/* Mobile only: type + pills */}
           <div className='md:hidden space-y-2'>
-            <span className='text-overline text-muted block'>{project.type}</span>
+            <span className='text-overline text-muted block'>
+              {project.type}
+            </span>
             <div className='flex flex-wrap gap-2'>
               {project.items.slice(0, 3).map((item) => (
                 <span
@@ -152,8 +161,10 @@ export default function Work({ className = '', projectImages = {} }) {
       cards.forEach((card) => {
         const onMove = (e) => {
           const rect = card.getBoundingClientRect();
-          const rotateX = ((e.clientY - rect.top - rect.height / 2) / (rect.height / 2)) * -2;
-          const rotateY = ((e.clientX - rect.left - rect.width / 2) / (rect.width / 2)) * 2;
+          const rotateX =
+            ((e.clientY - rect.top - rect.height / 2) / (rect.height / 2)) * -2;
+          const rotateY =
+            ((e.clientX - rect.left - rect.width / 2) / (rect.width / 2)) * 2;
           gsap.to(card, {
             rotateX,
             rotateY,
@@ -198,7 +209,15 @@ export default function Work({ className = '', projectImages = {} }) {
         {/* Featured row */}
         <div className='grid gap-x-8 gap-y-16 md:grid-cols-2'>
           {featuredProjects.map((project) => (
-            <WorkCard key={project.slug} project={{ ...project, image: projectImages[project.slug] ?? project.image }} aspectClass='aspect-video' titleClass='h3' />
+            <WorkCard
+              key={project.slug}
+              project={{
+                ...project,
+                image: projectImages[project.slug] ?? project.image,
+              }}
+              aspectClass='aspect-video'
+              titleClass='h3'
+            />
           ))}
         </div>
 
@@ -206,7 +225,15 @@ export default function Work({ className = '', projectImages = {} }) {
         {restProjects.length > 0 && (
           <div className='grid gap-x-8 gap-y-16 md:grid-cols-3'>
             {restProjects.map((project) => (
-              <WorkCard key={project.slug} project={{ ...project, image: projectImages[project.slug] ?? project.image }} aspectClass='aspect-[4/3]' titleClass='h4' />
+              <WorkCard
+                key={project.slug}
+                project={{
+                  ...project,
+                  image: projectImages[project.slug] ?? project.image,
+                }}
+                aspectClass='aspect-[4/3]'
+                titleClass='h4'
+              />
             ))}
           </div>
         )}

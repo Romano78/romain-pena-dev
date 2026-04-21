@@ -5,13 +5,19 @@ import LinkCta from '@/components/snippets/LinkCta';
 import { useScrollReveal } from '@/hooks/use-scroll-reveal';
 import ScrambleTextAnimation1 from '@/components/snippets/ScrambleTextAnimation1';
 import { cn } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
 
 export default function Contact({ className = '' }) {
-  const ref = useScrollReveal({ y: 30, duration: 0.9, stagger: 0.1, selector: '.contact-reveal' });
+  const ref = useScrollReveal({
+    y: 30,
+    duration: 0.9,
+    stagger: 0.1,
+    selector: '.contact-reveal',
+  });
 
   return (
-    <section id="contact" ref={ref} className={cn(className)}>
-      <ScrambleTextAnimation1 className="text-overline mb-6 text-muted contact-reveal">
+    <section id='contact' ref={ref} className={cn(className)}>
+      <ScrambleTextAnimation1 className='text-overline mb-6 text-muted contact-reveal'>
         {"Let's talk."}
       </ScrambleTextAnimation1>
 

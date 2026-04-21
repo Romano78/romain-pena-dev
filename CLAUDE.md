@@ -204,3 +204,14 @@ Docs: https://gsap.com/docs/v3/
   ScrollTrigger.scrollerProxy for Lenis compatibility
 - Scope all GSAP selectors to a ref to avoid targeting 
   wrong elements across components
+
+### Search before creating infrastructure files
+ - Always search for existing equivalents before creating new config/infrastructure files
+
+ - Before creating any infrastructure file (middleware, proxy, provider, config), search the project root for existing files that could serve the same purpose — including framework convention aliases.
+
+**Why:** Created `middleware.ts` without knowing `proxy.ts` already existed and did the same thing. Next.js migrated from `middleware.ts` → `proxy.ts` convention. This caused a conflict and a runtime error.
+
+**How to apply:** Before creating files like middleware, proxies, providers, or routing config — run a broad search (Glob `*.ts` at root, or Grep for the relevant import/pattern) to confirm nothing equivalent already exists under a different name.
+
+  

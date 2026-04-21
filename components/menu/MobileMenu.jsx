@@ -1,19 +1,14 @@
 import { Button } from '@/components/ui/button';
 import { navigationItems } from '@/config/navigation-config';
 import PropTypes from 'prop-types';
-// import { ThemeToggle } from '@/components/snippets/Customizer/theme-toggle';
-// import AuthSection from './AuthSection';
+import LanguageSwitcher from '@/components/snippets/LanguageSwitcher';
+import { ThemeToggle } from './ThemeToggle';
+import { Link } from '@/i18n/navigation';
+import { useTranslations } from 'next-intl';
 
-/**
- * Mobile menu component that displays navigation items and theme toggle
- *
- * @param {Object} props - Component props
- * @param {boolean} props.isOpen - Whether the mobile menu is open
- * @param {Object} props.user - User object for authentication
- * @param {Function} props.onItemClick - Callback function when a navigation item is clicked
- * @returns {JSX.Element} - MobileMenu component
- */
 export default function MobileMenu({ isOpen, onItemClick }) {
+  const navTranslations = useTranslations('nav');
+
   return (
     <div
       id='mobile-menu'
@@ -34,23 +29,29 @@ export default function MobileMenu({ isOpen, onItemClick }) {
           <div className='space-y-2'>
             {navigationItems.map((item) => (
               <Button
-                key={item.id}
-                variant='ghost'
+                variant='link'
                 size='sm'
-                href={item.href}
-                className='w-full justify-start'
-                disabled={item.isDisabled}
-                target={item.isExternal ? '_blank' : undefined}
-                rel={item.isExternal ? 'noopener noreferrer' : undefined}
-                onClick={() => {
-                  if (onItemClick) {
-                    onItemClick();
-                  }
-                }}
+                asChild
+                key={item.id}
+                onClick={onItemClick}
+                className='flex flex-col items-start gap-1 w-full text-left pl-0 hover:bg---secondary-foreground/10 rounded-md transition-colors'
               >
-                {item.label}
+                <Link
+                  href={item.href}
+                  title={navTranslations(item.id) || item.label}
+                  target={item.isExternal ? '_blank' : undefined}
+                  rel={item.isExternal ? 'noopener noreferrer' : undefined}
+                >
+                  {navTranslations(item.id) || item.label}
+                </Link>
               </Button>
             ))}
+          </div>
+          <div className=''>
+            <LanguageSwitcher className='w-full' />
+          </div>
+          <div className='bg-primary/10 mb-6 rounded-lg p-2'>
+            <ThemeToggle />
           </div>
         </nav>
       </div>
@@ -61,5 +62,4 @@ export default function MobileMenu({ isOpen, onItemClick }) {
 MobileMenu.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   user: PropTypes.object,
-  onItemClick: PropTypes.func,
 };

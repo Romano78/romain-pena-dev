@@ -41,3 +41,10 @@ export const navigationItems = [
     isDisabled: false,
   },
 ];
+
+export const footerNavigationItems = [
+  {
+    id: 'copyright',
+    label: `© ${new Date().getFullYear()} Shopify Developer Montreal. All rights reserved.`,
+  },
+];

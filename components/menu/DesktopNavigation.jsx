@@ -1,8 +1,12 @@
 'use client';
 
 import { navigationItems } from '@/config/navigation-config';
+import { Link } from '@/i18n/navigation';
+import { useTranslations } from 'next-intl';
 
 export default function DesktopNavigation() {
+  const navTranslations = useTranslations('nav');
+
   return (
     <nav className='hidden lg:flex items-center gap-6'>
       {navigationItems.map((item) => (

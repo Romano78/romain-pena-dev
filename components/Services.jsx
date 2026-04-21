@@ -2,7 +2,7 @@
 
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
-import { ArrowRight, Blocks, LineChart } from 'lucide-react';
+import { Blocks, LineChart } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import SectionHeader from '@/components/snippets/SectionHeader';
 
@@ -65,18 +65,11 @@ ColumnItem.propTypes = {
   icon: PropTypes.elementType,
   title: PropTypes.string.isRequired,
   body: PropTypes.string.isRequired,
+  learnMore: PropTypes.string.isRequired,
   href: PropTypes.string,
 };
 
 Services.propTypes = {
-  columns: PropTypes.arrayOf(
-    PropTypes.shape({
-      icon: PropTypes.elementType,
-      title: PropTypes.string.isRequired,
-      body: PropTypes.string.isRequired,
-      href: PropTypes.string,
-    }),
-  ),
   className: PropTypes.string,
 };
 

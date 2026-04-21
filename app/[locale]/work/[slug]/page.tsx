@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
+import { getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import { ArrowUpRight, ArrowLeft } from 'lucide-react';
 import { projects, getProject } from '@/config/projects';
@@ -35,6 +36,8 @@ export default async function CaseStudyPage({
   const project = getProject(slug);
 
   if (!project) notFound();
+
+  const t = await getTranslations('workDetail');
 
   return (
     <main className='container px-4 md:px-0 m-auto mt-(--menu-height)'>

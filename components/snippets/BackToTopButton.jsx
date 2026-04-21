@@ -130,7 +130,7 @@ export default function BackToTopButton({ className, position = 'right' }) {
     <button
       onClick={handleClick}
       className={cn(
-        'fixed bottom-3 z-50 flex h-12 w-12 items-center justify-center rounded-full shadow-lg transition-all duration-700',
+        'fixed bottom-5 z-50 flex h-12 w-12 items-center justify-center rounded-full shadow-lg transition-all duration-700',
         // Position classes
         position === 'left' && 'left-3',
         position === 'center' && 'left-1/2 -translate-x-1/2',
@@ -143,7 +143,7 @@ export default function BackToTopButton({ className, position = 'right' }) {
       )}
       style={{
         // Create the circular progress indicator using conic-gradient
-        background: `conic-gradient(hsl(var(--accent-foreground)) ${progressPercentage}, hsl(var(--accent)) ${progressPercentage})`,
+        background: `conic-gradient(hsl(var(--muted)) ${progressPercentage}, hsl(var(--accent)) ${progressPercentage})`,
       }}
       aria-label={isScrolledPast300 ? 'Back to top' : 'Scroll to bottom'}
     >
