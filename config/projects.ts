@@ -9,15 +9,6 @@ export type Project = {
   url?: string;
 };
 
-const galleryImages = (slug: string) => [
-  `https://picsum.photos/seed/${slug}-g1/800/1100`,
-  `https://picsum.photos/seed/${slug}-g2/1100/700`,
-  `https://picsum.photos/seed/${slug}-g3/800/1100`,
-  `https://picsum.photos/seed/${slug}-g4/800/1100`,
-  `https://picsum.photos/seed/${slug}-g5/1100/700`,
-  `https://picsum.photos/seed/${slug}-g6/800/1100`,
-];
-
 export const projects: Project[] = [
   {
     slug: 'atari',
@@ -33,8 +24,6 @@ export const projects: Project[] = [
       'Custom Trevco fulfillment backend',
       'Countdown timers',
     ],
-    image: '/atari_safari.png',
-    gallery: galleryImages('atari'),
     url: 'https://atari.com',
   },
   {
@@ -50,8 +39,6 @@ export const projects: Project[] = [
       'Scroll-snap + Lenis architecture',
       'Dark-first immersive design',
     ],
-    image: 'https://picsum.photos/seed/philippe-tullio/800/600',
-    gallery: galleryImages('philippe-tullio'),
   },
   {
     slug: 'togethxr',
@@ -65,8 +52,6 @@ export const projects: Project[] = [
       'Klaviyo email integration',
       'Full storefront build in Liquid',
     ],
-    image: '/together-sfari.png',
-    gallery: galleryImages('togethxr'),
     url: 'https://www.togethxr.com',
   },
   {
@@ -80,8 +65,6 @@ export const projects: Project[] = [
       'Custom sections & page layouts',
       'Full storefront build in Liquid',
     ],
-    image: '/andor_safari.png',
-    gallery: galleryImages('andor'),
     url: 'https://andorcollective.com',
   },
   {
@@ -96,8 +79,6 @@ export const projects: Project[] = [
       'Custom inventory deduction backend',
       'English / French bilingual support',
     ],
-    image: '/animo_safari.png',
-    gallery: galleryImages('animo'),
     url: 'https://animoetc.com',
   },
   {
@@ -113,8 +94,6 @@ export const projects: Project[] = [
       'Custom checkout configuration',
       'Vue.js → Shopify OS 2.0 migration',
     ],
-    image: '/jaysonhome_safari.png',
-    gallery: galleryImages('jayson'),
     url: 'https://www.jaysonhome.com',
   },
   {
@@ -129,8 +108,6 @@ export const projects: Project[] = [
       'Custom product page layout',
       'Full storefront in Liquid',
     ],
-    image: '/cc_safari.png',
-    gallery: galleryImages('ccollections'),
     url: 'https://ccollections.shop',
   },
 ];

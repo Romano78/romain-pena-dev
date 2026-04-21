@@ -4,23 +4,29 @@ import { useLocale } from 'next-intl';
 import { useRouter, usePathname } from '@/i18n/navigation';
 import { cn } from '@/lib/utils';
 
-const localeMap = { en: 'fr', fr: 'en' };
-
 export default function LanguageSwitcher({ className }) {
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
 
+  const toggle = () => {
+    const next = locale === 'fr' ? 'en' : 'fr';
+    router.replace(pathname, { locale: next });
+  };
+
   return (
     <button
-      onClick={() => router.replace(pathname, { locale: localeMap[locale] })}
-      className={cn(
-        'text-sm uppercase text-muted-foreground hover:text-foreground transition-colors cursor-pointer text-left',
-        className,
-      )}
-      aria-label={`Switch to ${localeMap[locale]}`}
+      onClick={toggle}
+      className={cn('flex items-center gap-1.5 cursor-pointer', className)}
+      aria-label={`Switch to ${locale === 'fr' ? 'en' : 'fr'}`}
     >
-      {localeMap[locale]}
+      <span style={{ fontSize: '1rem', lineHeight: 1, opacity: locale === 'fr' ? 1 : 0.3 }}>
+        🇫🇷
+      </span>
+      <span className='text-foreground/20 text-xs'>/</span>
+      <span style={{ fontSize: '1rem', lineHeight: 1, opacity: locale === 'en' ? 1 : 0.3 }}>
+        🇺🇸
+      </span>
     </button>
   );
 }
