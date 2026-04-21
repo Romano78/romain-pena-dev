@@ -1,100 +1,154 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { useTranslations } from 'next-intl';
-import SectionHeader from '@/components/snippets/SectionHeader';
+import Image from 'next/image';
+import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import TextAnimation1 from '@/components/snippets/TextAnimation1';
+import { ArrowDown, ArrowRight } from 'lucide-react';
+import PillCta from '@/components/snippets/PillCta';
+import LinkCta from '@/components/snippets/LinkCta';
 
-gsap.registerPlugin(ScrollTrigger);
+const col1Images = [
+  '/atari_safari.png',
+  '/andor_safari.png',
+  '/jaysonhome_safari.png',
+  'https://picsum.photos/seed/rp1/800/600',
+  'https://picsum.photos/seed/rp2/800/600',
+];
 
+const col2Images = [
+  '/together-sfari.png',
+  '/animo_safari.png',
+  '/cc_safari.png',
+  'https://picsum.photos/seed/rp3/800/600',
+  'https://picsum.photos/seed/rp4/800/600',
+];
+
+/**
+ * @typedef {Object} MainHeroProps
+ * @property {string} [title]
+ * @property {'left' | 'center' | 'right'} [align]
+ * @property {string} [className]
+ * @property {string} [parentClassName]
+ * @property {string[]} [leftCol]
+ * @property {string[]} [rightCol]
+ */
+
+/**
+ * @param {MainHeroProps} props
+ */
 export default function MainHero({
-  headingType = 'h1',
+  title = `I build what your Shopify store can't do out of the box.`,
   align = 'left',
   className = '',
   parentClassName = '',
+  leftCol = [],
+  rightCol = [],
 }) {
-  const t = useTranslations('hero');
-  const imageRef = useRef(null);
+  const displayLeft = leftCol.length > 0 ? leftCol : col1Images;
+  const displayRight = rightCol.length > 0 ? rightCol : col2Images;
+
   const textRef = useRef(null);
-  const containerRef = useRef(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Set initial state via GSAP — survives React Strict Mode remount correctly
       gsap.set(textRef.current, { autoAlpha: 0, y: 24 });
-      gsap.set(imageRef.current, { autoAlpha: 0, x: 32 });
-
-      // Entrance animation
-      const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
-
-      tl.to(textRef.current, {
+      gsap.to(textRef.current, {
         autoAlpha: 1,
         y: 0,
         duration: 0.9,
+        ease: 'power3.out',
         delay: 0.1,
-      }).to(imageRef.current, { autoAlpha: 1, x: 0, duration: 1.1 }, '-=0.5');
-
-      // Image parallax on scroll exit — desktop only
-      const mm = gsap.matchMedia();
-      mm.add('(min-width: 768px)', () => {
-        gsap.to(imageRef.current, {
-          y: -60,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: 'top top',
-            end: 'bottom top',
-            scrub: 1.5,
-          },
-        });
       });
     });
-
     return () => ctx.revert();
   }, []);
 
   return (
     <section
-      ref={containerRef}
-      className={`flex items-center gap-16 overflow-hidden py-0 max-lg:mt-24 max-lg:flex-col lg:h-[calc(100svh-65.5px)] ${cn(className)} ${cn(parentClassName)}`}
+      className={cn(
+        'h-[calc(100svh-var(--menu-height))] flex items-center gap-12 overflow-hidden max-lg:mt-24 max-lg:flex-col max-lg:h-auto max-lg:py-16',
+        className,
+        parentClassName,
+      )}
       id='main-hero'
     >
-      <div ref={textRef} className='flex-1'>
-        <div className='mt-12 flex items-center gap-2 text-sm text-muted-foreground mb-6'>
-          <TextAnimation1 headingType={'p'} align={align}>
-            <span className='inline-block h-2 w-2 rounded-full bg-muted animate-pulse-dot mr-2' />
-            {t('status')}
-          </TextAnimation1>
+      {/* Left — text */}
+      <div ref={textRef} className='flex-1 flex flex-col gap-8'>
+        <div className='flex items-center gap-2 text-sm text-muted-foreground'>
+          <span className='inline-block h-2 w-2 rounded-full bg-muted animate-pulse-dot' />
+          {'Based in Montreal \u00B7 Available for new clients'}
         </div>
-        <SectionHeader
-          title={t('tagline')}
-          body={t('body')}
-          headingType={headingType}
-          align={align}
-          className='mb-8 flex-1'
-          parentClassName='flex-1'
-        />
+
+        <h1 className='font-sans text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] text-foreground max-w-2xl'>
+          {title}
+        </h1>
+
+        <div className='flex items-center gap-6'>
+          <PillCta href='#work' icon={<ArrowDown className='h-3 w-3' />}>See work</PillCta>
+          <LinkCta href='#contact' icon={<ArrowRight className='h-3 w-3' />}>Contact</LinkCta>
+        </div>
       </div>
-      <div className='flex-1'>
-        <img
-          src='/profile.JPEG'
-          alt='Romain Pena'
-          width={600}
-          height={500}
-          className='w-full h-auto'
-        />
+
+      {/* Right — vertical marquee (desktop only) */}
+      <div className='hidden lg:flex relative w-[45%] flex-shrink-0 h-full overflow-hidden gap-3'>
+        {/* Top fade */}
+        <div className='absolute top-0 left-0 right-0 z-10 h-24 bg-gradient-to-b from-background to-transparent pointer-events-none' />
+
+        {/* Column 1 — scrolls up at 30s */}
+        <motion.div
+          className='flex-1 flex flex-col gap-3'
+          initial={{ y: '0%' }}
+          animate={{ y: '-50%' }}
+          transition={{ repeat: Infinity, duration: 30, repeatType: 'loop', ease: 'linear' }}
+        >
+          {[...displayLeft, ...displayLeft].map((src, i) => (
+            <div key={i} className='relative rounded-xl overflow-hidden aspect-[4/3] flex-shrink-0'>
+              <Image
+                src={src}
+                alt=''
+                fill
+                sizes='20vw'
+                className='object-cover'
+              />
+            </div>
+          ))}
+        </motion.div>
+
+        {/* Column 2 — scrolls up at 22s (faster, creates depth), offset */}
+        <motion.div
+          className='flex-1 flex flex-col gap-3 -mt-[30%]'
+          initial={{ y: '-50%' }}
+          animate={{ y: '0%' }}
+          transition={{ repeat: Infinity, duration: 30, repeatType: 'loop', ease: 'linear' }}
+        >
+          {[...displayRight, ...displayRight].map((src, i) => (
+            <div key={i} className='relative rounded-xl overflow-hidden aspect-[4/3] flex-shrink-0'>
+              <Image
+                src={src}
+                alt=''
+                fill
+                sizes='20vw'
+                className='object-cover'
+              />
+            </div>
+          ))}
+        </motion.div>
+
+        {/* Bottom fade */}
+        <div className='absolute bottom-0 left-0 right-0 z-10 h-24 bg-gradient-to-t from-background to-transparent pointer-events-none' />
       </div>
     </section>
   );
 }
 
 MainHero.propTypes = {
-  headingType: PropTypes.oneOf(['h1', 'h2', 'h3', 'h4', 'h5', 'h6']),
+  title: PropTypes.string,
   align: PropTypes.oneOf(['left', 'center', 'right']),
   className: PropTypes.string,
   parentClassName: PropTypes.string,
+  leftCol: PropTypes.arrayOf(PropTypes.string).isRequired,
+  rightCol: PropTypes.arrayOf(PropTypes.string).isRequired,
 };

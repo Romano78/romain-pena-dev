@@ -40,65 +40,84 @@ export default async function CaseStudyPage({
   const t = await getTranslations('workDetail');
 
   return (
-    <main className='container px-4 md:px-0 m-auto mt-[65.5px] pt-16 pb-32 max-w-3xl'>
-      {/* Back */}
-      <Link
-        href='/#work'
-        className='inline-flex items-center gap-2 text-sm text-foreground/50 hover:text-foreground transition-colors mb-12'
-      >
-        <ArrowLeft size={14} />
-        {t('back')}
-      </Link>
+    <main className='container px-4 md:px-0 m-auto mt-(--menu-height)'>
+      <div className='lg:grid lg:grid-cols-[5fr_7fr] lg:gap-20 lg:items-start'>
 
-      {/* Header */}
-      <span className='text-overline text-muted'>{project.type}</span>
-      <h1 className='h1 mt-3 mb-10'>{project.client}</h1>
-
-      {/* Hero image */}
-      {project.image && (
-        <div className='relative w-full aspect-video rounded-lg overflow-hidden mb-10'>
-          <Image
-            src={project.image}
-            alt={project.client}
-            fill
-            className='object-cover'
-            priority
-          />
-        </div>
-      )}
-
-      {/* Description */}
-      <p className='text-foreground/70 text-lg leading-relaxed mb-12'>
-        {project.description}
-      </p>
-
-      {/* Deliverables */}
-      <div className='border-t border-border pt-10'>
-        <span className='text-overline text-muted mb-6 block'>{t('deliverables')}</span>
-        <ul className='space-y-4'>
-          {project.items.map((item) => (
-            <li key={item} className='flex items-start gap-3 text-foreground/80'>
-              <span className='text-muted mt-0.5 shrink-0'>→</span>
-              {item}
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      {/* Live URL */}
-      {project.url && (
-        <div className='mt-12 pt-10 border-t border-border'>
-          <a
-            href={project.url}
-            target='_blank'
-            rel='noopener noreferrer'
-            className='inline-flex items-center gap-2 text-muted hover:opacity-70 transition-opacity'
+        {/* LEFT — sticky sidebar */}
+        <aside className='lg:sticky lg:top-(--menu-height) lg:self-start lg:h-[calc(100dvh-var(--menu-height))] lg:flex lg:flex-col py-16 lg:py-20'>
+          <Link
+            href='/#work'
+            className='inline-flex items-center gap-2 text-sm text-foreground/50 hover:text-foreground transition-colors mb-12'
           >
-            {t('visitBrand')}
-            <ArrowUpRight size={16} />
-          </a>
+            <ArrowLeft size={14} />
+            Work
+          </Link>
+
+          <div className='mt-auto'>
+            <p className='text-foreground/70 text-lg leading-relaxed'>
+              {project.description}
+            </p>
+
+            {project.url && (
+              <a
+                href={project.url}
+                target='_blank'
+                rel='noopener noreferrer'
+                className='mt-8 inline-flex items-center gap-2 text-foreground hover:text-muted transition-colors'
+              >
+                Visit site
+                <ArrowUpRight size={16} />
+              </a>
+            )}
+          </div>
+
+          {/* Metadata */}
+          <dl className='pt-8 border-t border-border space-y-2'>
+            <div className='flex gap-6'>
+              <dt className='text-overline text-muted-foreground w-16 shrink-0'>Client</dt>
+              <dd className='text-overline text-foreground'>{project.client}</dd>
+            </div>
+            <div className='flex gap-6'>
+              <dt className='text-overline text-muted-foreground w-16 shrink-0'>Type</dt>
+              <dd className='text-overline text-foreground'>{project.type}</dd>
+            </div>
+          </dl>
+        </aside>
+
+        {/* RIGHT — images */}
+        <div className='py-16 lg:py-20 space-y-3'>
+          {/* Hero */}
+          {project.image && (
+            <div className='relative w-full aspect-[4/3] bg-card-deep overflow-hidden'>
+              <Image
+                src={project.image}
+                alt={project.client}
+                fill
+                className='object-contain'
+                priority
+              />
+            </div>
+          )}
+
+          {/* Gallery */}
+          {project.gallery && project.gallery.length > 0 && (
+            <div className='columns-2 gap-3'>
+              {project.gallery.map((img, i) => (
+                <div key={i} className='break-inside-avoid mb-3'>
+                  <Image
+                    src={img}
+                    alt={`${project.client} — ${i + 1}`}
+                    width={i % 3 === 1 ? 1100 : 800}
+                    height={i % 3 === 1 ? 700 : 1100}
+                    className='w-full h-auto'
+                  />
+                </div>
+              ))}
+            </div>
+          )}
         </div>
-      )}
+
+      </div>
     </main>
   );
 }

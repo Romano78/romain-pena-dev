@@ -12,11 +12,11 @@ import LanguageSwitcher from '@/components/snippets/LanguageSwitcher';
 
 export default function Menu({ className = '' }) {
   const [isMounted, setIsMounted] = useState(false);
-  const [lastScrollY, setLastScrollY] = useState(0);
   const [shouldShowMenu, setShouldShowMenu] = useState(true);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const menuHeight = 65; // Match the height in the className
   const componentMounted = useRef(false);
+  const lastScrollYRef = useRef(0);
 
   const handleMobileMenuToggle = (isOpen) => {
     setIsMobileMenuOpen(isOpen);
@@ -50,10 +50,10 @@ export default function Menu({ className = '' }) {
         setShouldShowMenu(true);
       } else {
         // Show when scrolling up, hide when scrolling down
-        setShouldShowMenu(currentScrollY < lastScrollY);
+        setShouldShowMenu(currentScrollY < lastScrollYRef.current);
       }
 
-      setLastScrollY(currentScrollY);
+      lastScrollYRef.current = currentScrollY;
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -63,7 +63,7 @@ export default function Menu({ className = '' }) {
       window.removeEventListener('scroll', handleScroll);
       componentMounted.current = false;
     };
-  }, [lastScrollY, isMobileMenuOpen]);
+  }, [isMobileMenuOpen]);
 
   // Empty div with the same height during server rendering
   if (!isMounted) {
@@ -154,6 +154,8 @@ export default function Menu({ className = '' }) {
                     <MobileMenuButton
                       isOpen={isMobileMenuOpen}
                       onClick={() => handleMobileMenuToggle(!isMobileMenuOpen)}
+                      aria-expanded={isMobileMenuOpen}
+                      aria-controls='mobile-menu'
                     />
                   </div>
 

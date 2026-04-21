@@ -11,7 +11,7 @@ const Character = React.memo(function Character({
   progress,
   range,
 }) {
-  const opacity = useTransform(progress, range, [0.3, 1]);
+  const opacity = useTransform(progress, range, [0.5, 1]);
 
   if (char.type === 'space') {
     return <span className='inline'>{char.content}</span>;
@@ -80,7 +80,7 @@ const TextReveal = ({
   return (
     <div
       ref={targetRef}
-      className={cn('relative z-0', sticky ? 'h-[200vh]' : '', className)}
+      className={cn('relative z-0', sticky ? 'h-[150vh] md:h-[200vh]' : '', className)}
     >
       <div
         className={`${sticky ? 'sticky top-0 flex h-screen items-center justify-center' : ''} ${blockClassName}`}

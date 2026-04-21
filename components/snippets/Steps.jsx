@@ -28,7 +28,7 @@ const mockData = {
       stringValue: '03',
       label: 'We work together ongoing',
       subLabel:
-        '"Most clients stay on a monthly retainer. Your store keeps evolving, I keep building.',
+        'Most clients stay on a monthly retainer. Your store keeps evolving — I keep building.',
     },
   ],
 };

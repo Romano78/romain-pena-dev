@@ -52,13 +52,9 @@ export default function BackToTopButton({ className, position = 'right' }) {
     // Initial check
     handleScroll();
 
-    // Set up an interval to ensure updates happen even if scroll events are missed
-    const intervalId = setInterval(handleScroll, 100);
-
     // Clean up
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      clearInterval(intervalId);
     };
   }, []);
 

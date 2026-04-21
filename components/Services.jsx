@@ -1,19 +1,14 @@
 'use client';
 
-import { useRef } from 'react';
 import PropTypes from 'prop-types';
-import { useTranslations } from 'next-intl';
+import { motion } from 'framer-motion';
+import { Blocks, LineChart } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import SectionHeader from '@/components/snippets/SectionHeader';
-import { Badge } from '@/components/ui/badge';
 
-gsap.registerPlugin(ScrollTrigger);
-
-function ColumnItem({ icon: Icon, title, body, badgesL }) {
+function ColumnItem({ icon: Icon, title, body }) {
   return (
-    <div className='service-card group  h-full'>
+    <div className='service-card group block h-full'>
       <div className='bg-background border-border relative flex h-full flex-col items-start overflow-hidden rounded-[--radius] border p-6 transition-colors hover:border-muted'>
         {Icon && (
           <div className='relative mb-4'>
@@ -22,60 +17,44 @@ function ColumnItem({ icon: Icon, title, body, badgesL }) {
             </div>
           </div>
         )}
-        <div className='mb-4'>
-          <h3 className='h4 text-foreground mb-2'>{title}</h3>
-          <p className='text-body text-muted-foreground'>{body}</p>
-        </div>
-        <div className='flex items-center gap-2 flex-wrap mt-auto'>
-          {badgesL.map((badge, i) => (
-            <Badge
-              key={i}
-              variant='outline'
-              className='text-sm text-muted-foreground'
-            >
-              {badge}
-            </Badge>
-          ))}
-        </div>
+        <h3 className='h4 text-foreground mb-2'>{title}</h3>
+        <p className='text-body text-muted-foreground'>{body}</p>
       </div>
     </div>
   );
 }
 
-function Services({ className = '' }) {
-  const serviceT = useTranslations('services');
-  const commonT = useTranslations('common');
-  const gridRef = useRef(null);
-
-  const columns = [
+function Services({
+  columns = [
     {
-      title: serviceT('design.title'),
-      body: serviceT('design.body'),
+      icon: Blocks,
+      title: 'Figma → Shopify',
+      body: 'You have the designs. I make them real — pixel-perfect, exactly as your designer intended. Custom sections, Liquid, no page builders, no interpretation.',
       href: '#work',
-      badgesL: [
-        serviceT('design.badge1'),
-        serviceT('design.badge2'),
-        serviceT('design.badge3'),
-      ],
     },
     {
-      title: serviceT('features.title'),
-      body: serviceT('features.body'),
-      href: '#',
-      badgesL: [
-        serviceT('features.badge1'),
-        serviceT('features.badge2'),
-        serviceT('features.badge3'),
-      ],
+      icon: LineChart,
+      title: 'Custom Features & Apps',
+      body: "When the app store isn't enough. I build custom Shopify apps, backend integrations, and features that make your store work the way your business actually works.",
+      href: '#work',
     },
-  ];
-
+  ],
+  className = '',
+}) {
   return (
     <section id='services' className={cn(className)}>
-      <SectionHeader overline={serviceT('overline')} />
-      <div ref={gridRef} className='grid gap-6 md:grid-cols-2'>
+      <SectionHeader overline='What I do.' />
+      <div className='grid gap-6 md:grid-cols-2'>
         {columns.map((column, i) => (
-          <ColumnItem key={i} {...column} learnMore={commonT('learnMore')} />
+          <motion.div
+            key={i}
+            initial={{ x: i === 0 ? -40 : 40, opacity: 0 }}
+            whileInView={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.7, ease: 'easeOut' }}
+            viewport={{ once: true, amount: 0.15 }}
+          >
+            <ColumnItem {...column} />
+          </motion.div>
         ))}
       </div>
     </section>

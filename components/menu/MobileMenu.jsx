@@ -11,7 +11,9 @@ export default function MobileMenu({ isOpen, onItemClick }) {
 
   return (
     <div
-      className={`absolute left-0 top-16.5 lg:hidden w-full ${
+      id='mobile-menu'
+      aria-hidden={!isOpen}
+      className={`absolute top-16.5 lg:hidden w-full ${
         isOpen
           ? 'translate-x-0 opacity-100'
           : '-translate-x-full opacity-0 pointer-events-none'
@@ -19,8 +21,11 @@ export default function MobileMenu({ isOpen, onItemClick }) {
     >
       <div className='mx-auto p-6'>
         {/* Theme Toggle */}
-
-        <nav className='space-y-4'>
+        {/* <div className='bg-muted/50 mb-6 rounded-lg p-2'>
+          <ThemeToggle />
+        </div> */}
+        <nav aria-label='Mobile navigation' className='space-y-4'>
+          {/* Navigation Links */}
           <div className='space-y-2'>
             {navigationItems.map((item) => (
               <Button

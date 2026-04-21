@@ -110,6 +110,36 @@ Everything else stays as a Server Component.
 - Confident but human — this is a personal site, not a marketing page
 - Typography and whitespace carry the design
 
+## Design Context
+
+### Users
+Two audiences with equal weight:
+- **Shopify brand founders** — evaluating a specialist retainer. Skeptical, time-poor, want proof before committing.
+- **E-commerce agencies** — subcontracting Shopify work; need confidence in technical depth.
+
+Most arrive via referral. The site's job is **validation**, not persuasion.
+
+### Brand Personality
+**Calm · Premium · Human**
+
+Trusted senior colleague energy: approachable but clearly expert, warm without being casual. No performance, no hype.
+
+**Emotional goal:** "This guy clearly knows his stuff."
+
+### Aesthetic Direction
+- Typography-driven — whitespace and type carry the design; decoration is subordinate to content
+- Both light and dark are first-class experiences
+- Green/cyan accent used sparingly — tags, borders, small hover states only, never dominant
+- Animations are purposeful: GSAP power2/power3, stagger reveals, smooth and inevitable — never flashy
+- Single typeface (Inter), weight/size variation does all the heavy lifting
+
+### Design Rules
+1. **Credibility over persuasion** — show, don't sell; specificity and restraint signal expertise
+2. **Whitespace is voice** — generous spacing signals selectivity and deliberateness
+3. **Typography does the work** — hierarchy through weight/scale before color or decoration
+4. **Calm interactions** — hover/scroll animations feel smooth and inevitable, never eager; no bounce
+5. **Human, not corporate** — first person always, no jargon, no aggressive CTAs
+
 ## Brand
 - Logo: "RomainPena" — "Romain" in medium weight, "Pena" in green, lighter weight
 - Navbar: "RomainPena.dev" — "RomainPena" medium weight, ".dev" in green lighter weight
