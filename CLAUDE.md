@@ -2,14 +2,17 @@
 
 This file provides guidance to Claude Code when working with code in this repository.
 
+## Remaining Work
+See `PLAN.md` for what's left before v1 ships.
+
+---
+
 ## About This Project
-Portfolio and business site for **Romain Pena** — a Shopify developer
-based in Montreal specializing in custom features, design implementation,
-and integrations for e-commerce brands.
+Portfolio and business site for **Romain Pena** — a frontend developer based in Montreal,
+specializing in Shopify custom development, design implementation, and web experiences.
 
 **Site:** [romainpena.dev](https://romainpena-dev-arev.vercel.app/)
-**Positioning:** "I build what your Shopify store can't do out of the box"
-**Model:** Monthly retainer (€900 Growth / €1,500 Partner)
+**Model:** Monthly retainer
 
 ---
 
@@ -32,73 +35,94 @@ npx shadcn@latest add <component-name>
 
 Single-page portfolio site built with:
 - Next.js 15 + React 19 + TypeScript + Tailwind CSS v4
-- Framer Motion for animations
+- Framer Motion — used selectively (not for the marquee)
+- GSAP — used for entrance animations
+- next-intl — FR/EN i18n with locale routing
 - next-themes for dark/light mode
 - shadcn/ui (new-york style, zinc base, Lucide icons)
-- react-tooltip for tooltips in ComparisonTable
-- split-type for text splitting in animation hooks
+- Cloudinary — all production images served via Cloudinary CDN
 
-### Page structure (`app/page.tsx`)
-One scrollable page with anchor navigation (`#work`, `#services`,
-`#pricing`, `#contact`). Sections in order:
-1. `MainHero` — hero with profile image
-2. "A bit about me" — `TextReveal` scroll animation
-3. "What I do" — `Services` (2-column grid)
-4. "Selected Work" — `ProjectCard` (3 case studies)
-5. "How I Work" — `Steps` (3-step process with animated counters)
-6. "Prices" — `PricingTable` (Monthly/Yearly toggle + expandable `ComparisonTable`)
-7. Contact — email link + HTML form (no backend — `preventDefault()` only)
+### Page structure (`app/[locale]/page.tsx`)
+One scrollable page with anchor navigation (`#work`, `#services`, `#pricing`, `#contact`).
+Sections in order:
+1. `MainHero` — headline + two-column vertical marquee (Cloudinary gallery images)
+2. `Work` — project grid with Cloudinary cover images
+3. `About` — text section with scroll reveal
+4. `Services` — 2-column grid
+5. `Steps` — 3-step process
+6. `PricingTable` — two retainer tiers
+7. `Contact` — email link only, no form
 8. `BackToTopButton` — floating scroll progress indicator
 
 ### Layout (`app/layout.tsx`)
-Wraps content with `ThemeProvider`, sticky `Menu`, and `Footer`.
+Wraps content with `ThemeProvider`, `LenisProvider`, sticky `Menu`, and `Footer`.
 Inter font via `next/font/google` (`--font-inter`).
 
 ### Component organization
-- `components/menu/` — Desktop nav, mobile menu, theme toggle
-- `components/snippets/` — Reusable blocks: `TextReveal`, `TextAnimation1`,
-  `ScrambleTextAnimation1`, `SectionHeader`, `ProjectCard`, `Steps`,
-  `BackToTopButton`, `ComparisonTable`, `NavigationMenu`,
-  `ParallaxImage` *(exists, not used in page.tsx)*,
-  `Media` *(exists, not used in page.tsx)*
+- `components/menu/` — `index.jsx` (Menu), `DesktopNavigation.jsx`, `MobileMenu.jsx`, theme toggle
+- `components/snippets/` — Reusable blocks:
+  - `ImagePlaceholder.jsx` — `bg-accent` placeholder, fills parent, used when no Cloudinary image
+  - `PillCta.jsx` — pill-shaped CTA button with optional icon
+  - `LinkCta.jsx` — underline text link CTA, supports `uppercase` prop
+  - `LanguageSwitcher.jsx` — FR/EN flag toggle (🇫🇷 / 🇺🇸), active flag at full opacity
+  - `Steps.jsx`, `BackToTopButton.jsx`, `SectionHeader.jsx`
+  - `TextReveal.jsx`, `TextAnimation1.jsx`, `ScrambleTextAnimation1.jsx`
+  - `ComparisonTable.jsx`, `NavigationMenu.jsx`
 - `components/ui/` — shadcn/ui primitives
 - `components/Footer/` — Footer with nav
-- Top-level: `MainHero.jsx`, `Services.jsx`, `PricingTable.jsx`
-- `hooks/` — `split-text.ts`, `use-text-reveal.ts` (used by text animation components)
+- Top-level components: `MainHero.jsx`, `About.jsx`, `Work.jsx`, `Services.jsx`, `PricingTable.jsx`, `Contact.jsx`
+- `hooks/` — `split-text.ts`, `use-text-reveal.ts`
 
 ### Config
 - `config/routes.js` — Single source of truth for anchor hrefs
 - `config/navigation-config.js` — Nav items for desktop + mobile
-- `config/cubic-beziers.js` — Shared Framer Motion easing curves
-- `config/theme-provider.jsx` — next-themes wrapper
+- `config/projects.ts` — Project data (slug, client, type, description, url, image)
+- `config/projects.md` — Full copy reference for all projects
+
+### Cloudinary
+- `lib/cloudinary.ts` — server-only, all Cloudinary API calls
+- `lib/cloudinary-url.ts` — `cldImage(path, width?)` URL builder
+- Folder structure in Cloudinary: `Projects/<slug>/cover/` and `Projects/<slug>/gallery/`
+- `getAllGalleryImages()` — single API call, fetches all `Projects/*/gallery/*`, used for hero marquee
+- `getProjectImages()` — per-slug cover fetch, used for work grid thumbnails
+- `getProjectCover(slug)` — single cover for case study page hero
+- `getProjectGallery(slug)` — gallery images for case study page
+- All calls cached via `unstable_cache` (1h revalidation)
+- In development: all Cloudinary functions return `[]` / `{}` — use `ImagePlaceholder` as fallback
+
+### Marquee (MainHero)
+- Two CSS-animated columns: `.marquee-col-up` and `.marquee-col-down` (defined in `globals.css`)
+- Pure CSS `animation: linear infinite` — no Framer Motion, no JS reset, no jump
+- Images from `getAllGalleryImages()`, split 50/50 into left and right columns
+- Aspect ratio: `aspect-[3/4]` (portrait, matches gallery image dimensions ~800×1100)
+- In dev: renders `<ImagePlaceholder />` per slot (5 per column)
 
 ### Styling
 - Tailwind CSS v4 with CSS variables in `styles/globals.css`
 - Custom typography: `.h1`–`.h6`, `.text-overline` in `@layer components`
-- `--muted` = accent green (Shopify green `#96BF48`), not a neutral
+- `--muted` = accent green (Shopify green `#96BF48`), **not a neutral**
 - Light theme: off-white (`#FAFAF8`) background, near-black (`#111111`) text
 - Dark theme: `#0D131F` background, cyan (`#5FD9D9`) replaces green as muted
+- `bg-accent` = light gray in light mode, dark blue-gray in dark mode — use for placeholders and subtle fills
 - Green/cyan used subtly — tags, borders, hover states, accents only
 
 ### Mixed JS/TS
-- `.tsx` — `app/layout.tsx`, `app/page.tsx`, `lib/utils.ts`, `components/ui/`
+- `.tsx` — `app/` files, `lib/`, `components/ui/`
 - `.jsx` — all other components
 - New page-level files → `.tsx`, new components → `.jsx`
 
 ---
 
 ## "use client" Rules
-Push it as deep as possible. Most components are static —
-only add "use client" when a component needs:
-- useState / useEffect
-- Event listeners (onClick, onChange)
+Push as deep as possible. Add only when a component needs:
+- `useState` / `useEffect`
+- Event listeners
 - Browser APIs
-- Framer Motion animations (if using useAnimation/useInView)
+- GSAP / Framer Motion imperative hooks
 
-Current client components: `Menu`, `Footer`, `PricingTable` (billing toggle),
-`ComparisonTable`, `TextReveal`, `TextAnimation1`, `ScrambleTextAnimation1`,
-`Steps`, `BackToTopButton`, `config/theme-provider.jsx`.
-Everything else stays as a Server Component.
+Current client components: `Menu`, `MobileMenu`, `DesktopNavigation`, `LanguageSwitcher`,
+`Footer`, `PricingTable`, `ComparisonTable`, `TextReveal`, `TextAnimation1`,
+`ScrambleTextAnimation1`, `Steps`, `BackToTopButton`, `MainHero`, `config/theme-provider.jsx`.
 
 ---
 
@@ -107,14 +131,14 @@ Everything else stays as a Server Component.
 - No buzzwords ("passionate", "innovative", "results-driven")
 - No aggressive CTAs or urgency tactics
 - First person throughout
-- Confident but human — this is a personal site, not a marketing page
+- Confident but human — personal site, not a marketing page
 - Typography and whitespace carry the design
 
 ## Design Context
 
 ### Users
-Two audiences with equal weight:
-- **Shopify brand founders** — evaluating a specialist retainer. Skeptical, time-poor, want proof before committing.
+Two audiences:
+- **Shopify brand founders** — evaluating a specialist retainer. Skeptical, time-poor, want proof.
 - **E-commerce agencies** — subcontracting Shopify work; need confidence in technical depth.
 
 Most arrive via referral. The site's job is **validation**, not persuasion.
@@ -122,55 +146,21 @@ Most arrive via referral. The site's job is **validation**, not persuasion.
 ### Brand Personality
 **Calm · Premium · Human**
 
-Trusted senior colleague energy: approachable but clearly expert, warm without being casual. No performance, no hype.
+Trusted senior colleague energy: approachable but clearly expert.
 
 **Emotional goal:** "This guy clearly knows his stuff."
 
-### Aesthetic Direction
-- Typography-driven — whitespace and type carry the design; decoration is subordinate to content
-- Both light and dark are first-class experiences
-- Green/cyan accent used sparingly — tags, borders, small hover states only, never dominant
-- Animations are purposeful: GSAP power2/power3, stagger reveals, smooth and inevitable — never flashy
-- Single typeface (Inter), weight/size variation does all the heavy lifting
-
 ### Design Rules
-1. **Credibility over persuasion** — show, don't sell; specificity and restraint signal expertise
-2. **Whitespace is voice** — generous spacing signals selectivity and deliberateness
-3. **Typography does the work** — hierarchy through weight/scale before color or decoration
-4. **Calm interactions** — hover/scroll animations feel smooth and inevitable, never eager; no bounce
-5. **Human, not corporate** — first person always, no jargon, no aggressive CTAs
+1. **Credibility over persuasion** — show, don't sell
+2. **Whitespace is voice** — generous spacing signals selectivity
+3. **Typography does the work** — hierarchy through weight/scale before color
+4. **Calm interactions** — smooth and inevitable, never eager; no bounce
+5. **Human, not corporate** — first person always, no jargon
 
 ## Brand
-- Logo: "RomainPena" — "Romain" in medium weight, "Pena" in green, lighter weight
+- Logo: "RomainPena" — "Romain" medium weight, "Pena" in green lighter weight
 - Navbar: "RomainPena.dev" — "RomainPena" medium weight, ".dev" in green lighter weight
-- Font: **Inter** (from `next/font/google`, variable `--font-inter`)
-
----
-
-## Content Reference
-
-### One-liner
-"I build what your Shopify store can't do out of the box."
-
-### Services
-1. Design Implementation — Figma → Shopify, pixel-perfect,
-   custom sections, Liquid, theme dev
-2. Features & Integrations — custom features, Klaviyo,
-   API integrations, app config
-
-### Case Studies
-1. Major Gaming Brand — full storefront, custom components,
-   pre-Dawn framework, pixel-perfect from design files
-2. Licensed Merch Brand — Klaviyo, Google Tags, custom cart,
-   custom fulfillment app, API endpoints
-3. Pet Commerce Brand — custom product sync app,
-   internal system → Shopify daily automation
-
-### Pricing
-- Growth: €900/month — 12h, design implementation,
-  features, fixes, 48h response, monthly call
-- Partner: €1,500/month — 20h, everything in Growth,
-  custom features & integrations, priority, weekly call, Slack
+- Font: **Inter** only (`--font-inter`)
 
 ---
 
@@ -178,40 +168,24 @@ Trusted senior colleague energy: approachable but clearly expert, warm without b
 - Build Shopify stores from scratch for new merchants
 - Run marketing campaigns or paid ads
 - Design (he implements designs, doesn't create them)
-- Shopify setup for clients with no Shopify knowledge
+- Shopify setup for clients with no existing Shopify knowledge
+
+---
 
 ## Key Libraries
 
 ### Lenis — Smooth Scrolling
-Docs: https://github.com/darkroomengineering/lenis/blob/main/README.md
-
-- Lenis is initialized once at the root level in `app/layout.tsx` 
-  or a dedicated `LenisProvider` component
-- Always use "use client" for the Lenis wrapper
-- Integrate with Framer Motion via lenis.on('scroll', ...) 
-  to sync scroll progress
-- Do NOT use both Lenis and native CSS scroll-behavior: smooth — 
-  they conflict
+- Initialized once at root level
+- Do NOT use native `scroll-behavior: smooth` alongside Lenis — they conflict
 
 ### GSAP
-Docs: https://gsap.com/docs/v3/
-
-- Use `useGSAP()` hook (from @gsap/react) instead of useEffect 
-  for all GSAP animations — it handles cleanup automatically
-- Register plugins at the top of the file: 
-  gsap.registerPlugin(ScrollTrigger)
-- Always use `scrollerProxy` to make ScrollTrigger work with Lenis:
-  ScrollTrigger.scrollerProxy for Lenis compatibility
-- Scope all GSAP selectors to a ref to avoid targeting 
-  wrong elements across components
+- Use `useGSAP()` hook from `@gsap/react` — never raw `useEffect` for animations
+- Register plugins at file top: `gsap.registerPlugin(ScrollTrigger)`
+- Scope all selectors to a `ref`
 
 ### Search before creating infrastructure files
- - Always search for existing equivalents before creating new config/infrastructure files
+Before creating any infrastructure file (middleware, proxy, provider, routing config):
+search the project root for existing equivalents — Next.js conventions change and a file
+may already exist under a different name.
 
- - Before creating any infrastructure file (middleware, proxy, provider, config), search the project root for existing files that could serve the same purpose — including framework convention aliases.
-
-**Why:** Created `middleware.ts` without knowing `proxy.ts` already existed and did the same thing. Next.js migrated from `middleware.ts` → `proxy.ts` convention. This caused a conflict and a runtime error.
-
-**How to apply:** Before creating files like middleware, proxies, providers, or routing config — run a broad search (Glob `*.ts` at root, or Grep for the relevant import/pattern) to confirm nothing equivalent already exists under a different name.
-
-  
+**Why:** Created `middleware.ts` without knowing `proxy.ts` already existed. Caused a runtime conflict.

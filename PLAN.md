@@ -1,105 +1,83 @@
-# Site Redesign Plan
+# Site — v1 Remaining Work
 
-**Status:** In planning — awaiting final answers before implementation begins
 **Branch:** impeccable-audit
 
 ---
 
-## Open Questions (must resolve before build)
+## Remaining Tasks
 
-1. **Font** — Almost certainly the lack of a display/editorial font. Both other projects built by Romain use a second typeface: Philippe Tullio uses Alfa Slab One (display) + Space Grotesk (meta), LinkpeakHQ uses Fraunces (display). The portfolio only has Inter — it reads flat. **Pending confirmation from Romain on which display font to add and where.**
-2. **Philippe Tullio (brother's project)** — Film director portfolio. Cinematic, dark, video-heavy. Built by Romain. Add to work grid? **Awaiting confirmation from Romain. If yes: need a screenshot/image.**
-3. **Pricing** — show numbers (and confirm: €900/€1,500 or €1,200/€2,000?) or remove pricing section and redirect to contact?
-4. **Work layout** — choose one:
-   - a) Keep 2-col grid, improve card design
-   - b) First project as full-width hero card, rest in 2-col below
-   - c) Alternating asymmetric layout
+### 1. Pricing — Needs rethink
+Current pricing section doesn't reflect reality. Decide:
+- Keep two tiers? If yes, confirm names, prices, and feature list
+- Or remove the section entirely and redirect to contact?
+- Current: Growth €900/mo · Partner €1,500/mo — confirm or change
 
----
+### 2. About — Remove TextReveal
+- Replace word-by-word opacity reveal with standard block fade-in
+- Consistent with every other section on the page
+- Copy stays the same
 
-## Confirmed Changes
+### 3. Copy — Improve across the site
+Sections that need work:
+- Hero headline — broaden from Shopify-only framing
+- About paragraph — update positioning
+- Services copy — review and tighten
+- Work card descriptions — too generic, need more specificity
 
-### 1. Hero — Remove image, go typographic
-- Remove the `<Image>` column entirely
-- Full-width editorial headline layout
-- Keep entrance animation (fade + slide)
-- Availability badge stays
-- No placeholder or fallback image
+### 4. SEO
+- Page `<title>` and `<meta description>` for home + each case study
+- Open Graph tags (title, description, image)
+- Depends on final copy being locked first
 
-### 2. Positioning — Broaden beyond Shopify-only
-- Shift framing from "Shopify developer" to "Frontend developer, Shopify specialist" or similar
-- Update: metadata title, hero headline, About paragraph, Services copy
-- This lets non-Shopify projects (brother's project, future work) be included naturally
+### 5. Favicon
+- Need asset from Romain (SVG or high-res PNG of logo mark)
 
-### 3. About section — Remove TextReveal inconsistency
-- The word-by-word opacity reveal animation only exists in this section
-- Remove TextReveal, replace with a standard block fade-in (consistent with every other section)
-- The copy itself stays the same
+### 6. OG Image
+- Need a designed OG image (1200×630) or generate one from the site
 
-### 4. Contact — Email only, no form
-- Remove the contact form entirely
-- Keep the email link, styled prominently
-- Keep availability context line
-- Simple, direct — no dead form endpoint
+### 7. Animations
+- Page load animation
+- Hero text entrance (headline + badge + CTAs)
+- Review scroll-reveal consistency across all sections
 
-### 5. Work section — TBD (pending layout choice above)
-- 6 projects total: Atari, TOGETHXR, and-OR Collective, Animo etc, Jayson Home, CCollections
-- Brother's project potentially added (TBD)
-- Real screenshots exist for all 6 (in /public/)
-
-### 6. Pricing — Simplify
-- Remove unused fullFeatureList comparison table data
-- Two clean cards only
-- Confirm prices before updating copy
-- Decide whether to show prices or remove section entirely
-
-### 7. Animations — Normalize across sections
-- Only About currently uses TextReveal
-- All other sections use block fade-in via useScrollReveal
-- After removing TextReveal from About: all sections will be consistent
+### 8. Work cards — Text treatment
+- Current text is too plain
+- Make project metadata (client, type) feel more considered
 
 ---
 
-## Other Projects (Context)
+## What's Done (v1 context)
 
-These are projects Romain built outside the 6 Shopify client projects. They inform positioning and may be added to the portfolio.
-
-### Philippe Tullio — Film Director Portfolio
-- **Repo:** /Users/romainpenaruiz/Desktop/Freelance/PhilippeTullio/ph_tullio
-- **What it is:** Portfolio site for Romain's brother, a film director. Cinematic, dark aesthetic. Uses Alfa Slab One + Inter + Space Grotesk, Cloudinary for assets, GSAP + Framer Motion, next-intl (FR/EN).
-- **Status:** Live on Vercel.
-- **Portfolio angle:** Shows Romain can build beyond Shopify — immersive, cinematic, high-end web experiences.
-- **Action needed:** Confirm whether to add to work grid.
-
-### LinkpeakHQ — Custom Link-in-Bio Service
-- **Repo:** /Users/romainpenaruiz/Desktop/Freelance/LinkpeakHQ/linkpeakhq-site
-- **What it is:** Marketing site for a done-for-you service building custom branded link-in-bio pages on the creator's own domain. Built by Romain. Uses DM Sans + Fraunces, clean minimal aesthetic.
-- **The adult creator angle:** The service was inspired by / targets adult content creators. This should NOT be mentioned on the portfolio.
-- **Portfolio angle:** Can be described simply as "custom link-in-bio service" or "creator web presence tool." Shows product/service thinking beyond client work.
-- **Action needed:** Confirm whether to add to work grid and how to describe it.
+- Hero: two-column vertical marquee with Cloudinary gallery images, CSS infinite scroll
+- Work: grid with real project cards, Cloudinary cover images, case study pages
+- Projects: 7 total — Atari, TOGETHXR, and-OR Collective, Animo etc, Jayson Home, CCollections, Philippe Tullio
+- About: section exists, TextReveal still in place (pending swap)
+- Contact: email link only, no form
+- Pricing: section exists, needs content rework
+- Menu: desktop nav + mobile menu + language switcher (FR/EN flags)
+- Cloudinary: gallery images for marquee, cover images for work cards and case study pages
+- Theming: light/dark, Inter only
 
 ---
 
 ## Projects Reference
 
-See `config/projects.md` for full project details and copy.
-See `config/projects.ts` for the live data feeding the work section.
+See `config/projects.md` for full copy.
+See `config/projects.ts` for live data.
 
-**Current projects (6):** (Shopify client work — other projects listed below in Other Projects section)
-| # | Client | Type | Image |
-|---|--------|------|-------|
-| 1 | Atari | Full Storefront Build | atari_safari.png |
-| 2 | TOGETHXR | Design Implementation | together-sfari.png |
-| 3 | and-OR Collective | Design Implementation | andor_safari.png |
-| 4 | Animo etc | Custom App & Backend | animo_safari.png |
-| 5 | Jayson Home | Retainer & Redesign | jaysonhome_safari.png |
-| 6 | CCollections | Design Implementation | cc_safari.png |
+| # | Client | Slug | Type |
+|---|--------|------|------|
+| 1 | Atari | atari | Full Storefront Build |
+| 2 | TOGETHXR | togethxr | Design Implementation |
+| 3 | and-OR Collective | andor-collective | Design Implementation |
+| 4 | Animo etc | animoetc | Custom App & Backend |
+| 5 | Jayson Home | jaysonhome | Retainer & Redesign |
+| 6 | CCollections | ccollections | Design Implementation |
+| 7 | Philippe Tullio | philippe-tullio | Web Experience |
 
 ---
 
-## What NOT to do
+## Constraints
+- Do not change prices without explicit confirmation
+- Do not add a second font without explicit instruction
 - Do not add features beyond what is listed above
-- Do not refactor components that are not being changed
-- Do not add a second font without explicit instruction on which font
-- Do not change prices without explicit confirmation from Romain
-- Do not keep the contact form or add a new one
