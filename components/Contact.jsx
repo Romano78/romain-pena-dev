@@ -1,16 +1,12 @@
 'use client';
 
-import { useState } from 'react';
 import { Mail } from 'lucide-react';
+import LinkCta from '@/components/snippets/LinkCta';
 import { useScrollReveal } from '@/hooks/use-scroll-reveal';
 import ScrambleTextAnimation1 from '@/components/snippets/ScrambleTextAnimation1';
 import { cn } from '@/lib/utils';
 
-const inputClass =
-  'w-full rounded-md border border-border bg-card px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground transition-colors focus:border-muted focus:outline-none focus:ring-2 focus:ring-muted/40';
-
 export default function Contact({ className = '' }) {
-  const [submitted, setSubmitted] = useState(false);
   const ref = useScrollReveal({ y: 30, duration: 0.9, stagger: 0.1, selector: '.contact-reveal' });
 
   return (
@@ -19,88 +15,17 @@ export default function Contact({ className = '' }) {
         {"Let's talk."}
       </ScrambleTextAnimation1>
 
-        <p className="contact-reveal mt-6 max-w-xl text-lg leading-relaxed text-foreground">
-          If you have a design-led Shopify store that needs custom development — or an agency that needs a reliable Shopify partner — send me a message. I{"'"}ll get back to you within 24 hours.
-        </p>
+      <p className="contact-reveal mt-6 max-w-xl text-lg leading-relaxed text-foreground">
+        If you have a Shopify store that needs custom development, or an agency that needs a reliable partner — reach out.
+      </p>
 
-        <div className="contact-reveal mt-10 flex flex-col gap-8 md:flex-row md:gap-16">
-          <a
-            href="mailto:hello@romainpena.dev"
-            className="flex items-center gap-3 text-foreground transition-colors hover:text-muted"
-          >
-            <Mail className="h-5 w-5" />
-            <span className="border-b border-foreground pb-0.5 text-sm font-medium transition-colors hover:border-muted">
-              hello@romainpena.dev
-            </span>
-          </a>
-        </div>
-
-        {submitted ? (
-          <p
-            role="status"
-            aria-live="polite"
-            className="contact-reveal mt-10 max-w-md rounded-md border border-muted/40 bg-card px-6 py-5 text-sm text-foreground"
-          >
-            Message received — I{"'"}ll get back to you within 24 hours.
-          </p>
-        ) : (
-          <form
-            className="contact-reveal mt-10 max-w-md space-y-4"
-            onSubmit={(e) => {
-              e.preventDefault();
-              setSubmitted(true);
-            }}
-          >
-            <div>
-              <label htmlFor="name" className="sr-only">
-                Name
-              </label>
-              <input
-                id="name"
-                name="name"
-                type="text"
-                placeholder="Your name"
-                required
-                aria-required="true"
-                className={inputClass}
-              />
-            </div>
-            <div>
-              <label htmlFor="email" className="sr-only">
-                Email
-              </label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                placeholder="Your email"
-                required
-                aria-required="true"
-                className={inputClass}
-              />
-            </div>
-            <div>
-              <label htmlFor="message" className="sr-only">
-                Message
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                placeholder="Tell me about your project"
-                rows={4}
-                required
-                aria-required="true"
-                className={cn(inputClass, 'resize-none')}
-              />
-            </div>
-            <button
-              type="submit"
-              className="rounded-md border border-foreground bg-foreground px-6 py-3 text-sm font-medium text-background transition-colors hover:bg-muted hover:border-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-muted"
-            >
-              Send message
-            </button>
-          </form>
-        )}
+      <LinkCta
+        href='mailto:hello@romainpena.dev'
+        icon={<Mail className='h-3.5 w-3.5' />}
+        className='contact-reveal mt-10'
+      >
+        hello@romainpena.dev
+      </LinkCta>
     </section>
   );
 }

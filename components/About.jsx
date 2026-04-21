@@ -1,23 +1,18 @@
 'use client';
 
-import { useRef } from 'react';
 import SectionHeader from '@/components/snippets/SectionHeader';
-import TextReveal from '@/components/snippets/TextReveal';
+import { useScrollReveal } from '@/hooks/use-scroll-reveal';
+import { cn } from '@/lib/utils';
 
-export default function About() {
-  const scrollRef = useRef(null);
+export default function About({ className = '' }) {
+  const ref = useScrollReveal({ y: 20, duration: 1 });
 
   return (
-    // Tall scroll container — creates the scroll real estate for the word reveal
-    <section ref={scrollRef} id="about">
-      {/* Entire section pins below the navbar, slides over the Hero */}
+    <section id="about" className={cn(className)}>
       <SectionHeader overline='A bit about me.' />
-      <TextReveal
-        scrollTarget={scrollRef}
-        body="I've spent the last few years working on Shopify stores for design-led brands that have outgrown what themes and apps can do. I work as an extension of your team: I move fast, communicate clearly, and write code that actually lasts."
-        blockClassName='max-w-[1074px] w-full'
-        textClassName='h3 text-primary'
-      />
+      <p ref={ref} className="h3 text-primary max-w-[1074px] w-full">
+        {"I've spent the last few years working on Shopify stores for design-led brands that have outgrown what themes and apps can do. I work as an extension of your team: I move fast, communicate clearly, and write code that actually lasts."}
+      </p>
     </section>
   );
 }

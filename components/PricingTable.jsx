@@ -10,13 +10,12 @@ import { useScrollReveal } from '@/hooks/use-scroll-reveal';
 const defaultOptions = {
   overline: 'Working together',
   title: 'Simple, transparent pricing',
-  body: 'I prefer to  work on a monthly retainer basis, predictable for you, sustainable for me.',
-  quarterlyText: '',
-  yearlyText: '',
-  fullComparisonButtonText: 'Compare all features',
+  body: 'I prefer to work on a monthly retainer basis, predictable for you, sustainable for me.',
+  mostPopularText: 'Most Popular',
+  currency: '€',
+  pricePeriodText: '/month',
   plans: [
     {
-      buttonVariant: 'default',
       popular: false,
       title: 'Growth',
       description: '12 hours included',
@@ -32,7 +31,6 @@ const defaultOptions = {
       buttonLink: '#contact',
     },
     {
-      buttonVariant: 'outline',
       popular: true,
       title: 'Partner',
       description: '20 hours included',
@@ -48,90 +46,8 @@ const defaultOptions = {
       buttonLink: '#contact',
     },
   ],
-  fullFeatureList: [
-    {
-      name: 'Components',
-      starter: 'Basic',
-      growth: 'Advanced',
-      scale: 'Custom',
-      info: 'Number and types of UI components available',
-    },
-    {
-      name: 'Documentation',
-      starter: 'Basic',
-      growth: 'Advanced',
-      scale: 'Custom',
-      info: 'Level of documentation detail and examples',
-    },
-    {
-      name: 'Support',
-      starter: 'Community',
-      growth: 'Premium',
-      scale: 'Priority',
-      info: 'Support response time and channels',
-    },
-    {
-      name: 'Updates',
-      starter: '+',
-      growth: '+',
-      scale: '+',
-      info: 'Regular updates and bug fixes',
-    },
-    {
-      name: 'Source Code',
-      starter: '-',
-      growth: '+',
-      scale: '+',
-      info: 'Access to component source code',
-    },
-    {
-      name: 'Custom Theming',
-      starter: 'Basic',
-      growth: 'Advanced',
-      scale: 'Custom',
-      info: 'Ability to customize component themes',
-    },
-    {
-      name: 'Private Discord',
-      starter: '-',
-      growth: '+',
-      scale: '+',
-      info: 'Access to private Discord community',
-    },
-    {
-      name: 'Team Training',
-      starter: '-',
-      growth: '-',
-      scale: '+',
-      info: 'Personalized training sessions',
-    },
-    {
-      name: 'SLA Guarantee',
-      starter: '-',
-      growth: '-',
-      scale: '+',
-      info: 'Service Level Agreement support',
-    },
-  ],
-
-  billedQuarterlyText: 'billed monthly',
-  billedYearlyText: 'billed yearly',
-  mostPopularText: 'Most Popular',
-  currency: '€',
-  pricePeriodText: '/month',
-  fullFeatureListName: 'Feature Comparison',
-  fullFeatureListItemName: 'Feature',
 };
 
-/**
- * PricingTable component that displays pricing plans with feature comparison
- *
- * @component
- * @param {Object} props - Component props
- * @param {string} [props.className] - Additional CSS classes
- * @param {Object} [props.options] - Pricing table configuration
- * @param {string} [props.theme] - Optional theme override for this section (light, dark, modern)
- */
 export default function PricingTable({ className, options = defaultOptions }) {
   const cardsRef = useScrollReveal({
     stagger: 0.15,
@@ -146,7 +62,6 @@ export default function PricingTable({ className, options = defaultOptions }) {
         title={options.title}
         body={options.body}
         align='left'
-        lineAnimation={true}
       />
 
       <div
@@ -157,7 +72,7 @@ export default function PricingTable({ className, options = defaultOptions }) {
           <div
             key={plan.title}
             className={cn(
-              'pricing-card border-border bg-card relative rounded-[--radius] border rounded-sm p-8 radius-sm',
+              'pricing-card border-border bg-card relative rounded-[--radius] border p-8',
               plan.popular && 'border-primary shadow-lg',
             )}
           >
@@ -173,14 +88,13 @@ export default function PricingTable({ className, options = defaultOptions }) {
             </div>
 
             <div className='mb-5'>
-              <span className='text-4xl text-foreground'>
+              <span className='font-sans text-4xl text-foreground'>
                 {options.currency}
                 {plan.price}
               </span>
               <span className='text-muted-foreground'>
                 {options.pricePeriodText}
               </span>
-              <br />
             </div>
 
             <ul className='mb-8 space-y-4'>
@@ -191,6 +105,13 @@ export default function PricingTable({ className, options = defaultOptions }) {
                 </li>
               ))}
             </ul>
+
+            <a
+              href={plan.buttonLink}
+              className='block w-full rounded-md border border-foreground bg-foreground px-6 py-3 text-center text-sm font-medium text-background transition-colors hover:bg-muted hover:border-muted'
+            >
+              {plan.buttonText}
+            </a>
           </div>
         ))}
       </div>

@@ -38,6 +38,22 @@ export const projects: Project[] = [
     url: 'https://atari.com',
   },
   {
+    slug: 'philippe-tullio',
+    client: 'Philippe Tullio',
+    type: 'Web Experience',
+    description:
+      'Built a full cinematic portfolio for film director Philippe Tullio. Immersive scroll-based storytelling with GSAP-powered animations, Cloudinary video streaming, and a custom scroll-snap architecture. Bilingual FR/EN with a dark-first aesthetic designed to let the work dominate.',
+    items: [
+      'Cinematic scroll animations (GSAP + Framer Motion)',
+      'Cloudinary video streaming',
+      'FR/EN bilingual (next-intl)',
+      'Scroll-snap + Lenis architecture',
+      'Dark-first immersive design',
+    ],
+    image: 'https://picsum.photos/seed/philippe-tullio/800/600',
+    gallery: galleryImages('philippe-tullio'),
+  },
+  {
     slug: 'togethxr',
     client: 'TOGETHXR',
     type: 'Design Implementation',
@@ -69,7 +85,7 @@ export const projects: Project[] = [
     url: 'https://andorcollective.com',
   },
   {
-    slug: 'animo-etc',
+    slug: 'animoetc',
     client: 'Animo etc',
     type: 'Custom App & Backend',
     description:
@@ -85,11 +101,11 @@ export const projects: Project[] = [
     url: 'https://animoetc.com',
   },
   {
-    slug: 'jayson-home',
+    slug: 'jaysonhome',
     client: 'Jayson Home',
     type: 'Retainer & Redesign',
     description:
-      "Long-term retainer for Jayson Home — a premium lifestyle and furniture brand. Handled ongoing maintenance and new features alongside a full redesign: new homepage, navigation, and cart. Built a custom checkout app and configured a custom checkout setup. Also migrated the entire theme from Vue.js to Shopify OS 2.0, bridging legacy code with the modern Shopify stack.",
+      'Long-term retainer for Jayson Home — a premium lifestyle and furniture brand. Handled ongoing maintenance and new features alongside a full redesign: new homepage, navigation, and cart. Built a custom checkout app and configured a custom checkout setup. Also migrated the entire theme from Vue.js to Shopify OS 2.0, bridging legacy code with the modern Shopify stack.',
     items: [
       'Ongoing maintenance & new features',
       'Homepage, nav & cart redesign',

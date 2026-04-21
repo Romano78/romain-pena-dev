@@ -106,7 +106,34 @@ Backend-focused engagement for Animo etc, a Quebec-based pet supply chain. Built
 
 ---
 
-## 5. CCollections
+## 5. Jayson Home
+
+**URL:** https://www.jaysonhome.com
+**Type:** Retainer & Redesign
+**Industry:** Premium Lifestyle & Furniture
+**Image:** `/public/jaysonhome_safari.png`
+
+### What I did
+Long-term retainer for Jayson Home — a premium lifestyle and furniture brand. Handled ongoing maintenance and new features alongside a full redesign: new homepage, navigation, and cart experience. Built a custom checkout app and custom checkout configuration. Also migrated the entire theme from Vue.js to Shopify OS 2.0, bridging legacy code with the modern Shopify stack.
+
+### Key deliverables
+- Ongoing maintenance & new features
+- Homepage, navigation & cart redesign
+- Custom checkout app
+- Custom checkout configuration
+- Vue.js → Shopify OS 2.0 migration
+
+### SEO angles
+- Shopify OS 2.0 migration
+- Vue.js to Shopify migration
+- Custom Shopify checkout app
+- Shopify theme redesign
+- Premium furniture Shopify store
+- Long-term Shopify retainer
+
+---
+
+## 6. CCollections
 
 **URL:** https://ccollections.shop
 **Type:** Design Implementation

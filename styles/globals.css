@@ -68,6 +68,7 @@
 
 @theme inline {
   --font-sans: 'Inter', 'Inter Fallback', sans-serif;
+  --font-display: 'Fraunces', serif;
   --font-mono: 'Geist Mono', 'Geist Mono Fallback';
   --color-background: hsl(var(--background));
   --color-foreground: hsl(var(--foreground));
@@ -183,6 +184,7 @@
 .marquee-root:hover .marquee-track {
   animation-play-state: paused;
 }
+
 
 @layer base {
   * {

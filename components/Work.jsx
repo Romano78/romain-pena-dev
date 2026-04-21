@@ -6,31 +6,34 @@ import Image from 'next/image';
 import { Link } from '@/i18n/navigation';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import SectionHeader from '@/components/snippets/SectionHeader';
 import { cn } from '@/lib/utils';
 import { projects } from '@/config/projects';
+import { ArrowRight } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
-function WorkCard({ project }) {
+function WorkCard({ project, aspectClass = 'aspect-video', titleClass = 'h3' }) {
   return (
     <article className='work-card group'>
       <Link href={`/work/${project.slug}`} className='block'>
         {/* Image */}
-        <div className='work-card-image relative overflow-hidden rounded-2xl aspect-video md:aspect-[4/3] bg-card-deep'>
+        <div className={cn(
+          'work-card-image relative overflow-hidden rounded-2xl bg-card',
+          aspectClass
+        )}>
           {project.image ? (
             <Image
               src={project.image}
               alt={project.client}
               fill
-              className='object-contain transition-transform duration-700 group-hover:scale-105'
+              className='object-cover object-[50%_20%] transition-transform duration-700 group-hover:scale-105'
             />
           ) : (
-            <div className='w-full h-full bg-card-deep' />
+            <div className='w-full h-full bg-card' />
           )}
 
           {/* Overlay */}
-          <div className='absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500' />
+          <div className='absolute inset-0 bg-black/65 opacity-0 group-hover:opacity-100 transition-opacity duration-500' />
 
           {/* Desktop hover content */}
           <div className='hidden md:flex absolute inset-0 flex-col justify-between p-6 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-75'>
@@ -46,14 +49,16 @@ function WorkCard({ project }) {
                   </span>
                 ))}
               </div>
-              <span className='text-sm font-medium text-white tracking-wide'>View project →</span>
+              <span className='inline-flex items-center gap-2 text-sm font-medium text-white tracking-wide'>
+                View project <ArrowRight className='h-3.5 w-3.5' />
+              </span>
             </div>
           </div>
         </div>
 
         {/* Below image */}
         <div className='work-card-text pt-4 space-y-3'>
-          <h3 className='h3'>{project.client}</h3>
+          <h3 className={titleClass}>{project.client}</h3>
           {/* Mobile only: type + pills */}
           <div className='md:hidden space-y-2'>
             <span className='text-overline text-muted block'>{project.type}</span>
@@ -83,9 +88,11 @@ WorkCard.propTypes = {
     image: PropTypes.string,
     url: PropTypes.string,
   }).isRequired,
+  aspectClass: PropTypes.string,
+  titleClass: PropTypes.string,
 };
 
-export default function Work({ className = '' }) {
+export default function Work({ className = '', projectImages = {} }) {
   const gridRef = useRef(null);
 
   useEffect(() => {
@@ -145,14 +152,14 @@ export default function Work({ className = '' }) {
       cards.forEach((card) => {
         const onMove = (e) => {
           const rect = card.getBoundingClientRect();
-          const rotateX = ((e.clientY - rect.top - rect.height / 2) / (rect.height / 2)) * -4;
-          const rotateY = ((e.clientX - rect.left - rect.width / 2) / (rect.width / 2)) * 4;
+          const rotateX = ((e.clientY - rect.top - rect.height / 2) / (rect.height / 2)) * -2;
+          const rotateY = ((e.clientX - rect.left - rect.width / 2) / (rect.width / 2)) * 2;
           gsap.to(card, {
             rotateX,
             rotateY,
             duration: 0.4,
             ease: 'power2.out',
-            transformPerspective: 900,
+            transformPerspective: 1400,
             transformOrigin: 'center center',
           });
         };
@@ -181,16 +188,28 @@ export default function Work({ className = '' }) {
     };
   }, []);
 
+  const featuredProjects = projects.slice(0, 2);
+  const restProjects = projects.slice(2);
+
   return (
     <section id='work' className={cn(className)}>
-      <SectionHeader overline='Selected Work' />
-      <div
-        ref={gridRef}
-        className='grid gap-x-8 gap-y-16 md:grid-cols-2'
-      >
-        {projects.map((project) => (
-          <WorkCard key={project.slug} project={project} />
-        ))}
+      <span className='text-overline text-muted mb-4 block'>Selected Work</span>
+      <div ref={gridRef} className='space-y-16'>
+        {/* Featured row */}
+        <div className='grid gap-x-8 gap-y-16 md:grid-cols-2'>
+          {featuredProjects.map((project) => (
+            <WorkCard key={project.slug} project={{ ...project, image: projectImages[project.slug] ?? project.image }} aspectClass='aspect-video' titleClass='h3' />
+          ))}
+        </div>
+
+        {/* Rest row */}
+        {restProjects.length > 0 && (
+          <div className='grid gap-x-8 gap-y-16 md:grid-cols-3'>
+            {restProjects.map((project) => (
+              <WorkCard key={project.slug} project={{ ...project, image: projectImages[project.slug] ?? project.image }} aspectClass='aspect-[4/3]' titleClass='h4' />
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );
@@ -198,4 +217,5 @@ export default function Work({ className = '' }) {
 
 Work.propTypes = {
   className: PropTypes.string,
+  projectImages: PropTypes.object,
 };
