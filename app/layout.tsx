@@ -1,4 +1,4 @@
-import { Inter, Fraunces } from 'next/font/google';
+import { Inter, Fraunces, Bebas_Neue } from 'next/font/google';
 import "@/styles/globals.css";
 
 const inter = Inter({
@@ -11,6 +11,12 @@ const fraunces = Fraunces({
   variable: '--font-fraunces',
 });
 
+const bebasNeue = Bebas_Neue({
+  weight: '400',
+  subsets: ['latin'],
+  variable: '--font-bebas',
+});
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -18,7 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <html suppressHydrationWarning>
-      <body className={`${inter.variable} ${fraunces.variable} antialiased`}>
+      <body className={`${inter.variable} ${fraunces.variable} ${bebasNeue.variable} antialiased`}>
         <a
           href='#main-content'
           className='sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[200] focus:rounded-md focus:bg-background focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-foreground focus:outline focus:outline-2 focus:outline-muted'

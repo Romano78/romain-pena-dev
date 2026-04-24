@@ -1,6 +1,7 @@
 'use client';
 
 import { useRef, useEffect } from 'react';
+import { useGSAP } from '@gsap/react';
 import PropTypes from 'prop-types';
 import { useTranslations } from 'next-intl';
 import { gsap } from 'gsap';
@@ -28,6 +29,7 @@ function WorkCard({
             'work-card-image relative overflow-hidden rounded-2xl bg-card',
             aspectClass,
           )}
+          style={{ clipPath: 'inset(0 0 100% 0)' }}
         >
           {project.image ? (
             <Image
@@ -65,7 +67,7 @@ function WorkCard({
         </div>
 
         {/* Below image */}
-        <div className='work-card-text pt-4 space-y-3'>
+        <div className='work-card-text pt-4 space-y-3 opacity-0 translate-y-3'>
           <h3 className={titleClass}>{project.client}</h3>
           {/* Mobile only: type + pills */}
           <div className='md:hidden space-y-2'>
@@ -105,6 +107,49 @@ WorkCard.propTypes = {
 export default function Work({ className = '', projectImages = {} }) {
   const gridRef = useRef(null);
 
+  // Hook 1: Scroll animations with useGSAP
+  useGSAP(
+    () => {
+      const grid = gridRef.current;
+      if (!grid) return;
+
+      const cards = grid.querySelectorAll('.work-card');
+      if (!cards.length) return;
+
+      cards.forEach((card, i) => {
+        const imageEl = card.querySelector('.work-card-image');
+        const textEl = card.querySelector('.work-card-text');
+
+        gsap.to(imageEl, {
+          clipPath: 'inset(0 0 0% 0)',
+          duration: 1.2,
+          ease: 'power3.out',
+          delay: i * 0.1,
+          scrollTrigger: {
+            trigger: card,
+            start: 'top 85%',
+            once: true,
+          },
+        });
+
+        gsap.to(textEl, {
+          y: 0,
+          opacity: 1,
+          duration: 0.6,
+          ease: 'power3.out',
+          delay: i * 0.1 + 0.5,
+          scrollTrigger: {
+            trigger: card,
+            start: 'top 85%',
+            once: true,
+          },
+        });
+      });
+    },
+    { scope: gridRef },
+  );
+
+  // Hook 2: Tilt event listeners
   useEffect(() => {
     const grid = gridRef.current;
     if (!grid) return;
@@ -114,48 +159,6 @@ export default function Work({ className = '', projectImages = {} }) {
 
     const canHover = window.matchMedia('(hover: hover)').matches;
 
-    // Scroll animations
-    const ctx = gsap.context(() => {
-      cards.forEach((card, i) => {
-        const imageEl = card.querySelector('.work-card-image');
-        const textEl = card.querySelector('.work-card-text');
-
-        gsap.fromTo(
-          imageEl,
-          { clipPath: 'inset(0 0 100% 0)' },
-          {
-            clipPath: 'inset(0 0 0% 0)',
-            duration: 1.2,
-            ease: 'power3.out',
-            delay: i * 0.1,
-            scrollTrigger: {
-              trigger: card,
-              start: 'top 85%',
-              once: true,
-            },
-          },
-        );
-
-        gsap.fromTo(
-          textEl,
-          { y: 12, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 0.6,
-            ease: 'power3.out',
-            delay: i * 0.1 + 0.5,
-            scrollTrigger: {
-              trigger: card,
-              start: 'top 85%',
-              once: true,
-            },
-          },
-        );
-      });
-    }, grid);
-
-    // Tilt — only attached on hover-capable devices
     const tiltCleanups = [];
 
     if (canHover) {
@@ -195,7 +198,6 @@ export default function Work({ className = '', projectImages = {} }) {
     }
 
     return () => {
-      ctx.revert();
       tiltCleanups.forEach((fn) => fn());
     };
   }, []);

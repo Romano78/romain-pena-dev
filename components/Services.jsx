@@ -1,14 +1,14 @@
 'use client';
 
 import PropTypes from 'prop-types';
-import { motion } from 'framer-motion';
 import { Blocks, LineChart } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useScrollReveal } from '@/hooks/use-scroll-reveal';
 import SectionHeader from '@/components/snippets/SectionHeader';
 
 function ColumnItem({ icon: Icon, title, body }) {
   return (
-    <div className='service-card group block h-full'>
+    <div className='service-card group block h-full opacity-0 translate-y-7'>
       <div className='bg-background border-border relative flex h-full flex-col items-start overflow-hidden rounded-[--radius] border p-6 transition-colors hover:border-muted'>
         {Icon && (
           <div className='relative mb-4'>
@@ -41,20 +41,16 @@ function Services({
   ],
   className = '',
 }) {
+  const cardsRef = useScrollReveal({ stagger: 0.15, selector: '.service-card', start: 'top 85%' });
+
   return (
     <section id='services' className={cn(className)}>
       <SectionHeader overline='What I do.' />
-      <div className='grid gap-6 md:grid-cols-2'>
+      <div className='grid gap-6 md:grid-cols-2' ref={cardsRef}>
         {columns.map((column, i) => (
-          <motion.div
-            key={i}
-            initial={{ x: i === 0 ? -40 : 40, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            transition={{ duration: 0.7, ease: 'easeOut' }}
-            viewport={{ once: true, amount: 0.15 }}
-          >
+          <div key={i}>
             <ColumnItem {...column} />
-          </motion.div>
+          </div>
         ))}
       </div>
     </section>

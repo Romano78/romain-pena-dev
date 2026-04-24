@@ -1,6 +1,7 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
+import { useGSAP } from '@gsap/react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -25,33 +26,29 @@ export function useScrollReveal({
 } = {}) {
   const ref = useRef(null);
 
-  useEffect(() => {
+  useGSAP(() => {
     const el = ref.current;
     if (!el) return;
 
     const targets = selector ? el.querySelectorAll(selector) : [el];
 
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        targets,
-        { opacity: 0, y },
-        {
-          opacity: 1,
-          y: 0,
-          duration,
-          ease: 'power3.out',
-          stagger,
-          scrollTrigger: {
-            trigger: el,
-            start,
-            once: true,
-          },
-        }
-      );
-    }, el);
-
-    return () => ctx.revert();
-  }, [y, duration, stagger, start, selector]);
+    gsap.fromTo(
+      targets,
+      { opacity: 0, y },
+      {
+        opacity: 1,
+        y: 0,
+        duration,
+        ease: 'power3.out',
+        stagger,
+        scrollTrigger: {
+          trigger: el,
+          start,
+          once: true,
+        },
+      }
+    );
+  }, { scope: ref, dependencies: [y, duration, stagger, start, selector] });
 
   return ref;
 }

@@ -127,22 +127,22 @@
 
   h1,
   .h1 {
-    @apply font-sans text-4xl lg:text-6xl font-bold leading-tight text-foreground;
+    @apply font-[family-name:var(--font-bebas)] text-4xl lg:text-6xl font-normal leading-tight text-foreground;
   }
 
   h2,
   .h2 {
-    @apply font-sans text-3xl lg:text-5xl font-bold leading-tight text-foreground;
+    @apply font-[family-name:var(--font-bebas)] text-3xl lg:text-5xl font-normal leading-tight text-foreground;
   }
 
   h3,
   .h3 {
-    @apply font-sans text-2xl lg:text-4xl font-semibold leading-snug text-foreground;
+    @apply font-[family-name:var(--font-bebas)] text-2xl lg:text-4xl font-normal uppercase tracking-wide leading-snug text-foreground;
   }
 
   h4,
   .h4 {
-    @apply font-sans text-xl lg:text-3xl font-semibold leading-snug text-foreground;
+    @apply font-[family-name:var(--font-bebas)] text-xl lg:text-3xl font-normal uppercase tracking-wide leading-snug text-foreground;
   }
 
   h5,

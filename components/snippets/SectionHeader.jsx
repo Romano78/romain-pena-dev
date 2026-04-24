@@ -3,8 +3,7 @@
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
-import TextAnimation1 from '@/components/snippets/TextAnimation1';
-import ScrambleTextAnimation1 from '@/components/snippets/ScrambleTextAnimation1';
+import { useScrollReveal } from '@/hooks/use-scroll-reveal';
 
 function SectionHeader({
   overline = '',
@@ -16,6 +15,10 @@ function SectionHeader({
   parentClassName,
   lineAnimation = false,
 }) {
+  const overlineRef = useScrollReveal({ y: 16, duration: 0.6, start: 'top 90%' });
+  const titleRef = useScrollReveal({ y: 20, duration: 0.7, start: 'top 88%' });
+  const bodyRef = useScrollReveal({ y: 16, duration: 0.6, start: 'top 88%' });
+
   const alignmentClasses = {
     left: 'items-start text-left',
     center: 'items-center text-center',
@@ -32,9 +35,12 @@ function SectionHeader({
         )}
       >
         {overline && (
-          <ScrambleTextAnimation1 className='text-overline mb-6 text-muted'>
+          <span
+            ref={overlineRef}
+            className='text-overline mb-6 text-muted opacity-0 translate-y-4'
+          >
             {overline}
-          </ScrambleTextAnimation1>
+          </span>
         )}
         {lineAnimation && (
           <motion.div
@@ -45,19 +51,21 @@ function SectionHeader({
             viewport={{ once: true, amount: 0.5 }}
           />
         )}
-        {title && (
-          <TextAnimation1
-            headingType={headingType}
-            align={align}
-            className={cn('', headingType === 'h1' ? 'h1' : 'h2')}
-          >
-            {title}
-          </TextAnimation1>
-        )}
+        {title && (() => {
+          const Tag = headingType;
+          return (
+            <Tag
+              ref={titleRef}
+              className={cn('opacity-0 translate-y-5', headingType === 'h1' ? 'h1' : 'h2')}
+            >
+              {title}
+            </Tag>
+          );
+        })()}
         {body && (
-          <TextAnimation1 className='mt-6 max-w-2xl' headingType={'p'}>
+          <p ref={bodyRef} className='mt-6 max-w-2xl opacity-0 translate-y-4'>
             {body}
-          </TextAnimation1>
+          </p>
         )}
       </div>
     </div>

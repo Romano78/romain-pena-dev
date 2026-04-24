@@ -62,9 +62,9 @@ export default function Steps({
 
 function Stat({ value, label, subLabel, stringValue, index = 0 }) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: false, amount: 0.5 });
+  const isInView = useInView(ref, { once: true, amount: 0.5 });
   const stepValue = index + 1;
-  const startValue = 30;
+  const startValue = 0;
 
   const countValue = useSpring(startValue, {
     stiffness: 200,
@@ -81,9 +81,7 @@ function Stat({ value, label, subLabel, stringValue, index = 0 }) {
   }, [isInView, stepValue, countValue]);
 
   const displayValue = useTransform(countValue, (latest) =>
-    latest - stepValue < 1.5
-      ? String(stepValue).padStart(2, '0')
-      : String(Math.floor(latest)),
+    String(Math.round(latest) >= stepValue ? stepValue : Math.round(latest)).padStart(2, '0')
   );
 
   return (

@@ -12,35 +12,25 @@ Current pricing section doesn't reflect reality. Decide:
 - Or remove the section entirely and redirect to contact?
 - Current: Growth €900/mo · Partner €1,500/mo — confirm or change
 
-### 2. About — Remove TextReveal
-- Replace word-by-word opacity reveal with standard block fade-in
-- Consistent with every other section on the page
-- Copy stays the same
-
-### 3. Copy — Improve across the site
+### 2. Copy — Improve across the site
 Sections that need work:
 - Hero headline — broaden from Shopify-only framing
 - About paragraph — update positioning
 - Services copy — review and tighten
 - Work card descriptions — too generic, need more specificity
 
-### 4. SEO
+### 3. SEO
 - Page `<title>` and `<meta description>` for home + each case study
 - Open Graph tags (title, description, image)
 - Depends on final copy being locked first
 
-### 5. Favicon
+### 4. Favicon
 - Need asset from Romain (SVG or high-res PNG of logo mark)
 
-### 6. OG Image
+### 5. OG Image
 - Need a designed OG image (1200×630) or generate one from the site
 
-### 7. Animations
-- Page load animation
-- Hero text entrance (headline + badge + CTAs)
-- Review scroll-reveal consistency across all sections
-
-### 8. Work cards — Text treatment
+### 6. Work cards — Text treatment
 - Current text is too plain
 - Make project metadata (client, type) feel more considered
 
@@ -51,12 +41,13 @@ Sections that need work:
 - Hero: two-column vertical marquee with Cloudinary gallery images, CSS infinite scroll
 - Work: grid with real project cards, Cloudinary cover images, case study pages
 - Projects: 7 total — Atari, TOGETHXR, and-OR Collective, Animo etc, Jayson Home, CCollections, Philippe Tullio
-- About: section exists, TextReveal still in place (pending swap)
+- About: TextReveal replaced with standard block fade-in
 - Contact: email link only, no form
 - Pricing: section exists, needs content rework
 - Menu: desktop nav + mobile menu + language switcher (FR/EN flags)
 - Cloudinary: gallery images for marquee, cover images for work cards and case study pages
 - Theming: light/dark, Inter only
+- Animations: page load, hero text entrance, scroll-reveal consistency across sections
 
 ---
 

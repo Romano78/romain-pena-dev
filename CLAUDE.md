@@ -189,3 +189,8 @@ search the project root for existing equivalents — Next.js conventions change 
 may already exist under a different name.
 
 **Why:** Created `middleware.ts` without knowing `proxy.ts` already existed. Caused a runtime conflict.
+
+### Always use existing snippet components
+When adding any interactive element (button, link, CTA), check `components/snippets/` first and use the existing component. Never inline a raw `<a>` or `<button>` when `LinkCta`, `PillCta`, or another snippet already covers the pattern. If no component fits, ask before creating a new one.
+
+**Why:** Used a raw `<a>` tag instead of `LinkCta` on the 404 page — inconsistent with the design system.

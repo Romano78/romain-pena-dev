@@ -56,7 +56,7 @@ export const projects: Project[] = [
   },
   {
     slug: 'andor-collective',
-    client: 'and-OR Collective',
+    client: '&OR Collective',
     type: 'Design Implementation',
     description:
       "Implemented and-OR Collective's full Figma designs in Shopify — a luxury sustainable knitwear brand. Custom sections and pixel-perfect layouts across all pages, fully tailored to their minimal, premium aesthetic.",

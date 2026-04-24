@@ -3,7 +3,7 @@
 import { cn } from '@/lib/utils';
 import PropTypes from 'prop-types';
 
-export default function LinkCta({ href, onClick, icon, children, className = '', uppercase = true }) {
+export default function LinkCta({ href, onClick = undefined, icon = null, children, className = '', uppercase = true }) {
   const base = cn(
     'relative inline-flex items-center gap-1.5 cursor-pointer',
     'text-xs font-medium tracking-widest text-foreground/50',
