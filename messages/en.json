@@ -9,28 +9,29 @@
     "contact": "Contact"
   },
   "footer": {
-    "copyright": "© {year} Romain Pena Ruiz. All rights reserved.  "
+    "copyright": "© {year} Romain Pena Ruiz. All rights reserved."
   },
   "hero": {
-    "status": "Based in Montreal · Available for new clients",
+    "status": "Based in Montreal · Available for new projects",
     "greeting": ", I'm",
-    "title": "Custom Shopify development: themes built from Figma files, apps the Shopify  doesn't have, integrations that actually work.",
+    "title": "High-end Shopify development for brands that need more than templates.",
+    "subtitle": "I build fast, reliable Shopify stores, custom features, and integrations that go beyond what Shopify offers out of the box.",
     "seeWork": "See work",
-    "ctaContact": "Contact"
+    "ctaContact": "Get in touch"
   },
   "about": {
-    "overline": "A bit about me.",
-    "body": "I studied psychology at Cal State Long Beach before deciding I wanted to build things. Moved to Montreal, joined Le Wagon's bootcamp, and that's where coding clicked. After the bootcamp I joined Field Office, a Montreal web agency, where most of my work was Shopify: custom sections from Figma files, custom apps and webhooks when off-the-shelf solutions weren't enough. Now I'm independent, and I've broadened what I take on. Not everything needs a platform. I've built cinematic portfolio sites, commerce pages, and custom tools that replace platform subscriptions at a fraction of the cost. With the right AI tooling, I can scope and ship these faster than a traditional agency, and lean enough to stay within a real budget."
+    "overline": "About",
+    "body": "I’m a web developer focused on building fast, clean digital experiences.\n\nI studied psychology in the US, then moved to Montreal where I transitioned into web development and joined Field Office.\n\nThere, I worked on high-end marketing websites and Shopify projects as part of an agency team, mainly focused on frontend development, performance, and turning designs into production-ready websites.\n\nToday, I work closely with designers, agencies, and teams to build reliable, well-crafted websites and applications with a strong attention to detail and clean code."
   },
   "services": {
-    "overline": "What I do.",
+    "overline": "Services",
     "design": {
       "title": "Design Implementation",
-      "body": "You have the files. I build them exactly as designed in Shopify: custom Liquid sections, pixel-perfect to the mockup. No interpretation, no shortcuts."
+      "body": "I turn Figma designs into fully working Shopify themes. Clean, responsive, and built to match the design properly without cutting corners."
     },
     "features": {
-      "title": "Features & Integrations",
-      "body": "Custom fulfillment apps, inventory sync, Klaviyo, Google Tag Manager, third-party APIs. When the Shopify  doesn't have what you need, I build it."
+      "title": "Custom Features & Integrations",
+      "body": "Custom Shopify features, apps, and integrations. If Shopify doesn’t do it out of the box, I build it so it works for your setup."
     }
   },
   "work": {
@@ -40,58 +41,58 @@
   "steps": {
     "overline": "How I work",
     "step1": {
-      "label": "You share what you need",
-      "subLabel": "Tell me what you're trying to build or fix. No brief template, no lengthy forms. Just tell me what's going on."
+      "label": "You tell me what you need",
+      "subLabel": "No need for a perfect brief. Just explain what you’re trying to build or fix."
     },
     "step2": {
-      "label": "I come back with a clear scope",
-      "subLabel": "I'll tell you exactly what I'll do, how long it'll take, and what it costs. No surprises."
+      "label": "I define the scope",
+      "subLabel": "I’ll come back with a clear plan, timeline, and cost so everything is straightforward."
     },
     "step3": {
-      "label": "We work together ongoing",
-      "subLabel": "Most clients stay on a monthly retainer. Your store keeps evolving, I keep building."
+      "label": "We build it",
+      "subLabel": "I develop, test, and refine until it’s solid and ready for production."
     }
   },
   "pricing": {
     "overline": "Working together",
-    "title": "Simple, transparent pricing",
-    "body": "I prefer to work on a monthly retainer: predictable for you, sustainable for me.",
+    "title": "Simple, flexible pricing",
+    "body": "I usually work on a monthly retainer so things stay predictable and flexible on both sides.",
     "mostPopularText": "Most Popular",
     "currency": "€",
     "pricePeriodText": "/month",
     "growth": {
       "title": "Growth",
       "description": "12 hours included",
-      "buttonText": "Get started",
+      "buttonText": "Start a project",
       "features": [
         "Figma → Shopify implementation",
-        "New feature additions",
-        "Bug fixes & improvements",
+        "New features and improvements",
+        "Bug fixes",
         "48h response time",
-        "Monthly sync call"
+        "Monthly check-in"
       ]
     },
     "partner": {
       "title": "Partner",
       "description": "20 hours included",
-      "buttonText": "Get started",
+      "buttonText": "Start a project",
       "features": [
         "Everything in Growth",
         "Custom features & integrations",
-        "Custom app development",
-        "Weekly sync call",
+        "Custom Shopify app work",
+        "Weekly check-in",
         "Slack access"
       ]
     }
   },
   "contact": {
-    "heading": "Let's talk.",
-    "body": "If you have a Shopify store that needs custom development, or an agency looking for a reliable Shopify specialist, get in touch.",
+    "heading": "Let’s talk",
+    "body": "If you need a developer for a Shopify project, custom feature, or ongoing work, feel free to reach out.",
     "email": "hello@romainpena.dev"
   },
   "workDetail": {
-    "back": "Work",
+    "back": "Back to work",
     "deliverables": "Deliverables",
-    "visitBrand": "Visit brand"
+    "visitBrand": "Visit site"
   }
 }
