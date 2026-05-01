@@ -14,10 +14,10 @@
   "hero": {
     "status": "Based in Montreal · Available for new projects",
     "greeting": ", I'm",
-    "title": "High-end Shopify development for brands that need more than templates.",
-    "subtitle": "I build fast, reliable Shopify stores, custom features, and integrations that go beyond what Shopify offers out of the box.",
+    "title": "Frontend & Shopify developer with agency experience, building custom storefronts, integrations, and web experiences.",
+    "subtitle": "I use code and no-code tools to build fast Shopify sites, custom features, integrations, and lightweight web experiences like one-page Next.js builds.",
     "seeWork": "See work",
-    "ctaContact": "Get in touch"
+    "ctaContact": "Let’s talk"
   },
   "about": {
     "overline": "About",
