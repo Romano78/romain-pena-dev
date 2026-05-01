@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
 import { navigationItems } from '@/config/navigation-config';
+import { Link } from '@/i18n/navigation';
 import { ThemeToggle } from './ThemeToggle';
 import LanguageSwitcher from '@/components/snippets/LanguageSwitcher';
 import { cubicBezierPreset } from '@/config/cubic-beziers';
@@ -50,13 +51,23 @@ export default function MobileMenu({ isOpen, onClose }) {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.4, delay: 0.2 + i * 0.07, ease: cubicBezierPreset }}
               >
-                <a
-                  href={item.href}
-                  onClick={onClose}
-                  className='text-5xl font-bold text-foreground hover:text-muted transition-colors block'
-                >
-                  {navTranslations(item.id) || item.label}
-                </a>
+                {item.isPage ? (
+                  <Link
+                    href={item.href}
+                    onClick={onClose}
+                    className='text-5xl font-bold text-foreground hover:text-muted transition-colors block'
+                  >
+                    {navTranslations(item.id) || item.label}
+                  </Link>
+                ) : (
+                  <a
+                    href={item.href}
+                    onClick={onClose}
+                    className='text-5xl font-bold text-foreground hover:text-muted transition-colors block'
+                  >
+                    {navTranslations(item.id) || item.label}
+                  </a>
+                )}
               </motion.div>
             ))}
           </nav>

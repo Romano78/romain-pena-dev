@@ -3,72 +3,51 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
 import { Check } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import SectionHeader from '@/components/snippets/SectionHeader';
 import PropTypes from 'prop-types';
 import { useScrollReveal } from '@/hooks/use-scroll-reveal';
 
-const defaultOptions = {
-  overline: 'Working together',
-  title: 'Simple, transparent pricing',
-  body: 'I prefer to work on a monthly retainer basis, predictable for you, sustainable for me.',
-  mostPopularText: 'Most Popular',
-  currency: '€',
-  pricePeriodText: '/month',
-  plans: [
-    {
-      popular: false,
-      title: 'Growth',
-      description: '12 hours included',
-      price: 1200,
-      features: [
-        { feature: 'Figma → Shopify implementation' },
-        { feature: 'New feature additions' },
-        { feature: 'Bug fixes & improvements' },
-        { feature: '48h response time' },
-        { feature: 'Monthly sync call' },
-      ],
-      buttonText: 'Get started',
-      buttonLink: '#contact',
-    },
-    {
-      popular: true,
-      title: 'Partner',
-      description: '20 hours included',
-      price: 2000,
-      features: [
-        { feature: 'Everything in Growth' },
-        { feature: 'Custom features & integrations' },
-        { feature: 'Custom app development' },
-        { feature: 'Weekly sync call' },
-        { feature: 'Slack access' },
-      ],
-      buttonText: 'Get started',
-      buttonLink: '#contact',
-    },
-  ],
-};
-
-export default function PricingTable({ className, options = defaultOptions }) {
+export default function PricingTable({ className }) {
+  const t = useTranslations('pricing');
   const cardsRef = useScrollReveal({
     stagger: 0.15,
     selector: '.pricing-card',
     start: 'top 80%',
   });
 
+  const plans = [
+    {
+      popular: false,
+      title: t('growth.title'),
+      description: t('growth.description'),
+      price: 1200,
+      features: t.raw('growth.features'),
+      buttonText: t('growth.buttonText'),
+      buttonLink: '#contact',
+    },
+    {
+      popular: true,
+      title: t('partner.title'),
+      description: t('partner.description'),
+      price: 2000,
+      features: t.raw('partner.features'),
+      buttonText: t('partner.buttonText'),
+      buttonLink: '#contact',
+    },
+  ];
+
   return (
     <section id='pricing' className={cn('relative', className)}>
       <SectionHeader
-        overline={options.overline}
-        title={options.title}
-        body={options.body}
+        overline={t('overline')}
+        title={t('title')}
+        body={t('body')}
         align='left'
       />
 
-      <div
-        ref={cardsRef}
-        className='mx-auto grid gap-4 sm:grid-cols-2'
-      >
-        {options.plans.map((plan) => (
+      <div ref={cardsRef} className='mx-auto grid gap-4 sm:grid-cols-2'>
+        {plans.map((plan) => (
           <div
             key={plan.title}
             className={cn(
@@ -78,7 +57,7 @@ export default function PricingTable({ className, options = defaultOptions }) {
           >
             {plan.popular && (
               <div className='bg-primary text-primary-foreground absolute -top-5 left-0 right-0 mx-auto w-32 rounded px-3 py-2 text-center text-sm'>
-                {options.mostPopularText}
+                {t('mostPopularText')}
               </div>
             )}
 
@@ -89,19 +68,16 @@ export default function PricingTable({ className, options = defaultOptions }) {
 
             <div className='mb-5'>
               <span className='font-sans text-4xl text-foreground'>
-                {options.currency}
-                {plan.price}
+                {t('currency')}{plan.price}
               </span>
-              <span className='text-muted-foreground'>
-                {options.pricePeriodText}
-              </span>
+              <span className='text-muted-foreground'>{t('pricePeriodText')}</span>
             </div>
 
             <ul className='mb-8 space-y-4'>
               {plan.features.map((feature, j) => (
                 <li key={j} className='flex items-center gap-2'>
                   <Check className='text-primary size-5' />
-                  <span className='text-foreground'>{feature.feature}</span>
+                  <span className='text-foreground'>{feature}</span>
                 </li>
               ))}
             </ul>
@@ -121,5 +97,4 @@ export default function PricingTable({ className, options = defaultOptions }) {
 
 PricingTable.propTypes = {
   className: PropTypes.string,
-  options: PropTypes.object,
 };

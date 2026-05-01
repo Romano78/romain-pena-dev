@@ -13,10 +13,9 @@ Current pricing section doesn't reflect reality. Decide:
 - Current: Growth €900/mo · Partner €1,500/mo — confirm or change
 
 ### 2. Copy — Improve across the site
-Sections that need work:
-- Hero headline — broaden from Shopify-only framing
-- About paragraph — update positioning
-- Services copy — review and tighten
+- ~~Hero headline~~ — done: "Custom Shopify development: themes built from Figma files, apps the App Store doesn't have, integrations that actually work." (en + fr)
+- ~~About paragraph~~ — done: personal story (Cal State LB → Le Wagon → Field Office → independent) with AI/speed/platform-replacement angle (en + fr)
+- **Services copy** — review and tighten ← next up
 - Work card descriptions — too generic, need more specificity
 
 ### 3. SEO
@@ -39,12 +38,14 @@ Sections that need work:
 ## What's Done (v1 context)
 
 - Hero: two-column vertical marquee with Cloudinary gallery images, CSS infinite scroll
+- Hero copy: final subtitle locked in en + fr (2026-05-01)
 - Work: grid with real project cards, Cloudinary cover images, case study pages
 - Projects: 7 total — Atari, TOGETHXR, and-OR Collective, Animo etc, Jayson Home, CCollections, Philippe Tullio
-- About: TextReveal replaced with standard block fade-in
+- About: copy rewritten — personal story + AI/speed angle, locked in en + fr (2026-05-01)
 - Contact: email link only, no form
 - Pricing: section exists, needs content rework
 - Menu: desktop nav + mobile menu + language switcher (FR/EN flags)
+- Resume page: `app/[locale]/resume` — styled, matches site design, Download PDF via `window.print()` (2026-05-01)
 - Cloudinary: gallery images for marquee, cover images for work cards and case study pages
 - Theming: light/dark, Inter only
 - Animations: page load, hero text entrance, scroll-reveal consistency across sections

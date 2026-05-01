@@ -9,33 +9,85 @@
     "contact": "Contact"
   },
   "footer": {
-    "copyright": "© {year} Shopify Developer Montreal. Tous droits réservés.  "
+    "copyright": "© {year} Romain Pena Ruiz. Tous droits réservés.  "
   },
   "hero": {
     "status": "Basé à Montréal · Disponible pour de nouveaux clients",
-    "tagline": "Je construis ce que votre boutique Shopify ne peut pas faire nativement.",
-    "body": "Fonctionnalités sur mesure, intégration de design et connexions tierces pour les marques e-commerce en croissance."
+    "greeting": ", je suis",
+    "title": "Développement Shopify sur mesure : thèmes construits depuis Figma, apps que l'App Store ne propose pas, intégrations qui fonctionnent vraiment.",
+    "seeWork": "Voir les projets",
+    "ctaContact": "Contact"
+  },
+  "about": {
+    "overline": "À mon sujet.",
+    "body": "J'ai étudié la psychologie à Cal State Long Beach avant de décider que je voulais construire des choses. Déménagé à Montréal, rejoint le bootcamp Le Wagon, et c'est là que le code a vraiment cliqué. Après le bootcamp j'ai rejoint Field Office, une agence web montréalaise, où la majorité de mon travail était Shopify : sections sur mesure depuis des fichiers Figma, apps personnalisées et webhooks quand les solutions existantes ne suffisaient pas. Maintenant je suis indépendant, et j'ai élargi ce que je prends en charge. Tout n'a pas besoin d'une plateforme. J'ai construit des sites portfolio cinématiques, des pages commerce, et des outils sur mesure qui remplacent des abonnements à des plateformes à une fraction du coût. Avec les bons outils IA, je peux cadrer et livrer ces projets plus vite qu'une agence traditionnelle, et assez léger pour rester dans un vrai budget."
   },
   "services": {
     "overline": "Ce que je fais.",
     "design": {
       "title": "Intégration de design",
-      "body": "Vous avez les maquettes. Je les rends réelles dans Shopify — pixel-perfect, exactement comme votre designer l'a prévu. Sans interprétation, sans raccourcis.",
-      "badge1": "Figma → Shopify",
-      "badge2": "Tailwind CSS",
-      "badge3": "Pixel-perfect"
+      "body": "Vous avez les fichiers. Je les construis exactement comme prévu dans Shopify: sections Liquid sur mesure, pixel-perfect à la maquette. Sans interprétation, sans raccourcis."
     },
     "features": {
       "title": "Fonctionnalités & Intégrations",
-      "body": "Quand le store d'applications Shopify ne suffit pas. Je développe des fonctionnalités sur mesure, connecte des outils tiers et adapte votre boutique à votre business.",
-      "badge1": "Figma → Shopify",
-      "badge2": "Tailwind CSS",
-      "badge3": "Pixel-perfect"
+      "body": "Apps de traitement sur mesure, synchronisation d'inventaire, Klaviyo, Google Tag Manager, APIs tierces. Quand l'App Store n'a pas ce qu'il vous faut, je le construis."
     }
   },
   "work": {
     "overline": "Réalisations",
     "viewProject": "Voir le projet →"
+  },
+  "steps": {
+    "overline": "Comment je travaille",
+    "step1": {
+      "label": "Vous me partagez votre besoin",
+      "subLabel": "Dites-moi ce que vous essayez de construire ou de corriger. Pas de brief type, pas de formulaires interminables. Juste ce qui se passe."
+    },
+    "step2": {
+      "label": "Je reviens avec un périmètre clair",
+      "subLabel": "Je vous dis exactement ce que je vais faire, combien de temps ça prendra, et ce que ça coûte. Pas de surprises."
+    },
+    "step3": {
+      "label": "On travaille ensemble sur la durée",
+      "subLabel": "La plupart de mes clients sont sur un forfait mensuel. Votre boutique évolue, je continue à construire."
+    }
+  },
+  "pricing": {
+    "overline": "Travailler ensemble",
+    "title": "Des tarifs simples et transparents",
+    "body": "Je préfère travailler sur une base mensuelle: prévisible pour vous, viable pour moi.",
+    "mostPopularText": "Plus populaire",
+    "currency": "€",
+    "pricePeriodText": "/mois",
+    "growth": {
+      "title": "Growth",
+      "description": "12 heures incluses",
+      "buttonText": "Démarrer",
+      "features": [
+        "Figma → Shopify",
+        "Nouvelles fonctionnalités",
+        "Corrections et améliorations",
+        "Réponse sous 48h",
+        "Appel mensuel"
+      ]
+    },
+    "partner": {
+      "title": "Partner",
+      "description": "20 heures incluses",
+      "buttonText": "Démarrer",
+      "features": [
+        "Tout ce qui est dans Growth",
+        "Fonctionnalités et intégrations sur mesure",
+        "Développement d'apps Shopify",
+        "Appel hebdomadaire",
+        "Accès Slack"
+      ]
+    }
+  },
+  "contact": {
+    "heading": "Parlons-en.",
+    "body": "Vous avez une boutique Shopify qui a besoin de développement sur mesure, ou une agence qui cherche un spécialiste Shopify fiable, contactez-moi.",
+    "email": "hello@romainpena.dev"
   },
   "workDetail": {
     "back": "Travaux",

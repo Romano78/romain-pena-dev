@@ -11,7 +11,7 @@ import { getProjectImages, getAllGalleryImages } from '@/lib/cloudinary';
 const SECTION_SPACING = 'pt-20 lg:pt-32';
 
 export default async function Home() {
-  const [galleryImages, projectImages] = await Promise.all([
+  const [galleryImages, projectImages]: [string[], Record<string, string>] = await Promise.all([
     getAllGalleryImages(),
     getProjectImages(),
   ]);
@@ -20,8 +20,8 @@ export default async function Home() {
   return (
     <main id='main-content' className='container py-0 px-4 md:px-0 m-auto mt-(--menu-height)'>
       <MainHero leftCol={galleryImages.slice(0, mid)} rightCol={galleryImages.slice(mid)} />
-      <Work className={SECTION_SPACING} projectImages={projectImages} />
       <About className={SECTION_SPACING} />
+      <Work className={SECTION_SPACING} projectImages={projectImages} />
       <Services className={SECTION_SPACING} />
       <Steps className={SECTION_SPACING} />
       <PricingTable className={SECTION_SPACING} />
