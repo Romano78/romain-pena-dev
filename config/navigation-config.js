@@ -3,6 +3,7 @@ import {
   SERVICES_ROUTE,
   PRICING_ROUTE,
   CONTACT_ROUTE,
+  RESUME_ROUTE,
 } from '@/config/routes';
 
 /**
@@ -39,6 +40,14 @@ export const navigationItems = [
     href: CONTACT_ROUTE,
     isExternal: false,
     isDisabled: false,
+  },
+  {
+    id: 'resume',
+    label: 'Resume',
+    href: RESUME_ROUTE,
+    isExternal: false,
+    isDisabled: false,
+    isPage: true,
   },
 ];
 

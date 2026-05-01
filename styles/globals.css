@@ -1,5 +1,5 @@
 @import 'tailwindcss';
-@import '../node_modules/tw-animate-css/dist/tw-animate.css';
+@import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -234,4 +234,26 @@
 
 .animate-pulse-dot {
   animation: pulse-dot 2s ease-in-out infinite;
+}
+
+@media print {
+  header,
+  footer,
+  [data-no-print] {
+    display: none !important;
+  }
+
+  body {
+    background: white !important;
+    color: black !important;
+  }
+
+  main {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+
+  section {
+    break-inside: avoid;
+  }
 }

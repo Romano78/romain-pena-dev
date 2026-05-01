@@ -9,33 +9,85 @@
     "contact": "Contact"
   },
   "footer": {
-    "copyright": "© {year} Your Company Name. All rights reserved.  "
+    "copyright": "© {year} Romain Pena Ruiz. All rights reserved.  "
   },
   "hero": {
     "status": "Based in Montreal · Available for new clients",
-    "tagline": "I build what your Shopify store can't do out of the box.",
-    "body": "Custom features, design implementation, and integrations for growing e-commerce brands."
+    "greeting": ", I'm",
+    "title": "Custom Shopify development: themes built from Figma files, apps the App Store doesn't have, integrations that actually work.",
+    "seeWork": "See work",
+    "ctaContact": "Contact"
+  },
+  "about": {
+    "overline": "A bit about me.",
+    "body": "I studied psychology at Cal State Long Beach before deciding I wanted to build things. Moved to Montreal, joined Le Wagon's bootcamp, and that's where coding clicked. After the bootcamp I joined Field Office, a Montreal web agency, where most of my work was Shopify: custom sections from Figma files, custom apps and webhooks when off-the-shelf solutions weren't enough. Now I'm independent, and I've broadened what I take on. Not everything needs a platform. I've built cinematic portfolio sites, commerce pages, and custom tools that replace platform subscriptions at a fraction of the cost. With the right AI tooling, I can scope and ship these faster than a traditional agency, and lean enough to stay within a real budget."
   },
   "services": {
     "overline": "What I do.",
     "design": {
       "title": "Design Implementation",
-      "body": "You have the designs. I make them real in Shopify — pixel-perfect, exactly as your designer intended. No interpretation, no shortcuts.",
-      "badge1": "Liquid",
-      "badge2": "Tailwind CSS",
-      "badge3": "Pixel-perfect"
+      "body": "You have the files. I build them exactly as designed in Shopify: custom Liquid sections, pixel-perfect to the mockup. No interpretation, no shortcuts."
     },
     "features": {
       "title": "Features & Integrations",
-      "body": "When the Shopify app store isn't enough. I build custom features, connect third-party tools, and make your store work the way your business actually works.",
-      "badge1": "Liquid",
-      "badge2": "Tailwind CSS",
-      "badge3": "Pixel-perfect"
+      "body": "Custom fulfillment apps, inventory sync, Klaviyo, Google Tag Manager, third-party APIs. When the App Store doesn't have what you need, I build it."
     }
   },
   "work": {
     "overline": "Selected Work",
     "viewProject": "View project →"
+  },
+  "steps": {
+    "overline": "How I work",
+    "step1": {
+      "label": "You share what you need",
+      "subLabel": "Tell me what you're trying to build or fix. No brief template, no lengthy forms. Just tell me what's going on."
+    },
+    "step2": {
+      "label": "I come back with a clear scope",
+      "subLabel": "I'll tell you exactly what I'll do, how long it'll take, and what it costs. No surprises."
+    },
+    "step3": {
+      "label": "We work together ongoing",
+      "subLabel": "Most clients stay on a monthly retainer. Your store keeps evolving, I keep building."
+    }
+  },
+  "pricing": {
+    "overline": "Working together",
+    "title": "Simple, transparent pricing",
+    "body": "I prefer to work on a monthly retainer: predictable for you, sustainable for me.",
+    "mostPopularText": "Most Popular",
+    "currency": "€",
+    "pricePeriodText": "/month",
+    "growth": {
+      "title": "Growth",
+      "description": "12 hours included",
+      "buttonText": "Get started",
+      "features": [
+        "Figma → Shopify implementation",
+        "New feature additions",
+        "Bug fixes & improvements",
+        "48h response time",
+        "Monthly sync call"
+      ]
+    },
+    "partner": {
+      "title": "Partner",
+      "description": "20 hours included",
+      "buttonText": "Get started",
+      "features": [
+        "Everything in Growth",
+        "Custom features & integrations",
+        "Custom app development",
+        "Weekly sync call",
+        "Slack access"
+      ]
+    }
+  },
+  "contact": {
+    "heading": "Let's talk.",
+    "body": "If you have a Shopify store that needs custom development, or an agency looking for a reliable Shopify specialist, get in touch.",
+    "email": "hello@romainpena.dev"
   },
   "workDetail": {
     "back": "Work",

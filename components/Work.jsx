@@ -17,6 +17,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 function WorkCard({
   project,
+  viewProject,
   aspectClass = 'aspect-video',
   titleClass = 'h3',
 }) {
@@ -60,7 +61,7 @@ function WorkCard({
                 ))}
               </div>
               <span className='inline-flex items-center gap-2 text-sm font-medium text-white tracking-wide'>
-                View project <ArrowRight className='h-3.5 w-3.5' />
+                {viewProject} <ArrowRight className='h-3.5 w-3.5' />
               </span>
             </div>
           </div>
@@ -100,11 +101,13 @@ WorkCard.propTypes = {
     image: PropTypes.string,
     url: PropTypes.string,
   }).isRequired,
+  viewProject: PropTypes.string.isRequired,
   aspectClass: PropTypes.string,
   titleClass: PropTypes.string,
 };
 
 export default function Work({ className = '', projectImages = {} }) {
+  const t = useTranslations('work');
   const gridRef = useRef(null);
 
   // Hook 1: Scroll animations with useGSAP
@@ -204,10 +207,11 @@ export default function Work({ className = '', projectImages = {} }) {
 
   const featuredProjects = projects.slice(0, 2);
   const restProjects = projects.slice(2);
+  const viewProject = t('viewProject');
 
   return (
     <section id='work' className={cn(className)}>
-      <span className='text-overline text-muted mb-4 block'>Selected Work</span>
+      <span className='text-overline text-muted mb-4 block'>{t('overline')}</span>
       <div ref={gridRef} className='space-y-16'>
         {/* Featured row */}
         <div className='grid gap-x-8 gap-y-16 md:grid-cols-2'>
@@ -218,6 +222,7 @@ export default function Work({ className = '', projectImages = {} }) {
                 ...project,
                 image: projectImages[project.slug] ?? project.image,
               }}
+              viewProject={viewProject}
               aspectClass='aspect-video'
               titleClass='h3'
             />
@@ -234,6 +239,7 @@ export default function Work({ className = '', projectImages = {} }) {
                   ...project,
                   image: projectImages[project.slug] ?? project.image,
                 }}
+                viewProject={viewProject}
                 aspectClass='aspect-[4/3]'
                 titleClass='h4'
               />

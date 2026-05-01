@@ -3,7 +3,22 @@
 This file provides guidance to Claude Code when working with code in this repository.
 
 ## Remaining Work
-See `PLAN.md` for what's left before v1 ships.
+See `PLAN.md` for full detail. Short list:
+
+- **Services copy** — review and tighten (next up)
+- **Work card descriptions** — too generic, need specificity
+- **Pricing** — confirm or change tiers/prices before locking
+- **SEO** — page `<title>`, `<meta description>`, OG tags (needs copy locked first)
+- **Favicon** — needs asset from Romain (SVG or high-res PNG)
+- **OG image** — 1200×630, designed or generated
+
+## Completed in Last Session (2026-05-01)
+- Hero subtitle (`hero.title`) updated in `en.json` + `fr.json` — "Custom Shopify development: themes built from Figma files, apps the App Store doesn't have, integrations that actually work."
+- About body (`about.body`) rewritten in `en.json` + `fr.json` — personal story (Cal State LB → Le Wagon → Field Office → independent), includes AI/speed/platform-replacement angle
+- Resume page added: `components/Resume.jsx` + `app/[locale]/resume/page.tsx`
+- Nav routing: `config/routes.js` (RESUME_ROUTE), `config/navigation-config.js` (resume item with `isPage: true`)
+- `DesktopNavigation.jsx` + `MobileMenu.jsx` — conditionally render next-intl `<Link>` for `isPage` items, `<a>` for anchors
+- `styles/globals.css` — `@media print` block added at end (hides header/footer/`[data-no-print]`, resets margins)
 
 ---
 
@@ -46,8 +61,8 @@ Single-page portfolio site built with:
 One scrollable page with anchor navigation (`#work`, `#services`, `#pricing`, `#contact`).
 Sections in order:
 1. `MainHero` — headline + two-column vertical marquee (Cloudinary gallery images)
-2. `Work` — project grid with Cloudinary cover images
-3. `About` — text section with scroll reveal
+2. `About` — text section with scroll reveal (moved up, directly after hero)
+3. `Work` — project grid with Cloudinary cover images
 4. `Services` — 2-column grid
 5. `Steps` — 3-step process
 6. `PricingTable` — two retainer tiers
@@ -62,19 +77,30 @@ Inter font via `next/font/google` (`--font-inter`).
 - `components/menu/` — `index.jsx` (Menu), `DesktopNavigation.jsx`, `MobileMenu.jsx`, theme toggle
 - `components/snippets/` — Reusable blocks:
   - `ImagePlaceholder.jsx` — `bg-accent` placeholder, fills parent, used when no Cloudinary image
-  - `PillCta.jsx` — pill-shaped CTA button with optional icon
+  - `PillCta.jsx` — pill-shaped CTA button with optional icon; renders `<button onClick>` when no `href`, `<a>` when `href` provided
   - `LinkCta.jsx` — underline text link CTA, supports `uppercase` prop
   - `LanguageSwitcher.jsx` — FR/EN flag toggle (🇫🇷 / 🇺🇸), active flag at full opacity
+  - `GreetingRotator.jsx` — GSAP cycling greeting animation (Hi → Bonjour → Hola → …), used in MainHero
   - `Steps.jsx`, `BackToTopButton.jsx`, `SectionHeader.jsx`
   - `TextReveal.jsx`, `TextAnimation1.jsx`, `ScrambleTextAnimation1.jsx`
   - `ComparisonTable.jsx`, `NavigationMenu.jsx`
 - `components/ui/` — shadcn/ui primitives
 - `components/Footer/` — Footer with nav
-- Top-level components: `MainHero.jsx`, `About.jsx`, `Work.jsx`, `Services.jsx`, `PricingTable.jsx`, `Contact.jsx`
+- Top-level components: `MainHero.jsx`, `About.jsx`, `Work.jsx`, `Services.jsx`, `PricingTable.jsx`, `Contact.jsx`, `Resume.jsx`
 - `hooks/` — `split-text.ts`, `use-text-reveal.ts`
 
+### Pages
+- `app/[locale]/page.tsx` — main single-page site
+- `app/[locale]/resume/page.tsx` — styled resume with print-to-PDF download
+- `app/[locale]/work/[slug]/page.tsx` — case study pages
+
+### Nav routing
+- Anchor items (`#work`, `#services`, etc.) → `<a href>` in `DesktopNavigation` + `MobileMenu`
+- Page items (e.g. `/resume`) → next-intl `<Link href>` — locale prefix injected automatically
+- Use `isPage: true` flag in `navigation-config.js` to control which renderer is used
+
 ### Config
-- `config/routes.js` — Single source of truth for anchor hrefs
+- `config/routes.js` — Single source of truth for anchor hrefs AND page routes (e.g. `RESUME_ROUTE`)
 - `config/navigation-config.js` — Nav items for desktop + mobile
 - `config/projects.ts` — Project data (slug, client, type, description, url, image)
 - `config/projects.md` — Full copy reference for all projects
@@ -122,7 +148,10 @@ Push as deep as possible. Add only when a component needs:
 
 Current client components: `Menu`, `MobileMenu`, `DesktopNavigation`, `LanguageSwitcher`,
 `Footer`, `PricingTable`, `ComparisonTable`, `TextReveal`, `TextAnimation1`,
-`ScrambleTextAnimation1`, `Steps`, `BackToTopButton`, `MainHero`, `config/theme-provider.jsx`.
+`ScrambleTextAnimation1`, `Steps`, `BackToTopButton`, `MainHero`, `About`, `Work`, `Services`, `Contact`, `GreetingRotator`, `Resume`, `config/theme-provider.jsx`.
+
+### i18n (next-intl)
+All sections are fully wired to `messages/en.json` and `messages/fr.json` via `useTranslations`. There are no hardcoded strings in any section component. Use `t.raw('key')` to retrieve raw array values (e.g. pricing feature lists). The name "Romain Pena Ruiz" in MainHero is intentionally hardcoded — it's a proper name.
 
 ---
 

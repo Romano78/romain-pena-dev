@@ -1,13 +1,14 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import { Mail } from 'lucide-react';
 import LinkCta from '@/components/snippets/LinkCta';
 import { useScrollReveal } from '@/hooks/use-scroll-reveal';
 import ScrambleTextAnimation1 from '@/components/snippets/ScrambleTextAnimation1';
 import { cn } from '@/lib/utils';
-import { Button } from '@/components/ui/button';
 
 export default function Contact({ className = '' }) {
+  const t = useTranslations('contact');
   const ref = useScrollReveal({
     y: 30,
     duration: 0.9,
@@ -18,19 +19,19 @@ export default function Contact({ className = '' }) {
   return (
     <section id='contact' ref={ref} className={cn(className)}>
       <ScrambleTextAnimation1 className='text-overline mb-6 text-muted contact-reveal'>
-        {"Let's talk."}
+        {t('heading')}
       </ScrambleTextAnimation1>
 
       <p className="contact-reveal mt-6 max-w-xl text-lg leading-relaxed text-foreground">
-        If you have a Shopify store that needs custom development, or an agency that needs a reliable partner — reach out.
+        {t('body')}
       </p>
 
       <LinkCta
-        href='mailto:hello@romainpena.dev'
+        href={`mailto:${t('email')}`}
         icon={<Mail className='h-3.5 w-3.5' />}
         className='contact-reveal mt-10'
       >
-        hello@romainpena.dev
+        {t('email')}
       </LinkCta>
     </section>
   );

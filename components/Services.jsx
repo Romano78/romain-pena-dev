@@ -3,8 +3,17 @@
 import PropTypes from 'prop-types';
 import { Blocks, LineChart } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useTranslations } from 'next-intl';
 import { useScrollReveal } from '@/hooks/use-scroll-reveal';
 import SectionHeader from '@/components/snippets/SectionHeader';
+
+/**
+ * @typedef {Object} ServiceColumn
+ * @property {React.ElementType} icon
+ * @property {string} title
+ * @property {string} body
+ * @property {string} [href]
+ */
 
 function ColumnItem({ icon: Icon, title, body }) {
   return (
@@ -24,30 +33,35 @@ function ColumnItem({ icon: Icon, title, body }) {
   );
 }
 
-function Services({
-  columns = [
+/**
+ * @type {React.FC<{columns?: ServiceColumn[], className?: string}>}
+ */
+const Services = function Services({ columns, className = '' }) {
+  const t = useTranslations('services');
+  const cardsRef = useScrollReveal({ stagger: 0.15, selector: '.service-card', start: 'top 85%' });
+
+  const defaultColumns = [
     {
       icon: Blocks,
-      title: 'Figma → Shopify',
-      body: 'You have the designs. I make them real — pixel-perfect, exactly as your designer intended. Custom sections, Liquid, no page builders, no interpretation.',
+      title: t('design.title'),
+      body: t('design.body'),
       href: '#work',
     },
     {
       icon: LineChart,
-      title: 'Custom Features & Apps',
-      body: "When the app store isn't enough. I build custom Shopify apps, backend integrations, and features that make your store work the way your business actually works.",
+      title: t('features.title'),
+      body: t('features.body'),
       href: '#work',
     },
-  ],
-  className = '',
-}) {
-  const cardsRef = useScrollReveal({ stagger: 0.15, selector: '.service-card', start: 'top 85%' });
+  ];
+
+  const displayColumns = columns ?? defaultColumns;
 
   return (
     <section id='services' className={cn(className)}>
-      <SectionHeader overline='What I do.' />
+      <SectionHeader overline={t('overline')} />
       <div className='grid gap-6 md:grid-cols-2' ref={cardsRef}>
-        {columns.map((column, i) => (
+        {displayColumns.map((column, i) => (
           <div key={i}>
             <ColumnItem {...column} />
           </div>
@@ -55,17 +69,17 @@ function Services({
       </div>
     </section>
   );
-}
+};
 
 ColumnItem.propTypes = {
   icon: PropTypes.elementType,
   title: PropTypes.string.isRequired,
   body: PropTypes.string.isRequired,
-  learnMore: PropTypes.string.isRequired,
   href: PropTypes.string,
 };
 
 Services.propTypes = {
+  columns: PropTypes.array,
   className: PropTypes.string,
 };
 

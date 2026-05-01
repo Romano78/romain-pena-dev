@@ -4,46 +4,21 @@ import { useEffect, useRef } from 'react';
 import { motion, useInView, useSpring, useTransform } from 'framer-motion';
 import PropTypes from 'prop-types';
 import { cn } from '@/lib/utils';
+import { useTranslations } from 'next-intl';
 import SectionHeader from '@/components/snippets/SectionHeader';
 
-// Placeholder data for component preview
-const mockData = {
-  steps: [
-    {
-      value: 1,
-      stringValue: '01',
-      label: 'You share what you need',
-      subLabel:
-        'Tell me what you\u2019re trying to build or fix. No brief template, no lengthy forms. Just tell me what\u2019s going on.',
-    },
-    {
-      value: 2,
-      stringValue: '02',
-      label: 'I come back with a clear scope',
-      subLabel:
-        'I\u2019ll tell you exactly what I\u2019ll do, how long it\u2019ll take, and what it costs. No surprises.',
-    },
-    {
-      value: 3,
-      stringValue: '03',
-      label: 'We work together ongoing',
-      subLabel:
-        'Most clients stay on a monthly retainer. Your store keeps evolving — I keep building.',
-    },
-  ],
-};
+export default function Steps({ id = 'how-i-work', className = '' }) {
+  const t = useTranslations('steps');
 
-export default function Steps({
-  id = 'how-i-work',
-  overlineText = 'How I Work',
-  steps = mockData.steps,
-  className = '',
-}) {
-  if (!steps.length) return null;
+  const steps = [
+    { value: 1, stringValue: '01', label: t('step1.label'), subLabel: t('step1.subLabel') },
+    { value: 2, stringValue: '02', label: t('step2.label'), subLabel: t('step2.subLabel') },
+    { value: 3, stringValue: '03', label: t('step3.label'), subLabel: t('step3.subLabel') },
+  ];
 
   return (
     <section id={id} className={cn(className)}>
-      <SectionHeader overline={overlineText} />
+      <SectionHeader overline={t('overline')} />
       <div className='grid grid-cols-1 gap-x-8 gap-y-12 md:grid-cols-3 lg:grid-cols-3'>
         {steps.map(({ value, stringValue, label, subLabel }, index) => (
           <Stat
@@ -99,17 +74,7 @@ function Stat({ value, label, subLabel, stringValue, index = 0 }) {
 
 Steps.propTypes = {
   id: PropTypes.string,
-  overlineText: PropTypes.string,
-  steps: PropTypes.arrayOf(
-    PropTypes.shape({
-      value: PropTypes.any,
-      stringValue: PropTypes.string,
-      label: PropTypes.string.isRequired,
-      subLabel: PropTypes.string,
-    }),
-  ),
   className: PropTypes.string,
-  theme: PropTypes.string,
 };
 
 Stat.propTypes = {
