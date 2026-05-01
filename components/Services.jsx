@@ -59,7 +59,7 @@ const Services = function Services({ columns, className = '' }) {
 
   return (
     <section id='services' className={cn(className)}>
-      <SectionHeader overline={t('overline')} />
+      <SectionHeader overline={t('overline')} lineAnimation={true} />
       <div className='grid gap-6 md:grid-cols-2' ref={cardsRef}>
         {displayColumns.map((column, i) => (
           <div key={i}>

@@ -43,10 +43,11 @@ All copy must follow brand rules: first person, no buzzwords, confident but huma
 Romain is not a generalist freelancer. He is a **Shopify specialist** who works at the intersection of design fidelity and custom engineering. His value to clients:
 
 1. **Design implementation** — takes Figma files and builds them exactly, no interpretation, no shortcuts
-2. **Custom features and apps** — builds what the Shopify App Store can't provide: fulfillment apps, inventory sync, custom carts, third-party integrations
+2. **Custom features and apps** — builds what the Shopif can't provide: fulfillment apps, inventory sync, custom carts, third-party integrations
 3. **Embedded working style** — works like a senior team member, not an outsourced vendor
 
 Primary audiences:
+
 - **Brand founders** — DTC brands that have outgrown themes and generic apps, want something that looks and works exactly right
 - **Agencies** — need a reliable Shopify specialist to subcontract complex builds
 
@@ -55,23 +56,30 @@ Primary audiences:
 ## Copy Bank
 
 ### Hero subtitle (t('title'))
+
 Current: "I'm a Shopify developer based in Montreal, passionate about creating beautiful and functional e-commerce experiences."
 Suggested (no buzzwords, more specific):
-> "Six years building custom Shopify themes, apps, and integrations for brands that have outgrown what the App Store can offer."
+
+> "Six years building custom Shopify themes, apps, and integrations for brands that have outgrown what the Shopify can offer."
 
 Or shorter:
+
 > "I build the Shopify things your current developer says aren't possible."
 
 ### About body (t('about.body'))
+
 Current: "I've spent the last six years building Shopify stores for design-led brands that have outgrown what themes and apps can offer. I work embedded in your team, I move fast, communicate clearly, and write code built to last."
 Suggested (adds real specificity):
+
 > "I've spent six years building custom Shopify stores — themes, fulfillment apps, inventory sync tools, third-party integrations. The projects I'm brought in for are the ones where an app won't cut it and the design can't be approximated. I work embedded in your team, I move fast, and I write code built to last."
 
 ### Services — Design Implementation body
+
 > "You have the files. I build them exactly as designed — Liquid, custom sections, pixel-perfect. No reinterpretation, no cutting corners because it's tricky."
 
 ### Services — Features & Integrations body
-> "Custom fulfillment apps, inventory sync, Klaviyo, GTM, third-party APIs. When the App Store isn't enough, I build it from scratch."
+
+> "Custom fulfillment apps, inventory sync, Klaviyo, GTM, third-party APIs. When the Shopify isn't enough, I build it from scratch."
 
 ---
 

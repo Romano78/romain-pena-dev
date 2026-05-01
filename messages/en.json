@@ -14,7 +14,7 @@
   "hero": {
     "status": "Based in Montreal · Available for new clients",
     "greeting": ", I'm",
-    "title": "Custom Shopify development: themes built from Figma files, apps the App Store doesn't have, integrations that actually work.",
+    "title": "Custom Shopify development: themes built from Figma files, apps the Shopify  doesn't have, integrations that actually work.",
     "seeWork": "See work",
     "ctaContact": "Contact"
   },
@@ -30,7 +30,7 @@
     },
     "features": {
       "title": "Features & Integrations",
-      "body": "Custom fulfillment apps, inventory sync, Klaviyo, Google Tag Manager, third-party APIs. When the App Store doesn't have what you need, I build it."
+      "body": "Custom fulfillment apps, inventory sync, Klaviyo, Google Tag Manager, third-party APIs. When the Shopify  doesn't have what you need, I build it."
     }
   },
   "work": {

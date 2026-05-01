@@ -68,7 +68,7 @@ const MainHero = function MainHero({
       id='main-hero'
     >
       {/* Left — text */}
-      <div className='flex-1 flex flex-col gap-6'>
+      <div className='flex-1 flex flex-col gap-6 w-full'>
         <div data-hero="badge" className='flex items-center gap-2 text-sm text-muted-foreground opacity-0 translate-y-7'>
           <span className='inline-block h-2 w-2 rounded-full bg-muted animate-pulse-dot' />
           {t('status')}
@@ -110,7 +110,7 @@ const MainHero = function MainHero({
           {[...displayLeft, ...displayLeft].map((src, i) => (
             <div key={i} className='relative rounded-xl overflow-hidden aspect-[3/4] shrink-0'>
               {src
-                ? <Image src={src} alt='' fill sizes='20vw' className='object-cover' />
+                ? <Image src={src} alt='' fill sizes='20vw' />
                 : <ImagePlaceholder />
               }
             </div>
@@ -121,7 +121,7 @@ const MainHero = function MainHero({
           {[...displayRight, ...displayRight].map((src, i) => (
             <div key={i} className='relative rounded-xl overflow-hidden aspect-[3/4] shrink-0'>
               {src
-                ? <Image src={src} alt='' fill sizes='20vw' className='object-cover' />
+                ? <Image src={src} alt='' fill sizes='20vw' />
                 : <ImagePlaceholder />
               }
             </div>

@@ -12,6 +12,7 @@ import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import { Link } from '@/i18n/navigation';
 import ImagePlaceholder from '@/components/snippets/ImagePlaceholder';
+import SectionHeader from '@/components/snippets/SectionHeader';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -211,7 +212,7 @@ export default function Work({ className = '', projectImages = {} }) {
 
   return (
     <section id='work' className={cn(className)}>
-      <span className='text-overline text-muted mb-4 block'>{t('overline')}</span>
+      <SectionHeader overline={t('overline')} lineAnimation={true} />
       <div ref={gridRef} className='space-y-16'>
         {/* Featured row */}
         <div className='grid gap-x-8 gap-y-16 md:grid-cols-2'>

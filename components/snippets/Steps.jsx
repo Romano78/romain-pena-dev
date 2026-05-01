@@ -11,14 +11,29 @@ export default function Steps({ id = 'how-i-work', className = '' }) {
   const t = useTranslations('steps');
 
   const steps = [
-    { value: 1, stringValue: '01', label: t('step1.label'), subLabel: t('step1.subLabel') },
-    { value: 2, stringValue: '02', label: t('step2.label'), subLabel: t('step2.subLabel') },
-    { value: 3, stringValue: '03', label: t('step3.label'), subLabel: t('step3.subLabel') },
+    {
+      value: 1,
+      stringValue: '01',
+      label: t('step1.label'),
+      subLabel: t('step1.subLabel'),
+    },
+    {
+      value: 2,
+      stringValue: '02',
+      label: t('step2.label'),
+      subLabel: t('step2.subLabel'),
+    },
+    {
+      value: 3,
+      stringValue: '03',
+      label: t('step3.label'),
+      subLabel: t('step3.subLabel'),
+    },
   ];
 
   return (
     <section id={id} className={cn(className)}>
-      <SectionHeader overline={t('overline')} />
+      <SectionHeader overline={t('overline')} lineAnimation={true} />
       <div className='grid grid-cols-1 gap-x-8 gap-y-12 md:grid-cols-3 lg:grid-cols-3'>
         {steps.map(({ value, stringValue, label, subLabel }, index) => (
           <Stat
@@ -56,7 +71,9 @@ function Stat({ value, label, subLabel, stringValue, index = 0 }) {
   }, [isInView, stepValue, countValue]);
 
   const displayValue = useTransform(countValue, (latest) =>
-    String(Math.round(latest) >= stepValue ? stepValue : Math.round(latest)).padStart(2, '0')
+    String(
+      Math.round(latest) >= stepValue ? stepValue : Math.round(latest),
+    ).padStart(2, '0'),
   );
 
   return (

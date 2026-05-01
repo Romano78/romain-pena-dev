@@ -9,7 +9,7 @@ export default function Resume() {
       {/* Download Button */}
       <div className='mb-12' data-no-print>
         <PillCta
-          onClick={() => window.print()}
+          href='/resume-romain.pdf'
           icon={<Download className='h-3 w-3' />}
         >
           Download PDF
@@ -26,9 +26,27 @@ export default function Resume() {
           Shopify Developer & Frontend Engineer
         </p>
         <p className='text-sm text-muted-foreground'>
-          hello@romainpena.dev · Montreal, QC · romainpena.dev
+          rom.penaruiz@gmail.com · Montreal, QC · romainpena.dev
         </p>
       </div>
+
+      {/* Summary */}
+      <section className='mb-8'>
+        <p className='text-sm text-foreground leading-relaxed mb-3'>
+          Frontend developer specializing in Shopify — custom themes built from
+          Figma, custom app development, and third-party integrations. 4+ years
+          at a Montreal agency, now independent.
+        </p>
+        <p className='text-sm text-muted-foreground leading-relaxed'>
+          I studied psychology at Cal State Long Beach before deciding I wanted
+          to build things. Moved to Montreal, joined Le Wagon&apos;s bootcamp,
+          and that&apos;s where coding clicked. After the bootcamp I joined
+          Field Office, a Montreal web agency, where most of my work was
+          Shopify. Now independent, I&apos;ve broadened what I take on —
+          cinematic portfolio sites, commerce pages, and custom tools that
+          replace platform subscriptions at a fraction of the cost.
+        </p>
+      </section>
 
       <hr className='border-t border-border mb-8' />
 
@@ -48,9 +66,18 @@ export default function Resume() {
               Full Stack Developer · Jun 2021 – Oct 2025 · Montreal, QC
             </p>
             <ul className='text-sm text-foreground space-y-1 pl-4'>
-              <li>· Shopify theme development: custom Liquid sections built pixel-perfect from Figma files</li>
-              <li>· Custom fulfillment apps, inventory sync tools, webhook integrations</li>
-              <li>· Third-party integrations: Klaviyo, Google Tag Manager, REST APIs</li>
+              <li>
+                · Shopify theme development: custom Liquid sections built
+                pixel-perfect from Figma files
+              </li>
+              <li>
+                · Custom fulfillment apps, inventory sync tools, webhook
+                integrations
+              </li>
+              <li>
+                · Third-party integrations: Klaviyo, Google Tag Manager, REST
+                APIs
+              </li>
               <li>· Webflow and Next.js projects alongside Shopify work</li>
             </ul>
           </div>
@@ -64,7 +91,10 @@ export default function Resume() {
               Full Stack Web Developer · 2019 – 2020 · Montreal, QC
             </p>
             <ul className='text-sm text-foreground space-y-1 pl-4'>
-              <li>· Full-stack development in C#, ASP.NET Core, Angular, TypeScript</li>
+              <li>
+                · Full-stack development in C#, ASP.NET Core, Angular,
+                TypeScript
+              </li>
             </ul>
           </div>
         </div>
@@ -86,10 +116,10 @@ export default function Resume() {
             </p>
           </div>
           <div>
-            <h3 className='font-semibold text-foreground'>Cal State Long Beach</h3>
-            <p className='text-sm text-muted-foreground'>
-              BA Psychology
-            </p>
+            <h3 className='font-semibold text-foreground'>
+              Cal State Long Beach
+            </h3>
+            <p className='text-sm text-muted-foreground'>BA Psychology</p>
           </div>
         </div>
       </section>
@@ -102,30 +132,34 @@ export default function Resume() {
           Skills
         </h2>
 
-        <div className='space-y-4'>
-          <div>
-            <h3 className='font-semibold text-foreground'>Shopify</h3>
-            <p className='text-sm text-muted-foreground'>
-              Theme development, Liquid, custom sections, custom apps, Klaviyo, GTM
-            </p>
+        <div className='grid grid-cols-2 gap-x-8 gap-y-3'>
+          <div className='text-sm'>
+            <span className='font-semibold text-foreground'>Shopify</span>
+            <span className='text-muted-foreground'>
+              {' '}
+              — Liquid, custom sections, custom apps, Klaviyo, GTM
+            </span>
           </div>
-          <div>
-            <h3 className='font-semibold text-foreground'>Frontend</h3>
-            <p className='text-sm text-muted-foreground'>
-              React 19, Next.js, TypeScript, JavaScript, Tailwind CSS, GSAP, Webflow
-            </p>
+          <div className='text-sm'>
+            <span className='font-semibold text-foreground'>Frontend</span>
+            <span className='text-muted-foreground'>
+              {' '}
+              — React 19, Next.js, TypeScript, Tailwind CSS, GSAP
+            </span>
           </div>
-          <div>
-            <h3 className='font-semibold text-foreground'>Backend</h3>
-            <p className='text-sm text-muted-foreground'>
-              Supabase, REST APIs, C#, ASP.NET Core
-            </p>
+          <div className='text-sm'>
+            <span className='font-semibold text-foreground'>Backend</span>
+            <span className='text-muted-foreground'>
+              {' '}
+              — Supabase, REST APIs, C#, ASP.NET Core
+            </span>
           </div>
-          <div>
-            <h3 className='font-semibold text-foreground'>Tooling</h3>
-            <p className='text-sm text-muted-foreground'>
-              Figma to code, Cloudinary, Vercel, AI-assisted development
-            </p>
+          <div className='text-sm'>
+            <span className='font-semibold text-foreground'>Tooling</span>
+            <span className='text-muted-foreground'>
+              {' '}
+              — Figma to code, Vercel, AI-assisted development
+            </span>
           </div>
         </div>
       </section>

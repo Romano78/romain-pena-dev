@@ -39,6 +39,7 @@ export const projects: Project[] = [
       'Scroll-snap + Lenis architecture',
       'Dark-first immersive design',
     ],
+    url: 'https://philippetullio.com',
   },
   {
     slug: 'togethxr',

@@ -44,6 +44,7 @@ export default function PricingTable({ className }) {
         title={t('title')}
         body={t('body')}
         align='left'
+        lineAnimation={true}
       />
 
       <div ref={cardsRef} className='mx-auto grid gap-4 sm:grid-cols-2'>

@@ -24,29 +24,61 @@ function search(expression: string, max = 50) {
   return cloudinary.search.expression(expression).max_results(max).execute();
 }
 
-// ─── Marquee gallery ──────────────────────────────────────────────────────
+// ─── Marquee columns ──────────────────────────────────────────────────────
 
-async function _getAllGalleryImages(): Promise<string[]> {
-  if (process.env.NODE_ENV === 'development') return [];
+async function _getMarqueeImages(): Promise<{ left: string[]; right: string[] }> {
+  try {
+    const [leftRes, rightRes] = await Promise.all([
+      cloudinary.api.resources({
+        type: 'upload',
+        resource_type: 'image',
+        prefix: 'Marquee/left-column',
+        max_results: 50,
+      }),
+      cloudinary.api.resources({
+        type: 'upload',
+        resource_type: 'image',
+        prefix: 'Marquee/right-column',
+        max_results: 50,
+      }),
+    ]);
+    return {
+      left: (leftRes.resources as CloudinaryResource[]).map(r => cldImage(toPath(r), 800)),
+      right: (rightRes.resources as CloudinaryResource[]).map(r => cldImage(toPath(r), 800)),
+    };
+  } catch (err) {
+    console.error('[cloudinary] getMarqueeImages failed:', err);
+    return { left: [], right: [] };
+  }
+}
+
+export const getMarqueeImages = unstable_cache(
+  _getMarqueeImages,
+  ['cloudinary-marquee-images'],
+  { revalidate: 3600 },
+);
+
+// ─── Portrait ─────────────────────────────────────────────────────────────
+
+async function _getPortraitImages(): Promise<string[]> {
+  // if (process.env.NODE_ENV === 'development') return [];
   try {
     const res = await cloudinary.api.resources({
       type: 'upload',
       resource_type: 'image',
-      prefix: 'Projects/',
-      max_results: 200,
+      prefix: 'Portrait',
+      max_results: 2,
     });
-    return (res.resources as CloudinaryResource[])
-      .filter(r => r.public_id.includes('/gallery/'))
-      .map(r => cldImage(toPath(r), 800));
+    return (res.resources as CloudinaryResource[]).map(r => cldImage(toPath(r), 800));
   } catch (err) {
-    console.error('[cloudinary] getAllGalleryImages failed:', err);
+    console.error('[cloudinary] getPortraitImages failed:', err);
     return [];
   }
 }
 
-export const getAllGalleryImages = unstable_cache(
-  _getAllGalleryImages,
-  ['cloudinary-all-gallery-images'],
+export const getPortraitImages = unstable_cache(
+  _getPortraitImages,
+  ['cloudinary-portrait-images'],
   { revalidate: 3600 },
 );
 

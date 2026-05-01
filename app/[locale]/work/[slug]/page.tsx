@@ -42,7 +42,7 @@ export default async function CaseStudyPage({
   const gallery = await getProjectGallery(slug);
 
   return (
-    <main className='container px-4 md:px-0 m-auto mt-(--menu-height)'>
+    <main className='container m-auto mt-(--menu-height)'>
       <div className='lg:grid lg:grid-cols-[5fr_7fr] lg:gap-20 lg:items-start'>
 
         {/* LEFT — sticky sidebar */}
