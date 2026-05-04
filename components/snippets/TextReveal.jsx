@@ -29,6 +29,12 @@ const Character = React.memo(function Character({
   );
 });
 
+const isHighlighted = (content, highlights) => {
+  if (!highlights?.length) return false;
+  const clean = content.replace(/[^a-zA-ZÀ-ÿ]/g, '').toLowerCase();
+  return highlights.some((h) => h.toLowerCase() === clean);
+};
+
 const TextReveal = ({
   body = 'Transform your user interface with our powerful text reveal animations, creating engaging and dynamic experiences that captivate your audience and enhance visual storytelling through smooth, scroll-based transitions.',
   className = '',
@@ -36,6 +42,7 @@ const TextReveal = ({
   textClassName = 'h3',
   sticky = false,
   textCenter = false,
+  highlights = [],
 }) => {
   const targetRef = useRef(null);
 
@@ -86,17 +93,20 @@ const TextReveal = ({
         className={`${sticky ? 'sticky top-0 flex h-screen items-center justify-center' : ''} ${blockClassName}`}
       >
         <div className={textClassName}>
-          {linesData.map(({ words, lineIndex }) => (
+          {linesData.map(({ words, lineIndex }) => {
+            const isEmpty = words.every((w) => w.type !== 'word');
+            if (isEmpty) return <div key={lineIndex} className='h-4' />;
+            return (
             <React.Fragment key={lineIndex}>
               <div
                 className={`inline-flex flex-wrap gap-x-[0.18em] ${textCenter ? 'justify-center' : ''}`}
               >
                 {words.map(
-                  ({ chars, type }, i) =>
+                  ({ chars, type, content }, i) =>
                     type === 'word' && (
                       <span
                         key={`${lineIndex}-${i}`}
-                        className='split-word inline-block'
+                        className={cn('split-word inline-block', isHighlighted(content, highlights) && 'text-muted')}
                       >
                         {chars.map(({ char, range }, j) => (
                           <Character
@@ -114,7 +124,8 @@ const TextReveal = ({
                 <br className='whitespace-pre' />
               )}
             </React.Fragment>
-          ))}
+          );
+          })}
         </div>
       </div>
     </div>
@@ -135,6 +146,7 @@ TextReveal.propTypes = {
   textClassName: PropTypes.string,
   sticky: PropTypes.bool,
   textCenter: PropTypes.bool,
+  highlights: PropTypes.arrayOf(PropTypes.string),
 };
 
 export default TextReveal;

@@ -84,7 +84,7 @@ const MainHero = function MainHero({
 
         <h1
           ref={headlineRef}
-          className='font-sans text-5xl md:text-7xl lg:text-8xl font-bold leading-none text-foreground opacity-0'
+          className='font-sans text-5xl md:text-7xl lg:text-7xl font-bold leading-none text-foreground opacity-0'
         >
           Romain Pena Ruiz
         </h1>

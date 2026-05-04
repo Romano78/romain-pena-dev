@@ -3,7 +3,6 @@ import About from '@/components/About';
 import Services from '@/components/Services';
 import Work from '@/components/Work';
 import Steps from '@/components/snippets/Steps';
-import PricingTable from '@/components/PricingTable';
 import Contact from '@/components/Contact';
 import BackToTopButton from '@/components/snippets/BackToTopButton';
 import { getProjectImages, getMarqueeImages, getPortraitImages } from '@/lib/cloudinary';
@@ -24,8 +23,7 @@ export default async function Home() {
       <Work className={SECTION_SPACING} projectImages={projectImages} />
       <Services className={SECTION_SPACING} />
       <Steps className={SECTION_SPACING} />
-      <PricingTable className={SECTION_SPACING} />
-      <Contact className={`${SECTION_SPACING} pb-20 lg:pb-32`} />
+<Contact className={`${SECTION_SPACING} pb-20 lg:pb-32`} />
       <BackToTopButton position='center' />
     </main>
   );
