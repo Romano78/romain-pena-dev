@@ -10,7 +10,6 @@ import SplitType from 'split-type';
 import { ArrowDown } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import PillCta from '@/components/snippets/PillCta';
-import LinkCta from '@/components/snippets/LinkCta';
 import ImagePlaceholder from '@/components/snippets/ImagePlaceholder';
 import GreetingRotator from '@/components/snippets/GreetingRotator';
 

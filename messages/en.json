@@ -6,7 +6,8 @@
     "work": "Work",
     "services": "Services",
     "pricing": "Pricing",
-    "contact": "Contact"
+    "contact": "Contact",
+    "resume": "Resume"
   },
   "footer": {
     "copyright": "© {year} Romain Pena Ruiz. All rights reserved."

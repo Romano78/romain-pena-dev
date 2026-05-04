@@ -1,27 +1,10 @@
 'use client';
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
+import { Linkedin } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import FooterNavigation from './FooterNavigation';
 
-/**
- * Consolidated Menu component that handles both client-side behavior and menu content
- *
- * Features:
- * - Scroll-aware behavior to hide/show based on scroll direction
- * - Smooth animations using Framer Motion
- * - Mobile and desktop navigation
- * - Theme toggle
- * - Authentication section
- * - Special handling for docs section
- *
- * @component
- * @param {Object} props - Component props
- * @param {string} [props.className] - Additional CSS classes
- * @param {string} [props.theme] - Optional theme override for this section (light, dark, modern)
- * @param {Object} [props.user] - User object for authentication state
- * @returns {JSX.Element} - Menu component
- */
 export default function Footer({ className = '' }) {
   return (
     <>
@@ -45,7 +28,7 @@ export default function Footer({ className = '' }) {
                             viewBox="0 0 23 14"
                             fill="none"
                             xmlns="http://www.w3.org/2000/svg"
-                            className="h-10 w-auto"
+                            className="h-14 w-auto"
                             aria-label="Romain Pena"
                           >
                             <path d="M2.72952 2.50158H4.9413C5.71022 2.50158 6.27108 2.6825 6.62388 3.04435C6.97667 3.39715 7.15307 3.94444 7.15307 4.68622V5.26969C7.15307 6.25572 6.82741 6.8799 6.17609 7.14224V7.16938C6.53794 7.27793 6.79123 7.49956 6.93597 7.83426C7.08975 8.16897 7.16664 8.61675 7.16664 9.17761V10.8466C7.16664 11.118 7.17569 11.3396 7.19378 11.5115C7.21187 11.6743 7.2571 11.8372 7.32947 12H5.80973C5.75545 11.8462 5.71926 11.7015 5.70117 11.5658C5.68308 11.4301 5.67403 11.1858 5.67403 10.8331V9.0962C5.67403 8.66198 5.60166 8.35894 5.45693 8.18706C5.32124 8.01519 5.08151 7.92925 4.73776 7.92925H4.22213V12H2.72952V2.50158ZM4.7649 6.57233C5.06342 6.57233 5.28505 6.49544 5.42979 6.34166C5.58357 6.18787 5.66046 5.93006 5.66046 5.56821V4.83548C5.66046 4.49173 5.59714 4.24296 5.4705 4.08917C5.3529 3.93539 5.16293 3.8585 4.90059 3.8585H4.22213V6.57233H4.7649Z" fill="#53B7F0" fillOpacity="0.87"/>
@@ -54,7 +37,18 @@ export default function Footer({ className = '' }) {
                           </svg>
                         </a>
                       </div>
-                      <FooterNavigation />
+                      <div className='flex items-center gap-4'>
+                        <FooterNavigation />
+                        <a
+                          href='https://www.linkedin.com/in/romainpenaruiz/'
+                          target='_blank'
+                          rel='noopener noreferrer'
+                          aria-label='LinkedIn'
+                          className='text-foreground/60 hover:text-foreground transition-colors duration-300'
+                        >
+                          <Linkedin className='h-4 w-4' />
+                        </a>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -69,12 +63,4 @@ export default function Footer({ className = '' }) {
 
 Footer.propTypes = {
   className: PropTypes.string,
-  /**
-   * Optional theme override for this section (light, dark, modern)
-   */
-  theme: PropTypes.string,
-  /**
-   * User object for authentication state
-   */
-  user: PropTypes.object,
 };

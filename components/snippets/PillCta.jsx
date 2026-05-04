@@ -9,6 +9,7 @@ export default function PillCta({ href, onClick, icon, children, className = '' 
     'text-foreground/60 border border-border cursor-pointer',
     'transition-all duration-300',
     'hover:text-foreground hover:border-foreground/40 hover:bg-foreground/5',
+    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-muted focus-visible:ring-offset-2',
     className
   );
 

@@ -9,6 +9,7 @@ export default function LinkCta({ href, onClick = undefined, icon = null, childr
     'text-xs font-medium tracking-widest text-foreground/50',
     uppercase ? 'uppercase' : 'normal-case',
     'hover:text-foreground transition-colors duration-300 group',
+    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-muted focus-visible:ring-offset-1 rounded-sm',
     className
   );
 

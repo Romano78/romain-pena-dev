@@ -191,6 +191,4 @@ export default function Menu({ className = '' }) {
 
 Menu.propTypes = {
   className: PropTypes.string,
-  theme: PropTypes.string,
-  user: PropTypes.object,
 };
