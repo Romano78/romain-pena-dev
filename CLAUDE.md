@@ -29,7 +29,7 @@ See `PLAN.md` for full detail. Short list:
 Portfolio and business site for **Romain Pena** — a frontend developer based in Montreal,
 specializing in Shopify custom development, design implementation, and web experiences.
 
-**Site:** [romainpena.dev](https://romainpena-dev-arev.vercel.app/)
+**Site:** [romainpena.com](https://romainpena.com)
 **Model:** Monthly retainer
 
 ---
