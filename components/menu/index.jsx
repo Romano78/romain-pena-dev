@@ -130,12 +130,39 @@ export default function Menu({ className = '' }) {
                           viewBox='0 0 200 200'
                           fill='none'
                           xmlns='http://www.w3.org/2000/svg'
-                          className='h-9 w-9'
+                          className='h-10 w-10'
                           aria-label='Romain Pena'
                         >
-                          <rect x='0' y='0' width='200' height='200' fill='none' stroke='currentColor' strokeWidth='2' rx='8' />
-                          <path d='M 10 10 L 30 10 M 10 10 L 10 30' stroke='currentColor' strokeWidth='2.5' strokeLinecap='round' fill='none' />
-                          <text x='100' y='105' textAnchor='middle' dominantBaseline='middle' fontSize='64' fontWeight='500' fontFamily='Inter, Arial, sans-serif' fill='#53B7F0' fillOpacity='0.87'>R</text>
+                          <rect
+                            x='0'
+                            y='0'
+                            width='200'
+                            height='200'
+                            fill='none'
+                            stroke='currentColor'
+                            strokeWidth='2'
+                            rx='8'
+                          />
+                          <path
+                            d='M 10 10 L 30 10 M 10 10 L 10 30'
+                            stroke='currentColor'
+                            strokeWidth='2.5'
+                            strokeLinecap='round'
+                            fill='none'
+                          />
+                          <text
+                            x='100'
+                            y='105'
+                            textAnchor='middle'
+                            dominantBaseline='middle'
+                            fontSize='96'
+                            fontWeight='500'
+                            fontFamily='Inter, Arial, sans-serif'
+                            fill='#53B7F0'
+                            fillOpacity='0.87'
+                          >
+                            R
+                          </text>
                         </svg>
                       </Link>
                     </div>
