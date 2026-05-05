@@ -95,7 +95,7 @@ export default async function CaseStudyPage({
                 src={(cover ?? project.image)!}
                 alt={project.client}
                 fill
-                className='object-cover object-top'
+                className='object-inherit object-top'
                 priority
               />
             ) : (
