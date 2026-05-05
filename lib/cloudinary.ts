@@ -5,7 +5,8 @@ import { cldImage } from './cloudinary-url';
 
 const CLOUD = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
 
-if (!CLOUD) throw new Error('Missing env var: NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME');
+if (!CLOUD)
+  throw new Error('Missing env var: NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME');
 
 cloudinary.config({
   cloud_name: CLOUD,
@@ -26,7 +27,11 @@ function search(expression: string, max = 50) {
 
 // ─── Marquee columns ──────────────────────────────────────────────────────
 
-async function _getMarqueeImages(): Promise<{ left: string[]; right: string[] }> {
+async function _getMarqueeImages(): Promise<{
+  left: string[];
+  right: string[];
+}> {
+  if (process.env.NODE_ENV === 'development') return { left: [], right: [] };
   try {
     const [leftRes, rightRes] = await Promise.all([
       cloudinary.api.resources({
@@ -43,8 +48,12 @@ async function _getMarqueeImages(): Promise<{ left: string[]; right: string[] }>
       }),
     ]);
     return {
-      left: (leftRes.resources as CloudinaryResource[]).map(r => cldImage(toPath(r), 800)),
-      right: (rightRes.resources as CloudinaryResource[]).map(r => cldImage(toPath(r), 800)),
+      left: (leftRes.resources as CloudinaryResource[]).map((r) =>
+        cldImage(toPath(r), 800),
+      ),
+      right: (rightRes.resources as CloudinaryResource[]).map((r) =>
+        cldImage(toPath(r), 800),
+      ),
     };
   } catch (err) {
     console.error('[cloudinary] getMarqueeImages failed:', err);
@@ -61,7 +70,7 @@ export const getMarqueeImages = unstable_cache(
 // ─── Portrait ─────────────────────────────────────────────────────────────
 
 async function _getPortraitImages(): Promise<string[]> {
-  // if (process.env.NODE_ENV === 'development') return [];
+  if (process.env.NODE_ENV === 'development') return [];
   try {
     const res = await cloudinary.api.resources({
       type: 'upload',
@@ -69,7 +78,9 @@ async function _getPortraitImages(): Promise<string[]> {
       prefix: 'Portrait',
       max_results: 2,
     });
-    return (res.resources as CloudinaryResource[]).map(r => cldImage(toPath(r), 800));
+    return (res.resources as CloudinaryResource[]).map((r) =>
+      cldImage(toPath(r), 800),
+    );
   } catch (err) {
     console.error('[cloudinary] getPortraitImages failed:', err);
     return [];
@@ -87,11 +98,22 @@ export const getPortraitImages = unstable_cache(
 async function _getProjectImages(): Promise<Record<string, string>> {
   if (process.env.NODE_ENV === 'development') return {};
   try {
-    const slugs = ['atari', 'philippe-tullio', 'togethxr', 'andor-collective', 'animoetc', 'jaysonhome', 'ccollections'];
+    const slugs = [
+      'atari',
+      'philippe-tullio',
+      'togethxr',
+      'andor-collective',
+      'animoetc',
+      'jaysonhome',
+      'ccollections',
+    ];
 
     const results = await Promise.allSettled(
       slugs.map((slug) =>
-        search(`asset_folder="Projects/${slug}/cover" AND resource_type=image`, 1),
+        search(
+          `asset_folder="Projects/${slug}/cover" AND resource_type=image`,
+          1,
+        ),
       ),
     );
 

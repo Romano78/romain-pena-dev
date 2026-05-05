@@ -38,7 +38,7 @@ function WorkCard({
               src={project.image}
               alt={project.client}
               fill
-              className='object-cover object-top transition-transform duration-700 group-hover:scale-105'
+              className='object-inherit object-top transition-transform duration-700 group-hover:scale-105'
             />
           ) : (
             <ImagePlaceholder />
@@ -213,9 +213,9 @@ export default function Work({ className = '', projectImages = {} }) {
   return (
     <section id='work' className={cn(className)}>
       <SectionHeader overline={t('overline')} lineAnimation={true} />
-      <div ref={gridRef} className='space-y-16'>
+      <div ref={gridRef} className='space-y-10 md:space-y-16'>
         {/* Featured row */}
-        <div className='grid gap-x-8 gap-y-16 md:grid-cols-2'>
+        <div className='grid gap-x-8 gap-y-10 md:gap-y-16 md:grid-cols-2'>
           {featuredProjects.map((project) => (
             <WorkCard
               key={project.slug}
@@ -232,7 +232,7 @@ export default function Work({ className = '', projectImages = {} }) {
 
         {/* Rest row */}
         {restProjects.length > 0 && (
-          <div className='grid gap-x-8 gap-y-16 md:grid-cols-3'>
+          <div className='grid gap-x-8 gap-y-10 md:gap-y-16 md:grid-cols-3'>
             {restProjects.map((project) => (
               <WorkCard
                 key={project.slug}

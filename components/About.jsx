@@ -23,7 +23,7 @@ export default function About({ className = '', portraits = [] }) {
     <section id='about' className={cn(className)}>
       <SectionHeader overline={t('overline')} lineAnimation={true} />
 
-      <div className='flex flex-col min-[1440px]:flex-row min-[1440px]:items-start min-[1440px]:gap-12 mt-10'>
+      <div className='flex flex-col min-[1440px]:flex-row min-[1440px]:items-start min-[1440px]:gap-12 mt-4 lg:mt-10'>
         <TextReveal
           body={t('body')}
           highlights={highlights}

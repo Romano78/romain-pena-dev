@@ -29,7 +29,7 @@ function SectionHeader({
     <div className={cn('bg-background', parentClassName)}>
       <div
         className={cn(
-          'mx-auto mb-16 flex flex-col',
+          'mx-auto mb-8 lg:mb-16 flex flex-col',
           alignmentClasses[align],
           className,
         )}

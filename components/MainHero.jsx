@@ -105,9 +105,9 @@ const MainHero = function MainHero({
       <div ref={marqueeRef} className='hidden lg:flex relative w-[55%] flex-shrink-0 h-full overflow-hidden gap-3 opacity-0'>
         <div className='absolute top-0 left-0 right-0 z-10 h-24 bg-gradient-to-b from-background to-transparent pointer-events-none' />
 
-        <div className='flex-1 flex flex-col gap-3 marquee-col-up'>
+        <div className='flex-1 flex flex-col marquee-col-up'>
           {[...displayLeft, ...displayLeft].map((src, i) => (
-            <div key={i} className='relative rounded-xl overflow-hidden aspect-[3/4] shrink-0'>
+            <div key={i} className='relative rounded-xl overflow-hidden aspect-[3/4] shrink-0 mb-3'>
               {src
                 ? <Image src={src} alt='' fill sizes='20vw' />
                 : <ImagePlaceholder />
@@ -116,9 +116,9 @@ const MainHero = function MainHero({
           ))}
         </div>
 
-        <div className='flex-1 flex flex-col gap-3 -mt-[30%] marquee-col-down'>
+        <div className='flex-1 flex flex-col -mt-[30%] marquee-col-down'>
           {[...displayRight, ...displayRight].map((src, i) => (
-            <div key={i} className='relative rounded-xl overflow-hidden aspect-[3/4] shrink-0'>
+            <div key={i} className='relative rounded-xl overflow-hidden aspect-[3/4] shrink-0 mb-3'>
               {src
                 ? <Image src={src} alt='' fill sizes='20vw' />
                 : <ImagePlaceholder />

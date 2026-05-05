@@ -11,28 +11,19 @@ import { notFound } from 'next/navigation';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://romainpena.com'),
-  title: 'Romain Pena — Shopify Developer',
+  title: 'Romain Pena Ruiz — Web Developer',
   description: 'I build what your Shopify store can\'t do out of the box.',
   openGraph: {
-    title: 'Romain Pena — Shopify Developer',
+    title: 'Romain Pena Ruiz — Web Developer',
     description: 'I build what your Shopify store can\'t do out of the box.',
     url: 'https://romainpena.com',
     siteName: 'Romain Pena Ruiz',
-    images: [
-      {
-        url: '/opengraph-image.png',
-        width: 1200,
-        height: 630,
-        alt: 'Romain Pena — Shopify Developer',
-      },
-    ],
     type: 'website',
   },
   twitter: {
-    card: 'summary_large_image',
-    title: 'Romain Pena — Shopify Developer',
+    card: 'summary',
+    title: 'Romain Pena Ruiz — Web Developer',
     description: 'I build what your Shopify store can\'t do out of the box.',
-    images: ['/opengraph-image.png'],
   },
 };
 
