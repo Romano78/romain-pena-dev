@@ -22,7 +22,9 @@
   },
   "about": {
     "overline": "About",
-    "body": "I design and build fast, elegant web experiences built to perform.\n\nMy approach goes beyond code: it’s grounded in a deep understanding of user behavior, shaped by my studies in psychology in the United States. That dual expertise lets me build interfaces that aren’t just beautiful, but effective.\n\nAfter moving to Montreal, I joined Field Office, where I worked on high-end marketing sites and demanding Shopify projects. I developed strong expertise in frontend development, performance, and turning complex designs into reliable, production-ready products.\n\nToday, I collaborate with designers, agencies, and product teams to turn ideas into polished digital experiences.\n\nEvery project is held to the same standard: precision, code quality, and attention to every detail.\n\nMy goal is simple: build products that work flawlessly. Products that leave a mark."
+    "block1": "I design and build fast, elegant web experiences built to perform.\n\nMy approach goes beyond code: it’s grounded in a deep understanding of user behavior, shaped by my studies in psychology in the United States. That dual expertise lets me build interfaces that aren’t just beautiful, but effective.",
+    "block2": "After moving to Montreal, I joined Field Office, where I worked on high-end marketing sites and demanding Shopify projects. I developed strong expertise in frontend development, performance, and turning complex designs into reliable, production-ready products.\n\nToday, I collaborate with designers, agencies, and product teams to turn ideas into polished digital experiences.",
+    "block3": "Every project is held to the same standard: precision, code quality, and attention to every detail.\n\nMy goal is simple: build products that work flawlessly. Products that leave a mark."
   },
   "services": {
     "overline": "Services",

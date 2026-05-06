@@ -60,7 +60,7 @@ const MainHero = function MainHero({
     <section
       ref={containerRef}
       className={cn(
-        'h-[calc(100svh-var(--menu-height))] flex items-center gap-12 overflow-hidden max-lg:mt-24 max-lg:flex-col max-lg:h-auto max-lg:py-16',
+        'h-[calc(100svh-var(--menu-height))] flex items-center gap-12 overflow-hidden  max-lg:flex-col max-lg:h-auto max-lg:py-16',
         className,
         parentClassName,
       )}

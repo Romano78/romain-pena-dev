@@ -1,0 +1,26 @@
+<svg width="32" height="32" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="favicon-shadow">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="1"/>
+      <feOffset dx="0" dy="1.5" result="offsetblur"/>
+      <feFlood floodColor="#000000" floodOpacity="0.15"/>
+      <feComposite in2="offsetblur" operator="in"/>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="40" height="40" fill="#0D131F" rx="8"/>
+
+  <!-- Rounded square frame -->
+  <rect x="2" y="2" width="36" height="36" rx="6" stroke="#FAFAF8" stroke-width="1.5" fill="none" filter="url(#favicon-shadow)"/>
+
+  <!-- R in white -->
+  <text x="15" y="22" text-anchor="middle" dominant-baseline="middle" font-size="18" font-weight="500" font-family="Inter, sans-serif" fill="#FAFAF8" letter-spacing="-0.5" filter="url(#favicon-shadow)">R</text>
+
+  <!-- P in cyan -->
+  <text x="25" y="22" text-anchor="middle" dominant-baseline="middle" font-size="18" font-weight="500" font-family="Inter, sans-serif" fill="#5FD9D9" letter-spacing="-0.5" filter="url(#favicon-shadow)">P</text>
+</svg>

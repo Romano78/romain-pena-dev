@@ -29,6 +29,8 @@ export default async function RootLayout({
   return (
     <html lang={locale} suppressHydrationWarning>
       <head>
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <link rel="apple-touch-icon" href="/favicon.svg" />
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-TCHHZ40CRM"
           strategy="afterInteractive"

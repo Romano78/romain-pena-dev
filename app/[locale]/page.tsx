@@ -7,7 +7,7 @@ import Contact from '@/components/Contact';
 import BackToTopButton from '@/components/snippets/BackToTopButton';
 import { getProjectImages, getMarqueeImages, getPortraitImages } from '@/lib/cloudinary';
 
-const SECTION_SPACING = 'pt-12 lg:pt-32';
+const SECTION_SPACING = 'pt-10 lg:pt-32';
 
 export default async function Home() {
   const [{ left: leftCol, right: rightCol }, projectImages, portraits] = await Promise.all([
@@ -17,7 +17,7 @@ export default async function Home() {
   ]);
 
   return (
-    <main id='main-content' className='container py-0 m-auto mt-(--menu-height)'>
+    <main id='main-content' className='container py-0 m-auto mt-[calc(var(--menu-height))]'>
       <MainHero leftCol={leftCol} rightCol={rightCol} />
       <About className={SECTION_SPACING} portraits={portraits} />
       <Work className={SECTION_SPACING} projectImages={projectImages} />

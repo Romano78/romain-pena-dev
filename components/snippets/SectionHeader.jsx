@@ -37,7 +37,7 @@ function SectionHeader({
         {overline && (
           <span
             ref={overlineRef}
-            className='text-overline mb-6 text-muted opacity-0 translate-y-4'
+            className='text-overline text-muted opacity-0 translate-y-4'
           >
             {overline}
           </span>
