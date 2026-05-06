@@ -7,10 +7,10 @@ export function ThemeProvider({ children }) {
   return (
     <NextThemesProvider
       attribute='class'
-      defaultTheme='system'
-      enableSystem
+      defaultTheme='dark'
+      enableSystem={false}
       disableTransitionOnChange
-      themes={['light', 'dark']}
+      themes={['dark']}
       suppressHydrationWarning
     >
       {children}

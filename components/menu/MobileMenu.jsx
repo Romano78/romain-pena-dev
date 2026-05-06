@@ -5,7 +5,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
 import { navigationItems } from '@/config/navigation-config';
 import { Link } from '@/i18n/navigation';
-import { ThemeToggle } from './ThemeToggle';
 import LanguageSwitcher from '@/components/snippets/LanguageSwitcher';
 import { cubicBezierPreset } from '@/config/cubic-beziers';
 import PropTypes from 'prop-types';
@@ -75,7 +74,6 @@ export default function MobileMenu({ isOpen, onClose }) {
           {/* Bottom */}
           <div className='px-6 py-8 flex items-center gap-4 border-t border-border'>
             <LanguageSwitcher />
-            <ThemeToggle />
           </div>
         </motion.div>
       )}
