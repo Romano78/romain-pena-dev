@@ -2,18 +2,25 @@
 
 This file provides guidance to Claude Code when working with code in this repository.
 
-## Remaining Work
+## V1 — Complete ✓
 
-See `PLAN.md` for full detail. Short list:
+Launch-ready portfolio site. All core functionality, design, and branding complete.
 
-- **Services copy** — review and tighten (next up)
+### Future Iterations
+
+- **Services copy** — review and tighten
 - **Work card descriptions** — too generic, need specificity
 - **Pricing** — confirm or change tiers/prices before locking
-- **SEO** — page `<title>`, `<meta description>`, OG tags (needs copy locked first)
-- **Favicon** — needs asset from Romain (SVG or high-res PNG)
-- **OG image** — 1200×630, designed or generated
+- **SEO** — page `<title>`, `<meta description>`, OG tags
 
-## Completed in Last Session (2026-05-01)
+## Completed in Last Session (2026-05-06)
+
+- **Light mode removed** — site is dark mode only. ThemeToggle removed from menu, ThemeProvider locked to dark theme
+- **Favicon assets** — favicon.svg, favicon-96x96.png, favicon.ico, apple-touch-icon.png all in `/public`
+- **app/layout.tsx** — metadata API added for icons (cleaner than link tags)
+- **OG image** — updated to show logo centered with name and subtitle only
+
+## Completed in Previous Session (2026-05-01)
 
 - Hero subtitle (`hero.title`) updated in `en.json` + `fr.json` — "Custom Shopify development: themes built from Figma files, apps the Shopify doesn't have, integrations that actually work."
 - About body (`about.body`) rewritten in `en.json` + `fr.json` — personal story (Cal State LB → Le Wagon → Field Office → independent), includes AI/speed/platform-replacement angle
@@ -59,7 +66,7 @@ Single-page portfolio site built with:
 - Framer Motion — used selectively (not for the marquee)
 - GSAP — used for entrance animations
 - next-intl — FR/EN i18n with locale routing
-- next-themes for dark/light mode
+- next-themes (dark mode only, locked)
 - shadcn/ui (new-york style, zinc base, Lucide icons)
 - Cloudinary — all production images served via Cloudinary CDN
 
@@ -84,7 +91,7 @@ Inter font via `next/font/google` (`--font-inter`).
 
 ### Component organization
 
-- `components/menu/` — `index.jsx` (Menu), `DesktopNavigation.jsx`, `MobileMenu.jsx`, theme toggle
+- `components/menu/` — `index.jsx` (Menu), `DesktopNavigation.jsx`, `MobileMenu.jsx`
 - `components/snippets/` — Reusable blocks:
   - `ImagePlaceholder.jsx` — `bg-accent` placeholder, fills parent, used when no Cloudinary image
   - `PillCta.jsx` — pill-shaped CTA button with optional icon; renders `<button onClick>` when no `href`, `<a>` when `href` provided
@@ -142,11 +149,9 @@ Inter font via `next/font/google` (`--font-inter`).
 
 - Tailwind CSS v4 with CSS variables in `styles/globals.css`
 - Custom typography: `.h1`–`.h6`, `.text-overline` in `@layer components`
-- `--muted` = accent green (Shopify green `#96BF48`), **not a neutral**
-- Light theme: off-white (`#FAFAF8`) background, near-black (`#111111`) text
-- Dark theme: `#0D131F` background, cyan (`#5FD9D9`) replaces green as muted
-- `bg-accent` = light gray in light mode, dark blue-gray in dark mode — use for placeholders and subtle fills
-- Green/cyan used subtly — tags, borders, hover states, accents only
+- Dark theme only: `#0D131F` background, `#FAFAF8` text
+- Accent color: cyan (`#5FD9D9`) — used subtly in tags, borders, hover states, accents
+- `bg-accent` = dark blue-gray — use for placeholders and subtle fills
 
 ### Mixed JS/TS
 

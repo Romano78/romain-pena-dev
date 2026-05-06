@@ -7,7 +7,6 @@ import DesktopNavigation from './DesktopNavigation';
 import MobileMenuButton from './MobileMenuButton';
 import MobileMenu from './MobileMenu';
 import { cn } from '@/lib/utils';
-import { ThemeToggle } from './ThemeToggle';
 import LanguageSwitcher from '@/components/snippets/LanguageSwitcher';
 import { Link } from '@/i18n/navigation';
 
@@ -198,7 +197,6 @@ export default function Menu({ className = '' }) {
                   {/* Desktop Actions */}
                   <div className='hidden items-center gap-4 lg:flex'>
                     <LanguageSwitcher />
-                    <ThemeToggle />
                   </div>
 
                   {/* Mobile Menu Button */}
