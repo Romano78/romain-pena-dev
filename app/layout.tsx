@@ -1,5 +1,6 @@
 import { Inter, Fraunces, Bebas_Neue } from 'next/font/google';
 import { getLocale } from 'next-intl/server';
+import Script from 'next/script';
 import "@/styles/globals.css";
 
 const inter = Inter({
@@ -27,6 +28,20 @@ export default async function RootLayout({
 
   return (
     <html lang={locale} suppressHydrationWarning>
+      <head>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-TCHHZ40CRM"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-TCHHZ40CRM');
+          `}
+        </Script>
+      </head>
       <body className={`${inter.variable} ${fraunces.variable} ${bebasNeue.variable} antialiased`}>
         <a
           href='#main-content'
