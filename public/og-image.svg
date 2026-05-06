@@ -28,12 +28,7 @@
   </g>
 
   <!-- Text -->
-  <text x="450" y="220" font-size="64" font-weight="600" font-family="Inter, sans-serif" fill="#FAFAF8" letter-spacing="-1">Romain Pena</text>
+  <text x="450" y="220" font-size="64" font-weight="600" font-family="Inter, sans-serif" fill="#FAFAF8" letter-spacing="-1">Romain Pena Ruiz</text>
 
   <text x="450" y="290" font-size="42" font-weight="400" font-family="Inter, sans-serif" fill="#5FD9D9">Frontend &amp; Shopify Developer</text>
-
-  <text x="450" y="370" font-size="28" font-weight="400" font-family="Inter, sans-serif" fill="#FAFAF8" opacity="0.7">Custom development, design implementation, web experiences</text>
-
-  <!-- Accent line -->
-  <line x1="450" y1="410" x2="1050" y2="410" stroke="#5FD9D9" stroke-width="3"/>
 </svg>

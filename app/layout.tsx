@@ -1,6 +1,7 @@
 import { Inter, Fraunces, Bebas_Neue } from 'next/font/google';
 import { getLocale } from 'next-intl/server';
 import Script from 'next/script';
+import type { Metadata } from 'next';
 import "@/styles/globals.css";
 
 const inter = Inter({
@@ -19,6 +20,17 @@ const bebasNeue = Bebas_Neue({
   variable: '--font-bebas',
 });
 
+export const metadata: Metadata = {
+  icons: {
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/favicon-96x96.png', sizes: '96x96', type: 'image/png' },
+      { url: '/favicon.ico' },
+    ],
+    apple: '/apple-touch-icon.png',
+  },
+};
+
 export default async function RootLayout({
   children,
 }: Readonly<{
@@ -29,8 +41,6 @@ export default async function RootLayout({
   return (
     <html lang={locale} suppressHydrationWarning>
       <head>
-        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-        <link rel="apple-touch-icon" href="/favicon.svg" />
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-TCHHZ40CRM"
           strategy="afterInteractive"
