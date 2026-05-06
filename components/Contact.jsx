@@ -1,7 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { Mail } from 'lucide-react';
+import { Mail, Instagram, Linkedin } from 'lucide-react';
 import LinkCta from '@/components/snippets/LinkCta';
 import { useScrollReveal } from '@/hooks/use-scroll-reveal';
 import ScrambleTextAnimation1 from '@/components/snippets/ScrambleTextAnimation1';
@@ -22,7 +22,11 @@ export default function Contact({ className = '' }) {
         {t('heading')}
       </ScrambleTextAnimation1>
 
-      <p className="contact-reveal mt-6 max-w-xl text-lg leading-relaxed text-foreground">
+      <h2 className='contact-reveal h2 mb-6 max-w-2xl'>
+        {t('title')}
+      </h2>
+
+      <p className='contact-reveal mt-6 max-w-xl text-lg leading-relaxed text-foreground'>
         {t('body')}
       </p>
 
@@ -33,6 +37,27 @@ export default function Contact({ className = '' }) {
       >
         {t('email')}
       </LinkCta>
+
+      <div className='contact-reveal flex gap-4 mt-6'>
+        <a
+          href='https://www.instagram.com/romainpena.dev/'
+          target='_blank'
+          rel='noopener noreferrer'
+          aria-label='Instagram'
+          className='text-foreground/60 hover:text-foreground transition-colors duration-300'
+        >
+          <Instagram className='h-4 w-4' />
+        </a>
+        <a
+          href='https://www.linkedin.com/in/romainpenaruiz/'
+          target='_blank'
+          rel='noopener noreferrer'
+          aria-label='LinkedIn'
+          className='text-foreground/60 hover:text-foreground transition-colors duration-300'
+        >
+          <Linkedin className='h-4 w-4' />
+        </a>
+      </div>
     </section>
   );
 }

@@ -87,8 +87,9 @@
     }
   },
   "contact": {
-    "heading": "On en parle",
-    "body": "Si vous avez un projet Shopify, une fonctionnalité sur mesure ou besoin d’un développeur sur le long terme, vous pouvez me contacter.",
+    "heading": "Travaillons ensemble",
+    "title": "Vous avez un projet en tête ?",
+    "body": "Que ce soit une boutique Shopify, une application web sur mesure, ou un projet dont vous n’êtes pas sûr qu’il soit faisable — écrivez-moi. Je suis toujours ouvert à entendre ce sur quoi vous travaillez.",
     "email": "rom.penaruiz@gmail.com"
   },
   "workDetail": {

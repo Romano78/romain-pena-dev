@@ -9,23 +9,52 @@ import SmoothScroll from '@/components/SmoothScroll';
 import { routing } from '@/i18n/routing';
 import { notFound } from 'next/navigation';
 
-export const metadata: Metadata = {
-  metadataBase: new URL('https://romainpena.com'),
-  title: 'Romain Pena Ruiz — Web Developer',
-  description: 'I build what your Shopify store can\'t do out of the box.',
-  openGraph: {
-    title: 'Romain Pena Ruiz — Web Developer',
-    description: 'I build what your Shopify store can\'t do out of the box.',
-    url: 'https://romainpena.com',
-    siteName: 'Romain Pena Ruiz',
-    type: 'website',
+const metadataByLocale = {
+  en: {
+    title: 'Romain Pena — Web & Shopify Developer',
+    description: 'Frontend and Shopify developer based in Montreal. I build custom storefronts, web apps, and integrations — fast, clean, and pixel-perfect.',
   },
-  twitter: {
-    card: 'summary',
-    title: 'Romain Pena Ruiz — Web Developer',
-    description: 'I build what your Shopify store can\'t do out of the box.',
+  fr: {
+    title: 'Romain Pena — Développeur Web & Shopify',
+    description: 'Développeur frontend et Shopify basé à Montréal. Je crée des boutiques sur mesure, des apps web et des intégrations — rapides, propres et pixel-perfect.',
   },
 };
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const meta = metadataByLocale[locale as keyof typeof metadataByLocale] || metadataByLocale.en;
+  const canonicalUrl = locale === 'en' ? 'https://romainpena.com' : 'https://romainpena.com/fr';
+
+  return {
+    metadataBase: new URL('https://romainpena.com'),
+    title: meta.title,
+    description: meta.description,
+    alternates: {
+      canonical: canonicalUrl,
+      languages: {
+        'en': 'https://romainpena.com',
+        'fr': 'https://romainpena.com/fr',
+        'x-default': 'https://romainpena.com',
+      },
+    },
+    openGraph: {
+      title: meta.title,
+      description: meta.description,
+      url: canonicalUrl,
+      siteName: 'Romain Pena Ruiz',
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary',
+      title: meta.title,
+      description: meta.description,
+    },
+  };
+}
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));

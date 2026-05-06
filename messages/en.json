@@ -87,8 +87,9 @@
     }
   },
   "contact": {
-    "heading": "Let’s talk",
-    "body": "If you need a developer for a Shopify project, custom feature, or ongoing work, feel free to reach out.",
+    "heading": "Get in touch",
+    "title": "Got a project in mind?",
+    "body": "Whether it’s a Shopify build, a custom web app, or something you’re not sure anyone can pull off — reach out. I’m always open to hearing what you’re working on.",
     "email": "rom.penaruiz@gmail.com"
   },
   "workDetail": {

@@ -1,4 +1,5 @@
 import { Inter, Fraunces, Bebas_Neue } from 'next/font/google';
+import { getLocale } from 'next-intl/server';
 import "@/styles/globals.css";
 
 const inter = Inter({
@@ -17,13 +18,15 @@ const bebasNeue = Bebas_Neue({
   variable: '--font-bebas',
 });
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const locale = await getLocale();
+
   return (
-    <html suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning>
       <body className={`${inter.variable} ${fraunces.variable} ${bebasNeue.variable} antialiased`}>
         <a
           href='#main-content'

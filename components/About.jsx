@@ -23,15 +23,8 @@ export default function About({ className = '', portraits = [] }) {
     <section id='about' className={cn(className)}>
       <SectionHeader overline={t('overline')} lineAnimation={true} />
 
-      <div className='flex flex-col min-[1440px]:flex-row min-[1440px]:items-start min-[1440px]:gap-12 mt-4 lg:mt-10'>
-        <TextReveal
-          body={t('body')}
-          highlights={highlights}
-          className='flex-1 min-[1440px]:sticky min-[1440px]:top-[calc(var(--menu-height)+2rem)]'
-          textClassName='text-lg min-[1440px]:text-2xl text-foreground/70 leading-snug'
-        />
-
-        <div className='relative w-96 shrink-0 aspect-2/3 rounded-2xl overflow-hidden mt-8 min-[1440px]:mt-0 min-[1440px]:sticky min-[1440px]:top-[calc(var(--menu-height)+2rem)]'>
+      <div className='flex flex-col min-[1440px]:flex-row-reverse min-[1440px]:items-start min-[1440px]:gap-12 mt-4 lg:mt-10'>
+        <div className='relative w-full min-[1440px]:w-96 shrink-0 aspect-2/3 rounded-2xl overflow-hidden mb-8 min-[1440px]:mb-0 min-[1440px]:sticky min-[1440px]:top-[calc(var(--menu-height)+2rem)]'>
           {hasPortraits ? (
             <Image
               src={portraits[0]}
@@ -44,6 +37,13 @@ export default function About({ className = '', portraits = [] }) {
             <ImagePlaceholder />
           )}
         </div>
+
+        <TextReveal
+          body={t('body')}
+          highlights={highlights}
+          className='flex-1 min-[1440px]:sticky min-[1440px]:top-[calc(var(--menu-height)+2rem)]'
+          textClassName='text-lg min-[1440px]:text-2xl text-foreground/70 leading-snug'
+        />
       </div>
     </section>
   );
