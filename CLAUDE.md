@@ -2,6 +2,35 @@
 
 This file provides guidance to Claude Code when working with code in this repository.
 
+---
+
+## HARD RULE: Never Code Without Explicit Approval
+
+**DO NOT write or modify code unless user explicitly says "go ahead", "implement", "do it", or similar approval.**
+
+Even if:
+- A plan has been approved
+- The task seems clear
+- You think you understand the requirements
+
+**Always ask first:**
+- Which sections / files are affected?
+- Mobile only, desktop only, or both?
+- Which breakpoints?
+- Any exceptions or edge cases?
+- Confirm scope before touching a single line
+
+**Consequences:** If you violate this, you waste the user's time reverting changes and rebuilding trust.
+
+**Example violations to NEVER repeat:**
+- Modifying Work.jsx animations without asking if desktop changes were wanted
+- Assuming site-wide changes when user may have wanted mobile-only
+- Coding after plan approval without confirming implementation details
+
+This is non-negotiable. Clarify → Get approval → Code.
+
+---
+
 ## V1 — Complete ✓
 
 Launch-ready portfolio site. All core functionality, design, and branding complete.
