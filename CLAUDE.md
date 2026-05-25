@@ -31,6 +31,21 @@ This is non-negotiable. Clarify → Get approval → Code.
 
 ---
 
+## HARD RULE: Dev Server Management
+
+**DO NOT create or start a dev server for testing.**
+
+- Only use `npm run build` to verify compilation
+- If a dev server is already running, use it for manual testing via browser
+- Never spawn `npm run dev` or similar
+- Do not leave processes running after testing
+
+**Why:** Prevents orphaned processes and port conflicts.
+
+This is non-negotiable.
+
+---
+
 ## V1 — Complete ✓
 
 Launch-ready portfolio site. All core functionality, design, and branding complete.
