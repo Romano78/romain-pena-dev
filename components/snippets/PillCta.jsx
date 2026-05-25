@@ -20,7 +20,15 @@ export default function PillCta({ href, onClick, icon, children, className = '' 
     </>
   );
 
-  if (href) return <a href={href} className={base}>{content}</a>;
+  if (href) {
+    const handleClick = (e) => {
+      if (href.startsWith('#')) {
+        e.preventDefault();
+        window.location.hash = href.replace('#', '');
+      }
+    };
+    return <a href={href} onClick={handleClick} className={base}>{content}</a>;
+  }
   return <button type='button' onClick={onClick} className={base}>{content}</button>;
 }
 

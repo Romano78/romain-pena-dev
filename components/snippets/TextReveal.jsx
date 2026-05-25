@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useRef, useMemo } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import React, { useRef, useMemo, useState, useEffect } from 'react';
+import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import { splitText } from '@/hooks/split-text';
 import { cn } from '@/lib/utils';
 import PropTypes from 'prop-types';
@@ -45,6 +45,15 @@ const TextReveal = ({
   highlights = [],
 }) => {
   const targetRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(false);
+  const isInView = useInView(targetRef, { once: true, margin: '-100px' });
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const { scrollYProgress } = useScroll({
     target: targetRef,
@@ -84,6 +93,57 @@ const TextReveal = ({
     return null;
   }
 
+  // Mobile: whole-block fade on scroll entry
+  if (isMobile) {
+    return (
+      <motion.div
+        ref={targetRef}
+        className={cn('relative z-0', sticky ? 'h-[150vh] md:h-[200vh]' : '', className)}
+        initial={{ opacity: 0 }}
+        animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+        transition={{ duration: 0.8, ease: 'easeOut' }}
+      >
+        <div
+          className={`${sticky ? 'sticky top-0 flex h-screen items-center justify-center' : ''} ${blockClassName}`}
+        >
+          <div className={textClassName}>
+            {linesData.map(({ words, lineIndex }) => {
+              const isEmpty = words.every((w) => w.type !== 'word');
+              if (isEmpty) return <div key={lineIndex} className='h-4' />;
+              return (
+                <React.Fragment key={lineIndex}>
+                  <div
+                    className={`inline-flex flex-wrap gap-x-[0.18em] ${textCenter ? 'justify-center' : ''}`}
+                  >
+                    {words.map(
+                      ({ chars, type, content }, i) =>
+                        type === 'word' && (
+                          <span
+                            key={`${lineIndex}-${i}`}
+                            className={cn('split-word inline-block', isHighlighted(content, highlights) && 'text-muted')}
+                          >
+                            {chars.map(({ char }, j) => (
+                              <span key={`${lineIndex}-${i}-${j}`}>
+                                {char.content}
+                              </span>
+                            ))}
+                          </span>
+                        ),
+                    )}
+                  </div>
+                  {lineIndex < lineCount - 1 && (
+                    <br className='whitespace-pre' />
+                  )}
+                </React.Fragment>
+              );
+            })}
+          </div>
+        </div>
+      </motion.div>
+    );
+  }
+
+  // Desktop: per-character scroll-linked opacity
   return (
     <div
       ref={targetRef}
