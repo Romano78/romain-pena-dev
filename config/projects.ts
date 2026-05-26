@@ -4,6 +4,8 @@ export type Project = {
   type: string;
   description: string;
   items: string[];
+  frontend: string[];
+  backend: string[];
   image?: string;
   gallery?: string[];
   url?: string;
@@ -24,6 +26,8 @@ export const projects: Project[] = [
       'Custom Trevco fulfillment backend',
       'Countdown timers',
     ],
+    frontend: ['Shopify Liquid', 'JavaScript'],
+    backend: ['Node.js', 'MetaMask API', 'Klaviyo', 'Google Analytics'],
     url: 'https://atari.com',
   },
   {
@@ -39,6 +43,8 @@ export const projects: Project[] = [
       'Scroll-snap + Lenis architecture',
       'Dark-first immersive design',
     ],
+    frontend: ['Next.js', 'React', 'TypeScript', 'GSAP', 'Framer Motion'],
+    backend: ['Cloudinary', 'next-intl'],
     url: 'https://philippetullio.com',
   },
   {
@@ -53,6 +59,8 @@ export const projects: Project[] = [
       'Klaviyo email integration',
       'Full storefront build in Liquid',
     ],
+    frontend: ['Shopify Liquid', 'JavaScript', 'CSS'],
+    backend: ['Klaviyo', 'Google Analytics'],
     url: 'https://www.togethxr.com',
   },
   {
@@ -66,6 +74,8 @@ export const projects: Project[] = [
       'Custom sections & page layouts',
       'Full storefront build in Liquid',
     ],
+    frontend: ['Shopify Liquid', 'JavaScript', 'CSS'],
+    backend: ['Klaviyo', 'Google Analytics'],
     url: 'https://andorcollective.com',
   },
   {
@@ -80,6 +90,8 @@ export const projects: Project[] = [
       'Custom inventory deduction backend',
       'English / French bilingual support',
     ],
+    frontend: ['next-intl'],
+    backend: ['Node.js', 'Shopify API', 'GraphQL', 'Webhooks', 'PostgreSQL'],
     url: 'https://animoetc.com',
   },
   {
@@ -95,6 +107,8 @@ export const projects: Project[] = [
       'Custom checkout configuration',
       'Vue.js → Shopify OS 2.0 migration',
     ],
+    frontend: ['Shopify Liquid', 'Vue.js', 'JavaScript', 'CSS'],
+    backend: ['Klaviyo', 'Google Analytics'],
     url: 'https://www.jaysonhome.com',
   },
   {
@@ -109,6 +123,8 @@ export const projects: Project[] = [
       'Custom product page layout',
       'Full storefront in Liquid',
     ],
+    frontend: ['Shopify Liquid', 'JavaScript', 'CSS'],
+    backend: ['Klaviyo', 'Google Analytics'],
     url: 'https://ccollections.shop',
   },
 ];

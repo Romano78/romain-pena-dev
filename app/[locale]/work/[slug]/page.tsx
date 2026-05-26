@@ -42,7 +42,7 @@ export default async function CaseStudyPage({
 
   return (
     <main className='container m-auto mt-(--menu-height)'>
-      <div className='lg:grid lg:grid-cols-[5fr_7fr] lg:gap-20 lg:items-start'>
+      <div className='flex flex-col-reverse lg:grid lg:grid-cols-[5fr_7fr] lg:gap-20 lg:items-start'>
 
         {/* LEFT — sticky sidebar */}
         <aside className='lg:sticky lg:top-(--menu-height) lg:self-start lg:h-[calc(100dvh-var(--menu-height))] lg:flex lg:flex-col py-16 lg:py-20'>
@@ -82,11 +82,21 @@ export default async function CaseStudyPage({
               <dt className='text-overline text-muted-foreground w-16 shrink-0'>Type</dt>
               <dd className='text-overline text-foreground'>{project.type}</dd>
             </div>
+            <div className='flex gap-6'>
+              <dt className='text-overline text-muted-foreground w-16 shrink-0'>Frontend</dt>
+              <dd className='text-overline text-foreground'>{project.frontend.join(', ')}</dd>
+            </div>
+            {project.backend.length > 0 && (
+              <div className='flex gap-6'>
+                <dt className='text-overline text-muted-foreground w-16 shrink-0'>Backend</dt>
+                <dd className='text-overline text-foreground'>{project.backend.join(', ')}</dd>
+              </div>
+            )}
           </dl>
         </aside>
 
         {/* RIGHT — images */}
-        <div className='py-16 lg:py-20 space-y-3'>
+        <div className='pt-6 lg:py-20 space-y-3'>
           {/* Hero */}
           <div className='relative w-full aspect-[4/3] overflow-hidden rounded-xl'>
             {(cover ?? project.image) ? (
