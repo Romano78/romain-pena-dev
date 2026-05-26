@@ -2,7 +2,7 @@
 
 import { cn } from '@/lib/utils';
 import { AnimatePresence, motion, useInView } from 'framer-motion';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useLayoutEffect } from 'react';
 import PropTypes from 'prop-types';
 
 /**
@@ -28,8 +28,16 @@ export default function ScrambleTextAnimation1({
 
   const [displayText, setDisplayText] = useState(() => children.split(''));
   const [isAnimating, setIsAnimating] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const iterationCount = useRef(0);
   const elementRef = useRef(null);
+
+  useLayoutEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const handleAnimationTrigger = () => {
     if (animateOnHover && !isAnimating) {
@@ -47,21 +55,23 @@ export default function ScrambleTextAnimation1({
 
   // Handle animation start based on view or delay
   useEffect(() => {
-    if (!startOnView) {
+    const effectiveStartOnView = isMobile ? false : startOnView;
+
+    if (!effectiveStartOnView) {
       const startTimeout = setTimeout(() => {
         setIsAnimating(true);
       }, delay);
       return () => clearTimeout(startTimeout);
     }
 
-    // Start animation when element comes into view
+    // Start animation when element comes into view (desktop only)
     if (isInView) {
       const startTimeout = setTimeout(() => {
         setIsAnimating(true);
       }, delay);
       return () => clearTimeout(startTimeout);
     }
-  }, [delay, startOnView, isInView]);
+  }, [delay, startOnView, isInView, isMobile]);
 
   // Handle scramble animation
   useEffect(() => {

@@ -126,7 +126,13 @@ export default function MobileMenu({ isOpen, onClose }) {
                 ) : (
                   <a
                     href={item.href}
-                    onClick={onClose}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      onClose();
+                      setTimeout(() => {
+                        window.location.hash = item.href.replace('#', '');
+                      }, 300);
+                    }}
                     className='text-5xl font-bold text-foreground hover:text-muted transition-colors block'
                   >
                     {navTranslations(item.id) || item.label}

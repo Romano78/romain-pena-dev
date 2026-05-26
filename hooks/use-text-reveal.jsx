@@ -13,7 +13,7 @@
  * @param {number} [options.lineHeight=1.2] - Line height for the animated text
  * @returns {Object} Object containing the isInView state
  */
-import { useLayoutEffect, useState, useRef } from 'react';
+import { useLayoutEffect, useState, useRef, useEffect } from 'react';
 import SplitType from 'split-type';
 import { animate, stagger, useInView } from 'framer-motion';
 import { cubicBezierPreset3 } from '@/config/cubic-beziers';
@@ -30,12 +30,20 @@ export default function useTextReveal({
   const lineHeightCompensation = lineHeight < 1.2 ? 1.2 - lineHeight : 0;
   const horizontalScreen = useRef(0);
   const pathname = usePathname();
+  const [isMobile, setIsMobile] = useState(false);
 
   const [splitHeading, setSplitHeading] = useState(null);
   const isInView = useInView(textRef, {
     margin: '0px 0px -10% 0px',
     once: once,
   });
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // Handle text splitting and styling on mount and resize
   useLayoutEffect(() => {
@@ -108,9 +116,10 @@ export default function useTextReveal({
 
         // Style each word
         if (splitText.words) {
+          const translateDistance = isMobile ? 0.4 : 1;
           splitText.words.forEach((word) => {
             if (!word) return;
-            word.style.transform = `translateY(${lineHeight}em)`;
+            word.style.transform = `translateY(${translateDistance}em)`;
             word.style.display = 'block';
           });
         }
@@ -138,6 +147,7 @@ export default function useTextReveal({
     center,
     lineHeight,
     lineHeightCompensation,
+    isMobile,
   ]);
 
   // Handle animation when element comes into view
@@ -151,13 +161,15 @@ export default function useTextReveal({
 
       if (isInView) {
         // Animate words up
+        const staggerDelay = isMobile ? 0.02 : 0.03;
+        const animationDuration = isMobile ? 1 : 0.8;
         animate(
           words,
           { transform: 'translateY(0em)' },
           {
-            duration: 0.8,
+            duration: animationDuration,
             ease: cubicBezierPreset3,
-            delay: stagger(0.03, { startDelay: delay + 0.2 }),
+            delay: stagger(staggerDelay, { startDelay: delay + 0.2 }),
           },
         );
 
@@ -175,9 +187,10 @@ export default function useTextReveal({
         }
       } else {
         // Reset positions when out of view
+        const translateDistance = isMobile ? 0.4 : 1;
         words.forEach((word) => {
           if (!word) return;
-          word.style.transform = `translateY(${lineHeight}em)`;
+          word.style.transform = `translateY(${translateDistance}em)`;
         });
 
         if (svgInContainer) {
@@ -187,7 +200,7 @@ export default function useTextReveal({
     } catch (error) {
       console.error('Error in text reveal animation:', error);
     }
-  }, [isInView, splitHeading, lineHeight, delay]);
+  }, [isInView, splitHeading, lineHeight, delay, isMobile]);
 
   return { isInView };
 }

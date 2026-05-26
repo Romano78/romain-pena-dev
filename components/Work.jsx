@@ -31,7 +31,6 @@ function WorkCard({
             'work-card-image relative overflow-hidden rounded-2xl bg-card',
             aspectClass,
           )}
-          style={{ clipPath: 'inset(0 0 100% 0)' }}
         >
           {project.image ? (
             <Image
@@ -121,40 +120,76 @@ export default function Work({ className = '', projectImages = {} }) {
       const cards = grid.querySelectorAll('.work-card');
       if (!cards.length) return;
 
+      const isMobile = window.innerWidth < 768;
+
       cards.forEach((card, i) => {
         const imageEl = card.querySelector('.work-card-image');
         const textEl = card.querySelector('.work-card-text');
 
-        gsap.to(imageEl, {
-          clipPath: 'inset(0 0 0% 0)',
-          duration: 1.2,
-          ease: 'power3.out',
-          delay: i * 0.1,
-          scrollTrigger: {
-            trigger: card,
-            start: 'top 85%',
-            once: true,
-          },
-        });
+        if (isMobile) {
+          gsap.set(imageEl, { opacity: 0, y: 12 });
+          gsap.set(textEl, { opacity: 0, y: 6 });
 
-        gsap.to(textEl, {
-          y: 0,
-          opacity: 1,
-          duration: 0.6,
-          ease: 'power3.out',
-          delay: i * 0.1 + 0.5,
-          scrollTrigger: {
-            trigger: card,
-            start: 'top 85%',
-            once: true,
-          },
-        });
+          gsap.to(imageEl, {
+            opacity: 1,
+            y: 0,
+            duration: 0.7,
+            ease: 'power2.out',
+            delay: i * 0.08,
+            scrollTrigger: {
+              trigger: card,
+              start: 'top 85%',
+              once: true,
+            },
+          });
+
+          gsap.to(textEl, {
+            y: 0,
+            opacity: 1,
+            duration: 0.6,
+            ease: 'power3.out',
+            delay: i * 0.08 + 0.3,
+            scrollTrigger: {
+              trigger: card,
+              start: 'top 85%',
+              once: true,
+            },
+          });
+        } else {
+          gsap.set(imageEl, { clipPath: 'inset(0 0 100% 0)' });
+          gsap.set(textEl, { opacity: 0, y: 12 });
+
+          gsap.to(imageEl, {
+            clipPath: 'inset(0 0 0% 0)',
+            duration: 1.2,
+            ease: 'power3.out',
+            delay: i * 0.1,
+            scrollTrigger: {
+              trigger: card,
+              start: 'top 85%',
+              once: true,
+            },
+          });
+
+          gsap.to(textEl, {
+            y: 0,
+            opacity: 1,
+            duration: 0.6,
+            ease: 'power3.out',
+            delay: i * 0.1 + 0.5,
+            scrollTrigger: {
+              trigger: card,
+              start: 'top 85%',
+              once: true,
+            },
+          });
+        }
       });
     },
     { scope: gridRef },
   );
 
-  // Hook 2: Tilt event listeners
+  // Hook 2: Tilt event listeners (desktop only)
   useEffect(() => {
     const grid = gridRef.current;
     if (!grid) return;
@@ -162,11 +197,12 @@ export default function Work({ className = '', projectImages = {} }) {
     const cards = grid.querySelectorAll('.work-card');
     if (!cards.length) return;
 
+    const isMobile = window.innerWidth < 768;
     const canHover = window.matchMedia('(hover: hover)').matches;
 
     const tiltCleanups = [];
 
-    if (canHover) {
+    if (canHover && !isMobile) {
       cards.forEach((card) => {
         const onMove = (e) => {
           const rect = card.getBoundingClientRect();
