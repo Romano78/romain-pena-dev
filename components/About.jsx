@@ -1,14 +1,19 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import Image from 'next/image';
 import { useTranslations, useLocale } from 'next-intl';
 import { AnimatePresence, motion } from 'framer-motion';
+import { useGSAP } from '@gsap/react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import PropTypes from 'prop-types';
 import SectionHeader from '@/components/snippets/SectionHeader';
 import TextReveal from '@/components/snippets/TextReveal';
 import { cn } from '@/lib/utils';
 import ImagePlaceholder from '@/components/snippets/ImagePlaceholder';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const HIGHLIGHTS = {
   fr: ['psychologie', 'efficaces', 'précision', 'qualité', 'marquent'],
@@ -30,6 +35,35 @@ export default function About({ className = '', portraits = [] }) {
   const blocks = [t('block1'), t('block2'), t('block3')];
   const fullBody = blocks.join('\n\n');
   const [modalOpen, setModalOpen] = useState(false);
+  const cardsRef = useRef(null);
+
+  useGSAP(
+    () => {
+      const container = cardsRef.current;
+      if (!container) return;
+
+      const cards = container.querySelectorAll('.about-card');
+      if (!cards.length) return;
+
+      cards.forEach((card, i) => {
+        gsap.set(card, { opacity: 0, y: 12 });
+
+        gsap.to(card, {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          ease: 'power2.out',
+          delay: i * 0.1,
+          scrollTrigger: {
+            trigger: card,
+            start: 'top 85%',
+            toggleActions: 'play reverse play reverse',
+          },
+        });
+      });
+    },
+    { scope: cardsRef },
+  );
 
   return (
     <section id='about' className={cn(className)}>
@@ -73,9 +107,9 @@ export default function About({ className = '', portraits = [] }) {
           </button>
 
           {/* Cards */}
-          <div className='flex flex-col gap-4 flex-1'>
+          <div ref={cardsRef} className='flex flex-col gap-4 flex-1'>
             {blocks.map((block, i) => (
-              <div key={i} className='rounded-2xl bg-card p-5'>
+              <div key={i} className='about-card rounded-2xl bg-card p-5'>
                 <span className='text-overline text-muted block mb-3'>{labels[i]}</span>
                 <p className='text-base text-foreground/70 leading-relaxed'>{block}</p>
               </div>

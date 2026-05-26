@@ -52,7 +52,7 @@ export default function Steps({ id = 'how-i-work', className = '' }) {
 
 function Stat({ value, label, subLabel, stringValue, index = 0 }) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.5 });
+  const isInView = useInView(ref, { amount: 0.5 });
   const stepValue = index + 1;
   const startValue = 0;
 

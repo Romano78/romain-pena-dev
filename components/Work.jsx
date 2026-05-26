@@ -69,7 +69,7 @@ function WorkCard({
         </div>
 
         {/* Below image */}
-        <div className='work-card-text pt-4 space-y-3 opacity-0 translate-y-3'>
+        <div className='work-card-text pt-4 space-y-3'>
           <h3 className={titleClass}>{project.client}</h3>
           {/* Mobile only: type + pills */}
           <div className='md:hidden space-y-2'>
@@ -139,7 +139,7 @@ export default function Work({ className = '', projectImages = {} }) {
             scrollTrigger: {
               trigger: card,
               start: 'top 85%',
-              once: true,
+              toggleActions: 'play reverse play reverse',
             },
           });
 
@@ -152,7 +152,7 @@ export default function Work({ className = '', projectImages = {} }) {
             scrollTrigger: {
               trigger: card,
               start: 'top 85%',
-              once: true,
+              toggleActions: 'play reverse play reverse',
             },
           });
         } else {
@@ -168,7 +168,7 @@ export default function Work({ className = '', projectImages = {} }) {
             scrollTrigger: {
               trigger: card,
               start: 'top 85%',
-              once: true,
+              toggleActions: 'play reverse play reverse',
             },
           });
 
@@ -181,7 +181,7 @@ export default function Work({ className = '', projectImages = {} }) {
             scrollTrigger: {
               trigger: card,
               start: 'top 85%',
-              once: true,
+              toggleActions: 'play reverse play reverse',
             },
           });
         }

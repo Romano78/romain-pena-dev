@@ -44,7 +44,7 @@ export function useScrollReveal({
         scrollTrigger: {
           trigger: el,
           start,
-          once: true,
+          toggleActions: 'play reverse play reverse',
         },
       }
     );
