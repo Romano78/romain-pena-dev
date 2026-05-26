@@ -1,39 +1,13 @@
 'use client';
 
-import React, { useRef, useMemo, useState, useEffect } from 'react';
-import { motion, useScroll, useTransform, useInView } from 'framer-motion';
-import { splitText } from '@/hooks/split-text';
+import React, { useRef } from 'react';
+import { useGSAP } from '@gsap/react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { cn } from '@/lib/utils';
 import PropTypes from 'prop-types';
 
-const Character = React.memo(function Character({
-  char,
-  progress,
-  range,
-}) {
-  const opacity = useTransform(progress, range, [0.5, 1]);
-
-  if (char.type === 'space') {
-    return <span className='inline'>{char.content}</span>;
-  }
-
-  return (
-    <motion.span
-      style={{
-        opacity,
-      }}
-      className='inline-block'
-    >
-      {char.content}
-    </motion.span>
-  );
-});
-
-const isHighlighted = (content, highlights) => {
-  if (!highlights?.length) return false;
-  const clean = content.replace(/[^a-zA-ZÀ-ÿ]/g, '').toLowerCase();
-  return highlights.some((h) => h.toLowerCase() === clean);
-};
+gsap.registerPlugin(ScrollTrigger);
 
 const TextReveal = ({
   body = 'Transform your user interface with our powerful text reveal animations, creating engaging and dynamic experiences that captivate your audience and enhance visual storytelling through smooth, scroll-based transitions.',
@@ -45,105 +19,44 @@ const TextReveal = ({
   highlights = [],
 }) => {
   const targetRef = useRef(null);
-  const [isMobile, setIsMobile] = useState(false);
-  const isInView = useInView(targetRef, { once: true, margin: '-100px' });
 
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
+  useGSAP(
+    () => {
+      const container = targetRef.current;
+      if (!container) return;
 
-  const { scrollYProgress } = useScroll({
-    target: targetRef,
-    offset: sticky ? ['start end', 'end start'] : ['center end', 'end start'],
-  });
+      const paragraphs = container.querySelectorAll('[data-paragraph]');
+      if (!paragraphs.length) return;
 
-  const { linesData, lineCount } = useMemo(() => {
-    const rawLines = body.split('\n');
-    const processed = rawLines.map((line, lineIndex) => {
-      const { words, characters } = splitText(line);
-      return { words, characters, lineIndex };
-    });
-    const totalCharacters = processed.reduce(
-      (acc, line) => acc + line.characters.length,
-      0,
-    );
-    let globalIndex = 0;
-    const linesData = processed.map(({ words, lineIndex }) => ({
-      lineIndex,
-      words: words.map((wordObj) => {
-        if (wordObj.type !== 'word') return wordObj;
-        return {
-          ...wordObj,
-          chars: wordObj.chars.map((char) => {
-            const index = globalIndex++;
-            const start = index / (totalCharacters * 1.8);
-            const end = start + 10 / (totalCharacters * 2);
-            return { char, range: [start, end] };
-          }),
-        };
-      }),
-    }));
-    return { linesData, lineCount: rawLines.length };
-  }, [body]);
+      paragraphs.forEach((para) => {
+        gsap.set(para, { opacity: 0, y: 12, color: 'rgba(250, 250, 248, 0.7)' });
+      });
+
+      paragraphs.forEach((para, i) => {
+        gsap.to(para, {
+          opacity: 1,
+          y: 0,
+          color: 'rgba(250, 250, 248, 0.8)',
+          duration: 1,
+          ease: 'power2.out',
+          delay: i * 0.1,
+          scrollTrigger: {
+            trigger: container,
+            start: 'top 85%',
+            toggleActions: 'play reverse play reverse',
+          },
+        });
+      });
+    },
+    { scope: targetRef },
+  );
 
   if (!body.trim()) {
     return null;
   }
 
-  // Mobile: whole-block fade on scroll entry
-  if (isMobile) {
-    return (
-      <motion.div
-        ref={targetRef}
-        className={cn('relative z-0', sticky ? 'h-[150vh] md:h-[200vh]' : '', className)}
-        initial={{ opacity: 0 }}
-        animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-        transition={{ duration: 0.8, ease: 'easeOut' }}
-      >
-        <div
-          className={`${sticky ? 'sticky top-0 flex h-screen items-center justify-center' : ''} ${blockClassName}`}
-        >
-          <div className={textClassName}>
-            {linesData.map(({ words, lineIndex }) => {
-              const isEmpty = words.every((w) => w.type !== 'word');
-              if (isEmpty) return <div key={lineIndex} className='h-4' />;
-              return (
-                <React.Fragment key={lineIndex}>
-                  <div
-                    className={`inline-flex flex-wrap gap-x-[0.18em] ${textCenter ? 'justify-center' : ''}`}
-                  >
-                    {words.map(
-                      ({ chars, type, content }, i) =>
-                        type === 'word' && (
-                          <span
-                            key={`${lineIndex}-${i}`}
-                            className={cn('split-word inline-block', isHighlighted(content, highlights) && 'text-muted')}
-                          >
-                            {chars.map(({ char }, j) => (
-                              <span key={`${lineIndex}-${i}-${j}`}>
-                                {char.content}
-                              </span>
-                            ))}
-                          </span>
-                        ),
-                    )}
-                  </div>
-                  {lineIndex < lineCount - 1 && (
-                    <br className='whitespace-pre' />
-                  )}
-                </React.Fragment>
-              );
-            })}
-          </div>
-        </div>
-      </motion.div>
-    );
-  }
+  const paragraphs = body.split('\n\n').filter(p => p.trim());
 
-  // Desktop: per-character scroll-linked opacity
   return (
     <div
       ref={targetRef}
@@ -152,51 +65,16 @@ const TextReveal = ({
       <div
         className={`${sticky ? 'sticky top-0 flex h-screen items-center justify-center' : ''} ${blockClassName}`}
       >
-        <div className={textClassName}>
-          {linesData.map(({ words, lineIndex }) => {
-            const isEmpty = words.every((w) => w.type !== 'word');
-            if (isEmpty) return <div key={lineIndex} className='h-4' />;
-            return (
-            <React.Fragment key={lineIndex}>
-              <div
-                className={`inline-flex flex-wrap gap-x-[0.18em] ${textCenter ? 'justify-center' : ''}`}
-              >
-                {words.map(
-                  ({ chars, type, content }, i) =>
-                    type === 'word' && (
-                      <span
-                        key={`${lineIndex}-${i}`}
-                        className={cn('split-word inline-block', isHighlighted(content, highlights) && 'text-muted')}
-                      >
-                        {chars.map(({ char, range }, j) => (
-                          <Character
-                            key={`${lineIndex}-${i}-${j}`}
-                            char={char}
-                            progress={scrollYProgress}
-                            range={range}
-                          />
-                        ))}
-                      </span>
-                    ),
-                )}
-              </div>
-              {lineIndex < lineCount - 1 && (
-                <br className='whitespace-pre' />
-              )}
-            </React.Fragment>
-          );
-          })}
+        <div className={cn(textClassName, textCenter && 'text-center', 'space-y-4')}>
+          {paragraphs.map((para, idx) => (
+            <div key={idx} data-paragraph>
+              {para}
+            </div>
+          ))}
         </div>
       </div>
     </div>
   );
-};
-
-Character.propTypes = {
-  char: PropTypes.object,
-  progress: PropTypes.object,
-  range: PropTypes.array,
-  sectionTheme: PropTypes.string,
 };
 
 TextReveal.propTypes = {

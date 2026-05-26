@@ -19,7 +19,7 @@ export default function ScrambleTextAnimation1({
   duration = 800,
   delay = 0,
   as: Component = 'div',
-  startOnView = true,
+  startOnView = false,
   animateOnHover = true,
   characterSet = DEFAULT_CHARACTER_SET,
   ...props

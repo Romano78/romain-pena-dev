@@ -18,7 +18,7 @@ export default function Contact({ className = '' }) {
 
   return (
     <section id='contact' ref={ref} className={cn(className)}>
-      <ScrambleTextAnimation1 className='text-overline mb-6 text-muted contact-reveal'>
+      <ScrambleTextAnimation1 className='text-overline mb-8 md:mb-6 text-muted contact-reveal'>
         {t('heading')}
       </ScrambleTextAnimation1>
 

@@ -17,7 +17,7 @@ import SectionHeader from '@/components/snippets/SectionHeader';
 
 function ColumnItem({ icon: Icon, title, body }) {
   return (
-    <div className='service-card group block h-full opacity-0 translate-y-7'>
+    <div className='service-card group block h-full'>
       <div className='bg-background border-border relative flex h-full flex-col items-start overflow-hidden rounded-[--radius] border p-6 transition-colors hover:border-muted'>
         {Icon && (
           <div className='relative mb-4'>
