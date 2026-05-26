@@ -3,6 +3,7 @@ import { Suspense } from 'react';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { ThemeProvider } from '@/config/theme-provider';
+import ProgressBar from '@/components/ProgressBar';
 import Menu from '@/components/menu';
 import Footer from '@/components/Footer';
 import SmoothScroll from '@/components/SmoothScroll';
@@ -78,6 +79,7 @@ async function LocaleContent({
   return (
     <NextIntlClientProvider messages={messages}>
       <ThemeProvider>
+        <ProgressBar />
         <SmoothScroll>
           <Menu />
           {children}

@@ -1,6 +1,5 @@
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
-import { Link } from '@/i18n/navigation';
 import { ArrowUpRight, ArrowLeft } from 'lucide-react';
 import { projects, getProject } from '@/config/projects';
 import { routing } from '@/i18n/routing';
@@ -47,13 +46,13 @@ export default async function CaseStudyPage({
 
         {/* LEFT — sticky sidebar */}
         <aside className='lg:sticky lg:top-(--menu-height) lg:self-start lg:h-[calc(100dvh-var(--menu-height))] lg:flex lg:flex-col py-16 lg:py-20'>
-          <Link
+          <a
             href='/#work'
             className='inline-flex items-center gap-2 text-sm text-foreground/50 hover:text-foreground transition-colors mb-12'
           >
             <ArrowLeft size={14} />
             Work
-          </Link>
+          </a>
 
           <div className='mt-auto'>
             <p className='text-foreground/70 text-lg leading-relaxed'>

@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useEffect } from 'react';
+import { useRef } from 'react';
 import { useGSAP } from '@gsap/react';
 import PropTypes from 'prop-types';
 import { useTranslations } from 'next-intl';
@@ -156,13 +156,14 @@ export default function Work({ className = '', projectImages = {} }) {
             },
           });
         } else {
-          gsap.set(imageEl, { clipPath: 'inset(0 0 100% 0)' });
-          gsap.set(textEl, { opacity: 0, y: 12 });
+          gsap.set(imageEl, { opacity: 0, y: 12 });
+          gsap.set(textEl, { opacity: 0, y: 6 });
 
           gsap.to(imageEl, {
-            clipPath: 'inset(0 0 0% 0)',
-            duration: 1.2,
-            ease: 'power3.out',
+            opacity: 1,
+            y: 0,
+            duration: 0.7,
+            ease: 'power2.out',
             delay: i * 0.1,
             scrollTrigger: {
               trigger: card,
@@ -176,7 +177,7 @@ export default function Work({ className = '', projectImages = {} }) {
             opacity: 1,
             duration: 0.6,
             ease: 'power3.out',
-            delay: i * 0.1 + 0.5,
+            delay: i * 0.1 + 0.3,
             scrollTrigger: {
               trigger: card,
               start: 'top 85%',
@@ -189,59 +190,6 @@ export default function Work({ className = '', projectImages = {} }) {
     { scope: gridRef },
   );
 
-  // Hook 2: Tilt event listeners (desktop only)
-  useEffect(() => {
-    const grid = gridRef.current;
-    if (!grid) return;
-
-    const cards = grid.querySelectorAll('.work-card');
-    if (!cards.length) return;
-
-    const isMobile = window.innerWidth < 768;
-    const canHover = window.matchMedia('(hover: hover)').matches;
-
-    const tiltCleanups = [];
-
-    if (canHover && !isMobile) {
-      cards.forEach((card) => {
-        const onMove = (e) => {
-          const rect = card.getBoundingClientRect();
-          const rotateX =
-            ((e.clientY - rect.top - rect.height / 2) / (rect.height / 2)) * -2;
-          const rotateY =
-            ((e.clientX - rect.left - rect.width / 2) / (rect.width / 2)) * 2;
-          gsap.to(card, {
-            rotateX,
-            rotateY,
-            duration: 0.4,
-            ease: 'power2.out',
-            transformPerspective: 1400,
-            transformOrigin: 'center center',
-          });
-        };
-
-        const onLeave = () => {
-          gsap.to(card, {
-            rotateX: 0,
-            rotateY: 0,
-            duration: 0.6,
-            ease: 'power3.out',
-          });
-        };
-
-        card.addEventListener('mousemove', onMove);
-        card.addEventListener('mouseleave', onLeave);
-        tiltCleanups.push(() => {
-          card.removeEventListener('mousemove', onMove);
-          card.removeEventListener('mouseleave', onLeave);
-        });
-      });
-    }
-
-    return () => {
-      tiltCleanups.forEach((fn) => fn());
-    };
-  }, []);
 
   const featuredProjects = projects.slice(0, 2);
   const restProjects = projects.slice(2);
