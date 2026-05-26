@@ -1,15 +1,20 @@
 'use client';
 
 import { Download } from 'lucide-react';
+import { useTranslations, useLocale } from 'next-intl';
 import PillCta from '@/components/snippets/PillCta';
 
 export default function Resume() {
+  const t = useTranslations('resume');
+  const locale = useLocale();
+  const pdfUrl = locale === 'fr' ? '/resume-romain-fr.pdf' : '/resume-romain.pdf';
+
   return (
     <div className='max-w-2xl mx-auto'>
       {/* Download Button */}
       <div className='mb-12' data-no-print>
         <PillCta
-          href='/resume-romain.pdf'
+          href={pdfUrl}
           icon={<Download className='h-3 w-3' />}
         >
           Download PDF
@@ -23,28 +28,17 @@ export default function Resume() {
           <span className='text-muted'>Pena Ruiz</span>
         </h1>
         <p className='text-lg text-muted-foreground mb-4'>
-          Shopify Developer & Frontend Engineer
+          {t('title')}
         </p>
         <p className='text-sm text-muted-foreground'>
-          rom.penaruiz@gmail.com · Montreal, QC · romainpena.dev
+          {t('contact')}
         </p>
       </div>
 
       {/* Summary */}
       <section className='mb-8'>
-        <p className='text-sm text-foreground leading-relaxed mb-3'>
-          Frontend developer specializing in Shopify — custom themes built from
-          Figma, custom app development, and third-party integrations. 4+ years
-          at a Montreal agency, now independent.
-        </p>
-        <p className='text-sm text-muted-foreground leading-relaxed'>
-          I studied psychology at Cal State Long Beach before deciding I wanted
-          to build things. Moved to Montreal, joined Le Wagon&apos;s bootcamp,
-          and that&apos;s where coding clicked. After the bootcamp I joined
-          Field Office, a Montreal web agency, where most of my work was
-          Shopify. Now independent, I&apos;ve broadened what I take on —
-          cinematic portfolio sites, commerce pages, and custom tools that
-          replace platform subscriptions at a fraction of the cost.
+        <p className='text-sm text-foreground leading-relaxed'>
+          {t('summary')}
         </p>
       </section>
 
@@ -53,48 +47,58 @@ export default function Resume() {
       {/* Experience */}
       <section className='mb-8'>
         <h2 className='text-xs font-semibold tracking-widest uppercase text-muted mb-6'>
-          Experience
+          {t('experience.sectionLabel')}
         </h2>
 
         <div className='space-y-6'>
           {/* Field Office */}
           <div>
             <div className='flex justify-between items-start mb-2'>
-              <h3 className='font-semibold text-foreground'>Field Office</h3>
+              <h3 className='font-semibold text-foreground'>
+                {t('experience.fieldOffice.company')}
+              </h3>
             </div>
             <p className='text-sm text-muted-foreground mb-3'>
-              Full Stack Developer · Jun 2021 – Oct 2025 · Montreal, QC
+              {t('experience.fieldOffice.role')} · {t('experience.fieldOffice.date')} · {t('experience.fieldOffice.location')}
             </p>
             <ul className='text-sm text-foreground space-y-1 pl-4'>
-              <li>
-                · Shopify theme development: custom Liquid sections built
-                pixel-perfect from Figma files
-              </li>
-              <li>
-                · Custom fulfillment apps, inventory sync tools, webhook
-                integrations
-              </li>
-              <li>
-                · Third-party integrations: Klaviyo, Google Tag Manager, REST
-                APIs
-              </li>
-              <li>· Webflow and Next.js projects alongside Shopify work</li>
+              {t.raw('experience.fieldOffice.bullets').map((bullet, i) => (
+                <li key={i}>· {bullet}</li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Le Wagon */}
+          <div>
+            <div className='flex justify-between items-start mb-2'>
+              <h3 className='font-semibold text-foreground'>
+                {t('experience.leWagon.company')}
+              </h3>
+            </div>
+            <p className='text-sm text-muted-foreground mb-3'>
+              {t('experience.leWagon.role')} · {t('experience.leWagon.date')} · {t('experience.leWagon.location')}
+            </p>
+            <ul className='text-sm text-foreground space-y-1 pl-4'>
+              {t.raw('experience.leWagon.bullets').map((bullet, i) => (
+                <li key={i}>· {bullet}</li>
+              ))}
             </ul>
           </div>
 
           {/* Beslogic Inc */}
           <div>
             <div className='flex justify-between items-start mb-2'>
-              <h3 className='font-semibold text-foreground'>Beslogic Inc</h3>
+              <h3 className='font-semibold text-foreground'>
+                {t('experience.beslogic.company')}
+              </h3>
             </div>
             <p className='text-sm text-muted-foreground mb-3'>
-              Full Stack Web Developer · 2019 – 2020 · Montreal, QC
+              {t('experience.beslogic.role')} · {t('experience.beslogic.date')} · {t('experience.beslogic.location')}
             </p>
             <ul className='text-sm text-foreground space-y-1 pl-4'>
-              <li>
-                · Full-stack development in C#, ASP.NET Core, Angular,
-                TypeScript
-              </li>
+              {t.raw('experience.beslogic.bullets').map((bullet, i) => (
+                <li key={i}>· {bullet}</li>
+              ))}
             </ul>
           </div>
         </div>
@@ -105,21 +109,25 @@ export default function Resume() {
       {/* Education */}
       <section className='mb-8'>
         <h2 className='text-xs font-semibold tracking-widest uppercase text-muted mb-6'>
-          Education
+          {t('education.sectionLabel')}
         </h2>
 
         <div className='space-y-4'>
           <div>
-            <h3 className='font-semibold text-foreground'>Le Wagon</h3>
+            <h3 className='font-semibold text-foreground'>
+              {t('education.leWagonBootcamp.school')}
+            </h3>
             <p className='text-sm text-muted-foreground'>
-              Web Development Bootcamp · 2019 · Montreal
+              {t('education.leWagonBootcamp.program')} · {t('education.leWagonBootcamp.year')} · {t('education.leWagonBootcamp.location')}
             </p>
           </div>
           <div>
             <h3 className='font-semibold text-foreground'>
-              Cal State Long Beach
+              {t('education.calState.school')}
             </h3>
-            <p className='text-sm text-muted-foreground'>BA Psychology</p>
+            <p className='text-sm text-muted-foreground'>
+              {t('education.calState.program')} · {t('education.calState.year')} · {t('education.calState.location')}
+            </p>
           </div>
         </div>
       </section>
@@ -129,36 +137,43 @@ export default function Resume() {
       {/* Skills */}
       <section className='mb-8'>
         <h2 className='text-xs font-semibold tracking-widest uppercase text-muted mb-6'>
-          Skills
+          {t('skills.sectionLabel')}
         </h2>
 
         <div className='grid grid-cols-2 gap-x-8 gap-y-3'>
           <div className='text-sm'>
-            <span className='font-semibold text-foreground'>Shopify</span>
+            <span className='font-semibold text-foreground'>{t('skills.shopify.category')}</span>
             <span className='text-muted-foreground'>
               {' '}
-              — Liquid, custom sections, custom apps, Klaviyo, GTM
+              — {t('skills.shopify.values')}
             </span>
           </div>
           <div className='text-sm'>
-            <span className='font-semibold text-foreground'>Frontend</span>
+            <span className='font-semibold text-foreground'>{t('skills.frontend.category')}</span>
             <span className='text-muted-foreground'>
               {' '}
-              — React 19, Next.js, TypeScript, Tailwind CSS, GSAP
+              — {t('skills.frontend.values')}
             </span>
           </div>
           <div className='text-sm'>
-            <span className='font-semibold text-foreground'>Backend</span>
+            <span className='font-semibold text-foreground'>{t('skills.backend.category')}</span>
             <span className='text-muted-foreground'>
               {' '}
-              — Supabase, REST APIs, C#, ASP.NET Core
+              — {t('skills.backend.values')}
             </span>
           </div>
           <div className='text-sm'>
-            <span className='font-semibold text-foreground'>Tooling</span>
+            <span className='font-semibold text-foreground'>{t('skills.cms.category')}</span>
             <span className='text-muted-foreground'>
               {' '}
-              — Figma to code, Vercel, AI-assisted development
+              — {t('skills.cms.values')}
+            </span>
+          </div>
+          <div className='text-sm'>
+            <span className='font-semibold text-foreground'>{t('skills.tooling.category')}</span>
+            <span className='text-muted-foreground'>
+              {' '}
+              — {t('skills.tooling.values')}
             </span>
           </div>
         </div>

@@ -98,5 +98,85 @@
     "back": "Retour aux projets",
     "deliverables": "Livrables",
     "visitBrand": "Voir le site"
+  },
+  "resume": {
+    "title": "Développeur Shopify & Frontend — Storefronts, Applications & Intégrations Sur Mesure",
+    "contact": "rom.penaruiz@gmail.com · (514) 415-4450 · Montréal, QC · romainpena.com · linkedin.com/in/romainpenaruiz",
+    "summary": "Développeur Frontend & Shopify avec plus de 6 ans d'expérience dans la création de storefronts personnalisés, d'intégrations backend et d'expériences web — de l'implémentation pixel-perfect depuis Figma jusqu'aux services backend en production. Une formation en psychologie nourrit une approche centrée sur l'utilisateur. Maintenant indépendant, je collabore avec des agences, des designers et des équipes produit.",
+    "experience": {
+      "sectionLabel": "Expérience",
+      "fieldOffice": {
+        "company": "Field Office",
+        "role": "Développeur Full Stack",
+        "date": "Juin 2021 – Oct. 2025",
+        "location": "Montréal, QC",
+        "bullets": [
+          "Développé une application de synchronisation quotidienne base de données → Shopify pour Animo etc — automatisation de la création et des mises à jour de produits en masse via webhooks, avec une logique de déduction d'inventaire personnalisée remplaçant le comportement par défaut de Shopify",
+          "Construit le storefront Shopify complet d'Atari depuis Figma — synchronisation de portefeuille MetaMask pour les achats NFT, intégration Trevco pour le suivi des commandes expédiées, et un backend de fulfillment personnalisé routant les commandes par partenaire d'expédition",
+          "Livré des thèmes Liquid pixel-perfect depuis Figma pour des clients incluant TOGETHXR, Jayson Home et &OR Collective ; travail de retainer incluant une application de checkout personnalisée, refonte du panier et de la navigation",
+          "Créé des expériences de défilement cinématiques avec GSAP et Framer Motion ; storefronts bilingues avec next-intl ; intégrations CMS avec Sanity, Contentful et Prismic",
+          "Projets Webflow incluant Groupe Copley, une plateforme immobilière de luxe bilingue FR/EN",
+          "Dirigé la migration Sanity v2 → v3 pour Octasic (Next.js), une entreprise montréalaise de technologie de défense spécialisée dans les solutions RF et sans fil pour les forces militaires et les forces de l'ordre"
+        ]
+      },
+      "leWagon": {
+        "company": "Le Wagon Montréal",
+        "role": "Assistant Pédagogique",
+        "date": "Mars 2021 – Janv. 2025",
+        "location": "Montréal, QC",
+        "bullets": [
+          "Accompagné des étudiants dans la réalisation de projets full-stack en Ruby on Rails, REST APIs, SQL, JavaScript et Bootstrap",
+          "Encadrement pratique lors des phases de projet, aidant des personnes en reconversion à déboguer, concevoir et livrer des applications fonctionnelles"
+        ]
+      },
+      "beslogic": {
+        "company": "Beslogic Inc",
+        "role": "Développeur Full Stack",
+        "date": "Sept. 2019 – Avr. 2020",
+        "location": "Montréal, QC",
+        "bullets": [
+          "Développement full-stack sur des applications web d'entreprise en C#, ASP.NET Core, Angular et TypeScript",
+          "Collaboré avec une équipe pour planifier, construire et maintenir des solutions robustes ; écriture de code extensible et amélioration des interfaces et performances existantes"
+        ]
+      }
+    },
+    "education": {
+      "sectionLabel": "Formation",
+      "leWagonBootcamp": {
+        "school": "Le Wagon",
+        "program": "Bootcamp Développement Web",
+        "year": "2019",
+        "location": "Montréal"
+      },
+      "calState": {
+        "school": "Cal State Long Beach",
+        "program": "BA Psychologie",
+        "year": "2018",
+        "location": "Long Beach, CA"
+      }
+    },
+    "skills": {
+      "sectionLabel": "Compétences",
+      "shopify": {
+        "category": "Shopify",
+        "values": "Thèmes, Liquid, Applications, Klaviyo, GTM"
+      },
+      "frontend": {
+        "category": "Frontend",
+        "values": "React, Next.js, TypeScript, Tailwind CSS, GSAP, Webflow"
+      },
+      "backend": {
+        "category": "Backend",
+        "values": "Node.js, Supabase, REST APIs, Webhooks, C#, ASP.NET"
+      },
+      "cms": {
+        "category": "CMS",
+        "values": "Sanity, Contentful, Prismic"
+      },
+      "tooling": {
+        "category": "Outils",
+        "values": "Figma, Cloudinary, Vercel, Cursor, GitHub Copilot"
+      }
+    }
   }
 }

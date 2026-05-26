@@ -36,7 +36,7 @@ export default function About({ className = '', portraits = [] }) {
       <SectionHeader overline={t('overline')} lineAnimation={true} />
 
       <div className='flex flex-col min-[1440px]:flex-row-reverse min-[1440px]:items-start min-[1440px]:gap-12 mt-6 lg:mt-8'>
-        <div className='hidden md:block relative w-full min-[1440px]:w-96 shrink-0 aspect-2/3 rounded-2xl overflow-hidden mb-8 min-[1440px]:mb-0 min-[1440px]:sticky min-[1440px]:top-[calc(var(--menu-height)+2rem)]'>
+        <div className='hidden xl:block relative w-full min-[1440px]:w-96 shrink-0 aspect-2/3 rounded-2xl overflow-hidden mb-8 min-[1440px]:mb-0 min-[1440px]:sticky min-[1440px]:top-[calc(var(--menu-height)+2rem)]'>
           {hasPortraits ? (
             <Image
               src={portraits[0]}
@@ -51,7 +51,7 @@ export default function About({ className = '', portraits = [] }) {
         </div>
 
         {/* Mobile: cards then avatar vertically */}
-        <div className='flex-1 flex flex-col gap-4 md:hidden'>
+        <div className='flex-1 flex flex-col gap-4 xl:hidden'>
           {/* Avatar button */}
           <button
             onClick={() => setModalOpen(true)}
@@ -119,7 +119,7 @@ export default function About({ className = '', portraits = [] }) {
         </AnimatePresence>
 
         {/* Desktop: single unified card */}
-        <div className='hidden md:block flex-1 rounded-2xl bg-card p-8 lg:p-10 min-[1440px]:sticky min-[1440px]:top-[calc(var(--menu-height)+2rem)]'>
+        <div className='hidden xl:block flex-1 rounded-2xl bg-card p-8 lg:p-10 min-[1440px]:sticky min-[1440px]:top-[calc(var(--menu-height)+2rem)]'>
           <TextReveal
             body={fullBody}
             highlights={highlights}

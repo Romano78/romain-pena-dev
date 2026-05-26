@@ -98,5 +98,85 @@
     "back": "Back to work",
     "deliverables": "Deliverables",
     "visitBrand": "Visit site"
+  },
+  "resume": {
+    "title": "Shopify & Frontend Developer — Custom Storefronts, Apps & Integrations",
+    "contact": "rom.penaruiz@gmail.com · (514) 415-4450 · Montreal, QC · romainpena.com · linkedin.com/in/romainpenaruiz",
+    "summary": "Frontend & Shopify developer with 6+ years of experience building custom storefronts, backend integrations, and web experiences — from pixel-perfect Figma implementations to production backend services. A background in psychology informs a user-first approach to every interface. Now independent, collaborating with agencies, designers, and product teams.",
+    "experience": {
+      "sectionLabel": "Experience",
+      "fieldOffice": {
+        "company": "Field Office",
+        "role": "Full Stack Developer",
+        "date": "Jun 2021 – Oct 2025",
+        "location": "Montreal, QC",
+        "bullets": [
+          "Developed a daily database-to-Shopify sync app for Animo etc — automating bulk product creation and updates via webhooks, with custom inventory deduction logic overriding Shopify's default behavior",
+          "Built the full Atari Shopify storefront from Figma — MetaMask wallet sync for NFT purchases, Trevco integration to track fulfilled order status, and a custom fulfillment backend routing orders by shipping partner",
+          "Delivered pixel-perfect Liquid themes from Figma for clients including TOGETHXR, Jayson Home, and &OR Collective; ongoing retainer work including custom checkout app, cart and nav redesigns",
+          "Built cinematic scroll experiences with GSAP and Framer Motion; bilingual storefronts using next-intl; CMS integrations with Sanity, Contentful, and Prismic",
+          "Webflow builds including Groupe Copley, a bilingual EN/FR luxury real estate platform",
+          "Led Sanity v2 → v3 migration for Octasic (Next.js), a Montreal defense tech company building RF and wireless solutions for military and law enforcement"
+        ]
+      },
+      "leWagon": {
+        "company": "Le Wagon Montreal",
+        "role": "Teaching Assistant",
+        "date": "Mar 2021 – Jan 2025",
+        "location": "Montreal, QC",
+        "bullets": [
+          "Supported students in building full-stack projects using Ruby on Rails, REST APIs, SQL, JavaScript, and Bootstrap",
+          "Provided hands-on guidance during project phases, helping career-changers debug, architect, and ship working applications"
+        ]
+      },
+      "beslogic": {
+        "company": "Beslogic Inc",
+        "role": "Full Stack Developer",
+        "date": "Sep 2019 – Apr 2020",
+        "location": "Montreal, QC",
+        "bullets": [
+          "Full-stack development on enterprise web applications using C#, ASP.NET Core, Angular, and TypeScript",
+          "Collaborated with a team to plan, build, and maintain robust solutions; wrote extensible code and improved existing interfaces and performance"
+        ]
+      }
+    },
+    "education": {
+      "sectionLabel": "Education",
+      "leWagonBootcamp": {
+        "school": "Le Wagon",
+        "program": "Web Development Bootcamp",
+        "year": "2019",
+        "location": "Montreal"
+      },
+      "calState": {
+        "school": "Cal State Long Beach",
+        "program": "BA Psychology",
+        "year": "2018",
+        "location": "Long Beach, CA"
+      }
+    },
+    "skills": {
+      "sectionLabel": "Skills",
+      "shopify": {
+        "category": "Shopify",
+        "values": "Theme dev, Liquid, Custom apps, Klaviyo, GTM"
+      },
+      "frontend": {
+        "category": "Frontend",
+        "values": "React, Next.js, TypeScript, Tailwind CSS, GSAP, Webflow"
+      },
+      "backend": {
+        "category": "Backend",
+        "values": "Node.js, Supabase, REST APIs, Webhooks, C#, ASP.NET"
+      },
+      "cms": {
+        "category": "CMS",
+        "values": "Sanity, Contentful, Prismic"
+      },
+      "tooling": {
+        "category": "Tooling",
+        "values": "Figma, Cloudinary, Vercel, Cursor, GitHub Copilot"
+      }
+    }
   }
 }
