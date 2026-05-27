@@ -18,12 +18,38 @@ export async function generateMetadata({
 }: {
   params: Promise<{ locale: string; slug: string }>;
 }): Promise<Metadata> {
-  const { slug } = await params;
+  const { locale, slug } = await params;
   const project = getProject(slug);
   if (!project) return {};
+
+  const canonicalUrl = locale === 'en'
+    ? `https://romainpena.com/work/${slug}`
+    : `https://romainpena.com/fr/work/${slug}`;
+
   return {
+    metadataBase: new URL('https://romainpena.com'),
     title: `${project.client} — Romain Pena`,
     description: project.description,
+    alternates: {
+      canonical: canonicalUrl,
+      languages: {
+        'en': `https://romainpena.com/work/${slug}`,
+        'fr': `https://romainpena.com/fr/work/${slug}`,
+        'x-default': `https://romainpena.com/work/${slug}`,
+      },
+    },
+    openGraph: {
+      title: `${project.client} — Romain Pena`,
+      description: project.description,
+      url: canonicalUrl,
+      siteName: 'Romain Pena Ruiz',
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary',
+      title: `${project.client} — Romain Pena`,
+      description: project.description,
+    },
   };
 }
 

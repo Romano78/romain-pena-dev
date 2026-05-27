@@ -6,11 +6,13 @@ const LOCALES = ['en', 'fr'];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes: MetadataRoute.Sitemap = [];
+  const DEFAULT_LOCALE = 'en';
 
   // Home pages
   LOCALES.forEach((locale) => {
+    const url = locale === DEFAULT_LOCALE ? BASE_URL : `${BASE_URL}/${locale}`;
     routes.push({
-      url: `${BASE_URL}/${locale}`,
+      url,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 1,
@@ -19,8 +21,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   // Resume pages
   LOCALES.forEach((locale) => {
+    const url = locale === DEFAULT_LOCALE ? `${BASE_URL}/resume` : `${BASE_URL}/${locale}/resume`;
     routes.push({
-      url: `${BASE_URL}/${locale}/resume`,
+      url,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.8,
@@ -30,8 +33,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Work case study pages
   projects.forEach((project) => {
     LOCALES.forEach((locale) => {
+      const url = locale === DEFAULT_LOCALE
+        ? `${BASE_URL}/work/${project.slug}`
+        : `${BASE_URL}/${locale}/work/${project.slug}`;
       routes.push({
-        url: `${BASE_URL}/${locale}/work/${project.slug}`,
+        url,
         lastModified: new Date(),
         changeFrequency: 'monthly',
         priority: 0.7,
