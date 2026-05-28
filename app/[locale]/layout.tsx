@@ -58,7 +58,7 @@ export async function generateMetadata({
       type: 'website',
       images: [
         {
-          url: 'https://romainpena.com/og-image.svg',
+          url: 'https://romainpena.com/og-image.png',
           width: 1200,
           height: 630,
           alt: 'Romain Pena',
@@ -66,7 +66,7 @@ export async function generateMetadata({
       ],
     },
     twitter: {
-      card: 'summary',
+      card: 'summary_large_image',
       title: meta.title,
       description: meta.description,
     },

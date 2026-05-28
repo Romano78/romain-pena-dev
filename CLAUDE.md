@@ -4,6 +4,17 @@ This file provides guidance to Claude Code when working with code in this reposi
 
 ---
 
+## Operating Principles
+
+Read these four first. Each exists because it was violated and cost real time.
+
+1. **Cite evidence before diagnosing.** Before claiming anything is missing, broken, or needs fixing, read the actual file and name the `file:line` that proves it. A glance is not evidence. "It looks like X is missing" is banned: either you read it and can cite it, or you say "I need to check first."
+2. **Reuse before creating.** Check what already exists (files under non-obvious names, snippet components) before creating or claiming something is absent. Details in "Reuse Before Creating" below.
+3. **Clarify, get approval, then code.** Never write or modify code without explicit go-ahead. Details below.
+4. **Stay in scope.** Do exactly what was asked, nothing adjacent, even if it seems helpful. When unsure, ask.
+
+---
+
 ## HARD RULE: Never Code Without Explicit Approval
 
 **DO NOT write or modify code unless user explicitly says "go ahead", "implement", "do it", or similar approval.**
@@ -31,6 +42,19 @@ This is non-negotiable. Clarify → Get approval → Code.
 
 ---
 
+## Reuse Before Creating
+
+One principle, learned three times the hard way: **check what already exists before you create something new or claim something is absent.** When you diagnose, cite the `file:line` you actually read.
+
+- **Metadata lives in `app/[locale]/layout.tsx`** (full title / description / OG / canonical / hreflang), not the root `app/layout.tsx` (icons only). Read both before claiming SEO or metadata is missing.
+  - *Violated: claimed all SEO was missing after reading only the root layout. It was already complete.*
+- **Infrastructure files may exist under non-obvious names.** Search the project root before creating any middleware / proxy / provider / routing file.
+  - *Violated: created `middleware.ts` while `proxy.ts` already existed. Runtime conflict.*
+- **Interactive elements already have snippet components.** Check `components/snippets/` (`LinkCta`, `PillCta`, etc.) before inlining a raw `<a>` or `<button>`. If nothing fits, ask before creating.
+  - *Violated: raw `<a>` on the 404 page broke design consistency.*
+
+---
+
 ## HARD RULE: Dev Server Management
 
 **DO NOT create or start a dev server for testing.**
@@ -46,32 +70,14 @@ This is non-negotiable.
 
 ---
 
-## V1 — Complete ✓
-
-Launch-ready portfolio site. All core functionality, design, and branding complete.
-
-### Future Iterations
+## Roadmap — Future Iterations
 
 - **Services copy** — review and tighten
 - **Work card descriptions** — too generic, need specificity
 - **Pricing** — confirm or change tiers/prices before locking
-- **SEO** — page `<title>`, `<meta description>`, OG tags
 
-## Completed in Last Session (2026-05-06)
-
-- **Light mode removed** — site is dark mode only. ThemeToggle removed from menu, ThemeProvider locked to dark theme
-- **Favicon assets** — favicon.svg, favicon-96x96.png, favicon.ico, apple-touch-icon.png all in `/public`
-- **app/layout.tsx** — metadata API added for icons (cleaner than link tags)
-- **OG image** — updated to show logo centered with name and subtitle only
-
-## Completed in Previous Session (2026-05-01)
-
-- Hero subtitle (`hero.title`) updated in `en.json` + `fr.json` — "Custom Shopify development: themes built from Figma files, apps the Shopify doesn't have, integrations that actually work."
-- About body (`about.body`) rewritten in `en.json` + `fr.json` — personal story (Cal State LB → Le Wagon → Field Office → independent), includes AI/speed/platform-replacement angle
-- Resume page added: `components/Resume.jsx` + `app/[locale]/resume/page.tsx`
-- Nav routing: `config/routes.js` (RESUME_ROUTE), `config/navigation-config.js` (resume item with `isPage: true`)
-- `DesktopNavigation.jsx` + `MobileMenu.jsx` — conditionally render next-intl `<Link>` for `isPage` items, `<a>` for anchors
-- `styles/globals.css` — `@media print` block added at end (hides header/footer/`[data-no-print]`, resets margins)
+> SEO metadata (title, description, OG, canonical, hreflang) is DONE — see `app/[locale]/layout.tsx`. Remaining SEO work is indexing and backlinks, not code.
+> Session-by-session change logs live in `git log`, not here. Do not add "Completed in X session" sections.
 
 ---
 
@@ -290,16 +296,4 @@ Trusted senior colleague energy: approachable but clearly expert.
 - Register plugins at file top: `gsap.registerPlugin(ScrollTrigger)`
 - Scope all selectors to a `ref`
 
-### Search before creating infrastructure files
-
-Before creating any infrastructure file (middleware, proxy, provider, routing config):
-search the project root for existing equivalents — Next.js conventions change and a file
-may already exist under a different name.
-
-**Why:** Created `middleware.ts` without knowing `proxy.ts` already existed. Caused a runtime conflict.
-
-### Always use existing snippet components
-
-When adding any interactive element (button, link, CTA), check `components/snippets/` first and use the existing component. Never inline a raw `<a>` or `<button>` when `LinkCta`, `PillCta`, or another snippet already covers the pattern. If no component fits, ask before creating a new one.
-
-**Why:** Used a raw `<a>` tag instead of `LinkCta` on the 404 page — inconsistent with the design system.
+> The "check before you create" rules (infrastructure files, snippet components) now live in **Reuse Before Creating** near the top of this file.

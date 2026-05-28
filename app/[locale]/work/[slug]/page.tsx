@@ -44,9 +44,17 @@ export async function generateMetadata({
       url: canonicalUrl,
       siteName: 'Romain Pena Ruiz',
       type: 'website',
+      images: [
+        {
+          url: 'https://romainpena.com/og-image.png',
+          width: 1200,
+          height: 630,
+          alt: `${project.client} — Romain Pena`,
+        },
+      ],
     },
     twitter: {
-      card: 'summary',
+      card: 'summary_large_image',
       title: `${project.client} — Romain Pena`,
       description: project.description,
     },
