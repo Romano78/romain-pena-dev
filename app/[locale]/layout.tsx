@@ -34,6 +34,14 @@ export async function generateMetadata({
     metadataBase: new URL('https://romainpena.com'),
     title: meta.title,
     description: meta.description,
+    icons: {
+      icon: [
+        { url: '/favicon.svg?v=2', type: 'image/svg+xml' },
+        { url: '/favicon-96x96.png?v=2', sizes: '96x96', type: 'image/png' },
+        { url: '/favicon.ico?v=2' },
+      ],
+      apple: '/apple-touch-icon.png?v=2',
+    },
     alternates: {
       canonical: canonicalUrl,
       languages: {
@@ -48,6 +56,14 @@ export async function generateMetadata({
       url: canonicalUrl,
       siteName: 'Romain Pena Ruiz',
       type: 'website',
+      images: [
+        {
+          url: 'https://romainpena.com/og-image.svg',
+          width: 1200,
+          height: 630,
+          alt: 'Romain Pena',
+        },
+      ],
     },
     twitter: {
       card: 'summary',

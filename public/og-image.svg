@@ -1,22 +1,22 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="og-shadow">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="2"/>
+      <feOffset dx="0" dy="3" result="offsetblur"/>
+      <feFlood floodColor="#000000" floodOpacity="0.3"/>
+      <feComposite in2="offsetblur" operator="in"/>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
   <!-- Background -->
   <rect width="1200" height="630" fill="#0D131F"/>
 
-  <!-- Logo -->
-  <g transform="translate(150, 150)">
-    <defs>
-      <filter id="og-shadow">
-        <feGaussianBlur in="SourceAlpha" stdDeviation="2"/>
-        <feOffset dx="0" dy="3" result="offsetblur"/>
-        <feFlood floodColor="#000000" floodOpacity="0.3"/>
-        <feComposite in2="offsetblur" operator="in"/>
-        <feMerge>
-          <feMergeNode/>
-          <feMergeNode in="SourceGraphic"/>
-        </feMerge>
-      </filter>
-    </defs>
-
+  <!-- Logo centered -->
+  <g transform="translate(510, 225)">
     <!-- Rounded square frame -->
     <rect x="0" y="0" width="180" height="180" rx="24" stroke="#FAFAF8" stroke-width="6" fill="none" filter="url(#og-shadow)"/>
 
@@ -26,9 +26,4 @@
     <!-- P in cyan -->
     <text x="120" y="100" text-anchor="middle" dominant-baseline="middle" font-size="90" font-weight="500" font-family="Inter, sans-serif" fill="#5FD9D9" letter-spacing="-2">P</text>
   </g>
-
-  <!-- Text -->
-  <text x="450" y="220" font-size="64" font-weight="600" font-family="Inter, sans-serif" fill="#FAFAF8" letter-spacing="-1">Romain Pena Ruiz</text>
-
-  <text x="450" y="290" font-size="42" font-weight="400" font-family="Inter, sans-serif" fill="#5FD9D9">Frontend &amp; Shopify Developer</text>
 </svg>
